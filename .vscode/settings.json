@@ -59,10 +59,5 @@
     "dotnet.defaultSolution": "Pong3D.sln",
     "Lua.workspace.preloadFileSize": 1024,
     "lua_analyzer.codeLinting.enable": false,
-    "Lua.workspace.library": [
-        "${3rd}/love2d/library",
-        "c:\\Users\\thiol\\.vscode\\extensions\\antoinebalaine.reascript-docs-0.1.12/resources/Sexan_reaper_defs.lua",
-        "c:\\Users\\thiol\\.vscode\\extensions\\antoinebalaine.reascript-docs-0.1.12/resources/imgui_defs_0.9.lua",
-        "c:\\Users\\thiol\\.vscode\\extensions\\antoinebalaine.reascript-docs-0.1.12/resources/reawwise_defs.lua"
-    ]
+    "Lua.workspace.library": ["${3rd}/love2d/library"]
 }

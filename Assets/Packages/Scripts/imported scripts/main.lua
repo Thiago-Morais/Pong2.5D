@@ -1,64 +1,3 @@
---[[
-    GD50 2018
-    Pong Remake
-
-    -- Main Program --
-
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
-
-    Originally programmed by Atari in 1972. Features two
-    paddles, controlled by players, with the goal of getting
-    the ball past your opponent's edge. First to 10 points wins.
-
-    This version is built to more closely resemble the NES than
-    the original Pong machines or the Atari 2600 in terms of
-    resolution, though in widescreen (16:9) so it looks nicer on 
-    modern systems.
-]]
-
--- push is a library that will allow us to draw our game at a virtual
--- resolution, instead of however large our window is; used to provide
--- a more retro aesthetic
---
--- https://github.com/Ulydev/push
-push = require 'push'
-
--- the "Class" library we're using will allow us to represent anything in
--- our game as code, rather than keeping track of many disparate variables and
--- methods
---
--- https://github.com/vrld/hump/blob/master/class.lua
-Class = require 'class'
-
--- our Paddle class, which stores position and dimensions for each Paddle
--- and the logic for rendering them
-require 'Paddle'
-
--- our Ball class, which isn't much different than a Paddle structure-wise
--- but which will mechanically function very differently
-require 'Ball'
-
-require 'PaddleAutoController'
-
--- size of our actual window
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
-
--- size we're trying to emulate with push
-VIRTUAL_WIDTH = 432
-VIRTUAL_HEIGHT = 243
-
--- paddle movement speed
-PADDLE_SPEED = 200
-
---~ reduce ai speed by
-DIFFICULTY_DAMP = 3
-
---[[
-    Called just once at the beginning of the game; used to set up
-    game objects, variables, etc. and prepare the game world.
-]]
 function love.load()
     -- set love's default filter to "nearest-neighbor", which essentially
     -- means there will be no filtering of pixels (blurriness), which is
@@ -84,7 +23,7 @@ function love.load()
         ['score'] = love.audio.newSource('sounds/score.wav', 'static'),
         ['wall_hit'] = love.audio.newSource('sounds/wall_hit.wav', 'static')
     }
-    
+
     -- initialize our virtual resolution, which will be rendered within our
     -- actual window no matter its dimensions
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
@@ -100,10 +39,10 @@ function love.load()
 
     -- place a ball in the middle of the screen
     ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
-    
+
     aiController = PaddleAutoController(ball, player2, PADDLE_SPEED / DIFFICULTY_DAMP)
     --~ aiController = PaddleAutoController()
-    
+
     -- initialize score variables
     player1Score = 0
     player2Score = 0
@@ -115,7 +54,7 @@ function love.load()
     -- player who won the game; not set to a proper value until we reach
     -- that state in the game
     winningPlayer = 0
-    
+
     --~ amount of real players
     singlePlayer = 0
 
@@ -146,25 +85,25 @@ end
     across system hardware.
 ]]
 function love.update(dt)
-	--~ apply game state logic
+    --~ apply game state logic
     updateGameState()
     --~ detect and apply paddle interaction
     updatePlayerInput()
-    
+
     if gameState == 'play' then
         ball:update(dt)
     end
     --~ detect if second paddle should be controlled by machine
     if singlePlayer == 1 then
-		aiController:update(dt)
-	end
-	
-	player2:update(dt)
+        aiController:update(dt)
+    end
+
+    player2:update(dt)
     player1:update(dt)
 end
 
 function updateGameState()
-	if gameState == 'serve' then
+    if gameState == 'serve' then
         -- before switching to play, initialize ball's velocity based
         -- on player who last scored
         ball.dy = math.random(-50, 50)
@@ -292,8 +231,8 @@ function love.keypressed(key)
     if key == 'escape' then
         -- the function LÖVE2D uses to quit the application
         love.event.quit()
-    -- if we press enter during either the start or serve phase, it should
-    -- transition to the next appropriate state
+        -- if we press enter during either the start or serve phase, it should
+        -- transition to the next appropriate state
     elseif key == 'enter' or key == 'return' then
         if gameState == 'start' then
             --~ gameState = 'serve'
@@ -318,16 +257,16 @@ function love.keypressed(key)
                 servingPlayer = 1
             end
         end
-	elseif key == '1' then
-		if gameState == 'menu' then
-			singlePlayer = 1
-			gameState = 'serve'
-		end
-	elseif key == '2' then
-		if gameState == 'menu' then
-			singlePlayer = 2
-			gameState = 'serve'
-		end
+    elseif key == '1' then
+        if gameState == 'menu' then
+            singlePlayer = 1
+            gameState = 'serve'
+        end
+    elseif key == '2' then
+        if gameState == 'menu' then
+            singlePlayer = 2
+            gameState = 'serve'
+        end
     end
 end
 
@@ -339,23 +278,23 @@ function love.draw()
     -- begin drawing with push, in our virtual resolution
     push:apply('start')
 
-    love.graphics.clear(40/255, 45/255, 52/255, 255/255)
-    
+    love.graphics.clear(40 / 255, 45 / 255, 52 / 255, 255 / 255)
+
     -- render different things depending on which part of the game we're in
     if gameState == 'start' then
         -- UI messages
         love.graphics.setFont(smallFont)
         love.graphics.printf('Welcome to Pong!', 0, 10, VIRTUAL_WIDTH, 'center')
         love.graphics.printf('Press Enter to begin!', 0, 20, VIRTUAL_WIDTH, 'center')
-	elseif gameState == 'menu' then
-		-- UI messages
-		love.graphics.setFont(smallFont)
+    elseif gameState == 'menu' then
+        -- UI messages
+        love.graphics.setFont(smallFont)
         love.graphics.printf('Press 1 to play in singleplayer!', 0, 10, VIRTUAL_WIDTH, 'center')
         love.graphics.printf('Press 2 to play in multiplayer!', 0, 20, VIRTUAL_WIDTH, 'center')
     elseif gameState == 'serve' then
         -- UI messages
         love.graphics.setFont(smallFont)
-        love.graphics.printf('Player ' .. tostring(servingPlayer) .. "'s serve!", 
+        love.graphics.printf('Player ' .. tostring(servingPlayer) .. "'s serve!",
             0, 10, VIRTUAL_WIDTH, 'center')
         love.graphics.printf('Press Enter to serve!', 0, 20, VIRTUAL_WIDTH, 'center')
     elseif gameState == 'play' then
@@ -371,7 +310,7 @@ function love.draw()
 
     -- show the score before ball is rendered so it can move over the text
     displayScore()
-    
+
     player1:render()
     player2:render()
     ball:render()
