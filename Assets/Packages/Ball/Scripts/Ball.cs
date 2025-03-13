@@ -48,6 +48,7 @@ public class Ball
     }
     public void Render()
     {
-        love.graphics.rectangle('fill', x, y, width, height);
+        // FIXME
+        // love.graphics.rectangle('fill', x, y, width, height);
     }
 }

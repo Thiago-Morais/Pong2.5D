@@ -1,0 +1,6 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Packages/UI/StyleSheet.uss?fileID=7433441132597879392&amp;guid=cc631a7cb39f6b7498421209e61e8732&amp;type=3#StyleSheet" />
+    <engine:VisualElement style="flex-grow: 1; font-size: 8px; position: relative;">
+        <engine:Label text="FPS: fps_value" name="fps-display" class="text" style="color: rgb(0, 255, 0); -unity-text-align: upper-left; margin-top: 10px; margin-left: 10px;" />
+    </engine:VisualElement>
+</engine:UXML>
