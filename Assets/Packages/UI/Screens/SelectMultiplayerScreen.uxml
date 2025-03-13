@@ -1,9 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="Display FPS" src="project://database/Assets/Packages/UI/Display%20FPS.uxml?fileID=9197481963319205126&amp;guid=1849da57df8064e4abf68f4b453371d2&amp;type=3#Display FPS" />
+    <ui:Template name="Display FPS" src="project://database/Assets/Packages/UI/Instances/Display%20FPS.uxml?fileID=9197481963319205126&amp;guid=1849da57df8064e4abf68f4b453371d2&amp;type=3#Display FPS" />
+    <ui:Template name="Display Score" src="project://database/Assets/Packages/UI/Instances/Display%20Score.uxml?fileID=9197481963319205126&amp;guid=17b257c8607d94a459c8e783ca0415a3&amp;type=3#Display Score" />
     <Style src="project://database/Assets/Packages/UI/StyleSheet.uss?fileID=7433441132597879392&amp;guid=cc631a7cb39f6b7498421209e61e8732&amp;type=3#StyleSheet" />
     <ui:VisualElement style="flex-grow: 1; font-size: 8px;">
         <ui:Label text="Press 1 to play in singleplayer!" class="text" style="margin-top: 10px;" />
         <ui:Label text="Press 2 to play in multiplayer!" class="text" />
     </ui:VisualElement>
     <ui:Instance template="Display FPS" class="display-fps" />
+    <ui:VisualElement class="canvas-container" style="flex-grow: 1;">
+        <ui:Instance template="Display Score" class="score-display" />
+    </ui:VisualElement>
 </ui:UXML>

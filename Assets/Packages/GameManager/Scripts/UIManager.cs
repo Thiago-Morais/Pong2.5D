@@ -12,15 +12,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] VisualTreeAsset doneUI;
     VisualElement Root => uiDocument.rootVisualElement;
     [ContextMenu(nameof(Test_start))]
-    public void Test_start() => SetState("start");
+    void Test_start() => SetState("start");
     [ContextMenu(nameof(Test_menu))]
-    public void Test_menu() => SetState("menu");
+    void Test_menu() => SetState("menu");
     [ContextMenu(nameof(Test_serve))]
-    public void Test_serve() => SetState("serve");
+    void Test_serve() => SetState("serve");
     [ContextMenu(nameof(Test_play))]
-    public void Test_play() => SetState("play");
+    void Test_play() => SetState("play");
     [ContextMenu(nameof(Test_done))]
-    public void Test_done() => SetState("done");
+    void Test_done() => SetState("done");
+    void Update()
+    {
+        UpdateFPSDisplay();
+    }
     public void SetState(string uiState)
     {
         switch (uiState)
@@ -47,10 +51,12 @@ public class UIManager : MonoBehaviour
             default:
                 break;
         }
+        UpdateScore();
     }
-    void Update()
+    public void UpdateScore()
     {
-        UpdateFPSDisplay();
+        Root.Q<TextElement>("score-player-1").text = $"{GameManager.Instance.Player1Score}";
+        Root.Q<TextElement>("score-player-2").text = $"{GameManager.Instance.Player2Score}";
     }
-    void UpdateFPSDisplay() => Root.Q<TextElement>("fps-display").text = $"FPS: {(int)(1 / Time.smoothDeltaTime)}";
+    public void UpdateFPSDisplay() => Root.Q<TextElement>("fps-display").text = $"FPS: {(int)(1 / Time.smoothDeltaTime)}";
 }

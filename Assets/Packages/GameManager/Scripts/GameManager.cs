@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerMono player2;
     [SerializeField] BallMono ball;
     [SerializeField] PaddleAutoController aiController;
-    // [SerializeField] UIManager uiManager;
+    [SerializeField] UIManager uiManager;
     [SerializeField] int player1Score;
     [SerializeField] int player2Score;
     [SerializeField] int servingPlayer = 1;
@@ -28,7 +28,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
     public int ServingPlayerId => servingPlayer;
     public int WinningPlayerId => winningPlayer;
+    public int Player1Score => player1Score;
+    public int Player2Score => player2Score;
 
+    [ContextMenu(nameof(IncreaseScorePlayer1))]
+    void IncreaseScorePlayer1()
+    {
+        player1Score++;
+        uiManager.UpdateScore();
+    }
     void Awake()
     {
         if (instance == null)
