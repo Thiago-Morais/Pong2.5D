@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Constants;
@@ -50,5 +51,10 @@ public class Ball
     {
         // FIXME
         // love.graphics.rectangle('fill', x, y, width, height);
+    }
+
+    internal int GetPositionConstrained()
+    {
+        throw new NotImplementedException();
     }
 }
