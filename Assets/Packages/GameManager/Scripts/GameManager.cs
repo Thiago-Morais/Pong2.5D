@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     static GameManager instance;
     [SerializeField] float ballSpeedIncrease = 1.03f;
     ProjectInputs projectInputs;
+    View view;
+
 
     public static GameManager Instance => instance;
     public int ServingPlayerId => servingPlayer;
@@ -37,7 +39,8 @@ public class GameManager : MonoBehaviour
     public int Player2Score => player2Score;
     public GameStates GameState => gameState;
 
-    public enum GameStates { start, menu, serve, play, done };
+    public enum GameStates { start, menu, serve, play, done }
+    enum View { ThirdPerson, TopDown, }
     [ContextMenu(nameof(IncreaseScorePlayer1))]
     void IncreaseScorePlayer1()
     {
@@ -91,16 +94,12 @@ public class GameManager : MonoBehaviour
         // 3. 'play' (the ball is in play, bouncing between paddles)
         // 4. 'done' (the game is over, with a victor, ready for restart)
 
-        /* gameState = GameStates.start; */
         GetInputActions();
-
-
+        SetGameState(GameStates.start);
     }
     void GetInputActions()
     {
         projectInputs = new ProjectInputs();
-        projectInputs.Disable();
-        projectInputs.MapAwaitContinue.Enable();
     }
     void Update()
     {
@@ -181,12 +180,14 @@ public class GameManager : MonoBehaviour
         projectInputs.MapAwaitContinue.Continue.performed += Continue;
         projectInputs.MapPlayerSelection.SelectSinglePlayer.performed += SelectSinglePlayer;
         projectInputs.MapPlayerSelection.SelectMultiPlayer.performed += SelectMultiPlayer;
+        projectInputs.MapPlayer.Move.performed += MovePlayer1;
     }
     void OnDisable()
     {
         projectInputs.MapAwaitContinue.Continue.performed -= Continue;
         projectInputs.MapPlayerSelection.SelectSinglePlayer.performed -= SelectSinglePlayer;
         projectInputs.MapPlayerSelection.SelectMultiPlayer.performed -= SelectMultiPlayer;
+        projectInputs.MapPlayer.Move.performed -= MovePlayer1;
     }
     void Continue(InputAction.CallbackContext context)
     {
@@ -228,7 +229,6 @@ public class GameManager : MonoBehaviour
                 SetGameState(GameStates.serve);
             }
     }
-
     void SelectMultiPlayer(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -237,5 +237,10 @@ public class GameManager : MonoBehaviour
                 singlePlayer = 2;
                 SetGameState(GameStates.serve);
             }
+    }
+    void MovePlayer1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            player1.Paddle.Model.SetCurrentSpeed(context.ReadValue<float>());
     }
 }

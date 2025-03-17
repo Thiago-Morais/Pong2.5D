@@ -17,18 +17,20 @@ public class PaddleAutoController
     }
     public void Update(float dt)
     {
+        float newSpeed = paddle.CurrentSpeed;
         if (IsPaddleAfterBall())
-            paddle.currentSpeed += basePaddleSpeed * accelerationFactor * dt;
+            newSpeed += basePaddleSpeed * accelerationFactor * dt;
         else if (IsPaddleBeforeBall())
-            paddle.currentSpeed -= basePaddleSpeed * accelerationFactor * dt;
+            newSpeed -= basePaddleSpeed * accelerationFactor * dt;
         else
         {
-            if (paddle.currentSpeed > 0)
-                paddle.currentSpeed -= basePaddleSpeed * decelerationFactor * dt;
-            else if (paddle.currentSpeed < 0)
-                paddle.currentSpeed += basePaddleSpeed * decelerationFactor * dt;
+            if (paddle.CurrentSpeed > 0)
+                newSpeed -= basePaddleSpeed * decelerationFactor * dt;
+            else if (paddle.CurrentSpeed < 0)
+                newSpeed += basePaddleSpeed * decelerationFactor * dt;
         }
+        paddle.SetCurrentSpeed(newSpeed);
     }
-    public bool IsPaddleAfterBall() => paddle.GetPositionConstrained() > ball.PositionParallelToPlayers;
-    public bool IsPaddleBeforeBall() => paddle.GetPositionConstrained() < ball.PositionParallelToPlayers;
+    public bool IsPaddleAfterBall() => paddle.GetAxisPosition() > ball.PositionParallelToPlayers;
+    public bool IsPaddleBeforeBall() => paddle.GetAxisPosition() < ball.PositionParallelToPlayers;
 }

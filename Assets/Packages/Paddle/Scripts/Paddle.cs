@@ -1,14 +1,15 @@
 using System;
 using static Constants;
 
+[Serializable]
 public class Paddle
 {
     public float x;
     public float y;
     public float width;
     public float height;
-    public float currentSpeed = 0;
-
+    float currentSpeed = 0;
+    public float CurrentSpeed => currentSpeed;
     public Paddle(float x, float y, float width, float height)
     {
         this.x = x;
@@ -32,9 +33,12 @@ public class Paddle
         // FIXME
         // love.graphics.rectangle('fill', x, y, width, height);
     }
-
-    internal int GetPositionConstrained()
+    public float GetAxisPosition()
     {
         throw new NotImplementedException();
+    }
+    public void SetCurrentSpeed(float value)
+    {
+        currentSpeed = value;
     }
 }
