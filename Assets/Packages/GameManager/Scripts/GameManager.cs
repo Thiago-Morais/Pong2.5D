@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     static GameManager instance;
     [SerializeField] float ballSpeedIncrease = 1.03f;
     [SerializeField] PlayerInput playerInput;
-    InputAction continueAction;
+    ProjectInputs projectInputs;
 
     public static GameManager Instance => instance;
     public int ServingPlayerId => servingPlayer;
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public int Player1Score => player1Score;
     public int Player2Score => player2Score;
     public GameStates GameState => gameState;
+
     public enum GameStates { start, menu, serve, play, done };
     [ContextMenu(nameof(IncreaseScorePlayer1))]
     void IncreaseScorePlayer1()
@@ -98,19 +99,19 @@ public class GameManager : MonoBehaviour
     }
     void GetInputActions()
     {
-        continueAction = InputSystem.actions.FindAction("Continue");
-        Debug.Log($"{nameof(continueAction)} = " + continueAction, this);
+        projectInputs = new ProjectInputs();
+        projectInputs.Enable();
     }
     void Update()
     {
         UpdateGameState();
         Draw();
-        if (gameState == GameStates.play)
+        if (GameState == GameStates.play)
             ball.Model.Update(Time.deltaTime);
     }
     void UpdateGameState()
     {
-        switch (gameState)
+        switch (GameState)
         {
             case GameStates.serve:
                 float parallelDirection = Random.Range(-1f, 1f);
@@ -155,33 +156,40 @@ public class GameManager : MonoBehaviour
         // displayFPS()
 
     }
-    public void SetGameState(GameStates value) => gameState = value;
+    public void SetGameState(GameStates value)
+    {
+        gameState = value;
+        uiManager.SetState(gameState);
+    }
     public static float GetTowardPlayers(Vector2 vector2) => vector2.y;
     public static float GetParallelToPlayers(Vector2 vector2) => vector2.x;
     public static Vector2 SetTowardPlayers(Vector2 vector2, float value) => new Vector2(vector2.x, value);
     public static Vector2 SetParallelToPlayers(Vector2 vector2, float value) => new Vector2(value, vector2.y);
     void OnEnable()
     {
-        continueAction.performed += Continue;
+        Debug.Log($"OnEnable", this);
+        projectInputs.AwaitContinue.Continue.performed += Continue;
     }
     void OnDisable()
     {
-        continueAction.performed -= Continue;
+        Debug.Log($"OnDisable", this);
+        projectInputs.AwaitContinue.Continue.performed -= Continue;
     }
     void Continue(InputAction.CallbackContext context)
     {
+        Debug.Log($"Continue: {context.phase}", this);
         if (context.performed)
         {
-            switch (gameState)
+            switch (GameState)
             {
                 case GameStates.start:
-                    gameState = GameStates.menu;
+                    SetGameState(GameStates.menu);
                     break;
                 case GameStates.serve:
-                    gameState = GameStates.play;
+                    SetGameState(GameStates.play);
                     break;
                 case GameStates.done:
-                    gameState = GameStates.serve;
+                    SetGameState(GameStates.serve);
 
                     ball.Reset();
 

@@ -1,6 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using GameStates = GameManager.GameStates;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,39 +11,34 @@ public class UIManager : MonoBehaviour
     [SerializeField] VisualTreeAsset playUI;
     [SerializeField] VisualTreeAsset doneUI;
     VisualElement Root => uiDocument.rootVisualElement;
-    [ContextMenu(nameof(Test_start))]
-    void Test_start() => SetState("start");
-    [ContextMenu(nameof(Test_menu))]
-    void Test_menu() => SetState("menu");
-    [ContextMenu(nameof(Test_serve))]
-    void Test_serve() => SetState("serve");
-    [ContextMenu(nameof(Test_play))]
-    void Test_play() => SetState("play");
-    [ContextMenu(nameof(Test_done))]
-    void Test_done() => SetState("done");
+    [ContextMenu(nameof(Test_start))] void Test_start() => SetState(GameStates.start);
+    [ContextMenu(nameof(Test_menu))] void Test_menu() => SetState(GameStates.menu);
+    [ContextMenu(nameof(Test_serve))] void Test_serve() => SetState(GameStates.serve);
+    [ContextMenu(nameof(Test_play))] void Test_play() => SetState(GameStates.play);
+    [ContextMenu(nameof(Test_done))] void Test_done() => SetState(GameStates.done);
     void Update()
     {
         UpdateFPSDisplay();
     }
-    public void SetState(string uiState)
+    public void SetState(GameStates uiState)
     {
         switch (uiState)
         {
-            case "start":
+            case GameStates.start:
                 uiDocument.visualTreeAsset = startUI;
                 break;
-            case "menu":
+            case GameStates.menu:
                 uiDocument.visualTreeAsset = menuUI;
                 break;
-            case "serve":
+            case GameStates.serve:
                 uiDocument.visualTreeAsset = serveUI;
                 TextElement serveText = Root.Q<TextElement>("serve-text");
                 serveText.text = $"Player {GameManager.Instance.ServingPlayerId}'s serve!";
                 break;
-            case "play":
+            case GameStates.play:
                 uiDocument.visualTreeAsset = playUI;
                 break;
-            case "done":
+            case GameStates.done:
                 uiDocument.visualTreeAsset = doneUI;
                 TextElement winningText = Root.Q<TextElement>("winning-text");
                 winningText.text = $"Player {GameManager.Instance.WinningPlayerId} wins!";
