@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameStates gameState = GameStates.start;
     static GameManager instance;
     [SerializeField] float ballSpeedIncrease = 1.03f;
-    [SerializeField] PlayerInput playerInput;
     ProjectInputs projectInputs;
 
     public static GameManager Instance => instance;
@@ -100,7 +99,8 @@ public class GameManager : MonoBehaviour
     void GetInputActions()
     {
         projectInputs = new ProjectInputs();
-        projectInputs.Enable();
+        projectInputs.Disable();
+        projectInputs.MapAwaitContinue.Enable();
     }
     void Update()
     {
@@ -160,6 +160,17 @@ public class GameManager : MonoBehaviour
     {
         gameState = value;
         uiManager.SetState(gameState);
+
+        projectInputs.Disable();
+        switch (gameState)
+        {
+            case GameStates.start: projectInputs.MapAwaitContinue.Enable(); break;
+            case GameStates.menu: projectInputs.MapPlayerSelection.Enable(); break;
+            case GameStates.serve: projectInputs.MapAwaitContinue.Enable(); break;
+            case GameStates.play: projectInputs.MapPlayer.Enable(); break;
+            case GameStates.done: projectInputs.MapAwaitContinue.Enable(); break;
+            default: break;
+        }
     }
     public static float GetTowardPlayers(Vector2 vector2) => vector2.y;
     public static float GetParallelToPlayers(Vector2 vector2) => vector2.x;
@@ -167,13 +178,15 @@ public class GameManager : MonoBehaviour
     public static Vector2 SetParallelToPlayers(Vector2 vector2, float value) => new Vector2(value, vector2.y);
     void OnEnable()
     {
-        Debug.Log($"OnEnable", this);
-        projectInputs.AwaitContinue.Continue.performed += Continue;
+        projectInputs.MapAwaitContinue.Continue.performed += Continue;
+        projectInputs.MapPlayerSelection.SelectSinglePlayer.performed += SelectSinglePlayer;
+        projectInputs.MapPlayerSelection.SelectMultiPlayer.performed += SelectMultiPlayer;
     }
     void OnDisable()
     {
-        Debug.Log($"OnDisable", this);
-        projectInputs.AwaitContinue.Continue.performed -= Continue;
+        projectInputs.MapAwaitContinue.Continue.performed -= Continue;
+        projectInputs.MapPlayerSelection.SelectSinglePlayer.performed -= SelectSinglePlayer;
+        projectInputs.MapPlayerSelection.SelectMultiPlayer.performed -= SelectMultiPlayer;
     }
     void Continue(InputAction.CallbackContext context)
     {
@@ -205,5 +218,24 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
+    }
+    void SelectSinglePlayer(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            if (gameState == GameStates.menu)
+            {
+                singlePlayer = 1;
+                SetGameState(GameStates.serve);
+            }
+    }
+
+    void SelectMultiPlayer(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            if (gameState == GameStates.menu)
+            {
+                singlePlayer = 2;
+                SetGameState(GameStates.serve);
+            }
     }
 }

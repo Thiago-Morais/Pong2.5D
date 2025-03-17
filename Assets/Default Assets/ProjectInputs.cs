@@ -88,7 +88,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
     ""name"": ""ProjectInputs"",
     ""maps"": [
         {
-            ""name"": ""Await Continue"",
+            ""name"": ""Map Await Continue"",
             ""id"": ""cf033584-4f33-449e-8760-644f2f56e4ba"",
             ""actions"": [
                 {
@@ -108,7 +108,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/anyKey"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Continue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -116,7 +116,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Player Selection"",
+            ""name"": ""Map Player Selection"",
             ""id"": ""30d1045f-06af-404e-a2d3-f8fd845a7bb1"",
             ""actions"": [
                 {
@@ -145,7 +145,18 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
+                    ""action"": ""Select SinglePlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9596c453-3d04-4570-8c68-73bfee98e89b"",
+                    ""path"": ""<Keyboard>/numpad1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Select SinglePlayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -156,7 +167,18 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
+                    ""action"": ""Select MultiPlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc1cf026-1a16-4365-923e-31b2d51f62d1"",
+                    ""path"": ""<Keyboard>/numpad2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Select MultiPlayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -164,7 +186,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Player"",
+            ""name"": ""Map Player"",
             ""id"": ""df70fa95-8a34-4494-b137-73ab6b9c7d37"",
             ""actions"": [
                 {
@@ -271,7 +293,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""WASD"",
+                    ""name"": ""WASD 1"",
                     ""id"": ""00ca640b-d935-4593-8157-c05846ea39b3"",
                     ""path"": ""Dpad"",
                     ""interactions"": """",
@@ -287,18 +309,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""8180e8bd-4097-4f4e-ab88-4523101a6ce9"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -309,18 +320,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1c5327b5-f71c-4f60-99c7-4e737386f1d1"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -331,18 +331,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""2e46982e-44cc-431b-9f0b-c11910bf467a"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -353,18 +342,62 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""WASD 2"",
+                    ""id"": ""16d5e2b0-5361-4e84-8700-0d560131a45f"",
+                    ""path"": ""Dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7d603995-8f5b-4737-a21a-385ffc3ece4f"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse 2"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0e67483e-2591-456b-b4d1-930cba78147d"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse 2"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""78015b76-0706-453a-9a5d-e9b2cbd0c542"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse 2"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""77bff152-3580-4b21-b6de-dcd0c7e41164"",
+                    ""id"": ""0f6c186d-ee27-4702-9637-314d7fca1398"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 2"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -408,7 +441,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
+                    ""groups"": ""Touch;Keyboard&Mouse 1"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -441,7 +474,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -485,7 +518,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -496,7 +529,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Next"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -518,7 +551,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -551,7 +584,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Quit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -562,7 +595,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -595,7 +628,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Previous"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -617,7 +650,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -650,7 +683,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -658,7 +691,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""UI"",
+            ""name"": ""Map UI"",
             ""id"": ""272f6d14-89ba-496f-b7ff-215263d3219f"",
             ""actions"": [
                 {
@@ -935,7 +968,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -946,7 +979,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -957,7 +990,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -968,7 +1001,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -979,7 +1012,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -990,7 +1023,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1001,7 +1034,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1012,7 +1045,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1023,7 +1056,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""*/{Submit}"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""groups"": ""Gamepad;Touch;Joystick;XR;Keyboard&Mouse 1"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1034,7 +1067,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""*/{Cancel}"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""groups"": ""Gamepad;Touch;Joystick;XR;Keyboard&Mouse 1"",
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1045,7 +1078,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Point"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1056,7 +1089,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Pen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Point"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1078,7 +1111,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1089,7 +1122,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Pen>/tip"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1122,7 +1155,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""ScrollWheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1133,7 +1166,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1144,7 +1177,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse 1"",
                     ""action"": ""MiddleClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1176,8 +1209,8 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Keyboard&Mouse"",
-            ""bindingGroup"": ""Keyboard&Mouse"",
+            ""name"": ""Keyboard&Mouse 1"",
+            ""bindingGroup"": ""Keyboard&Mouse 1"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
@@ -1234,48 +1267,64 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Keyboard&Mouse 2"",
+            ""bindingGroup"": ""Keyboard&Mouse 2"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
-        // Await Continue
-        m_AwaitContinue = asset.FindActionMap("Await Continue", throwIfNotFound: true);
-        m_AwaitContinue_Continue = m_AwaitContinue.FindAction("Continue", throwIfNotFound: true);
-        // Player Selection
-        m_PlayerSelection = asset.FindActionMap("Player Selection", throwIfNotFound: true);
-        m_PlayerSelection_SelectSinglePlayer = m_PlayerSelection.FindAction("Select SinglePlayer", throwIfNotFound: true);
-        m_PlayerSelection_SelectMultiPlayer = m_PlayerSelection.FindAction("Select MultiPlayer", throwIfNotFound: true);
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
-        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Previous = m_Player.FindAction("Previous", throwIfNotFound: true);
-        m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
-        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
-        m_Player_Quit = m_Player.FindAction("Quit", throwIfNotFound: true);
-        // UI
-        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
-        m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
-        m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
-        m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
-        m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
-        m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
-        m_UI_MiddleClick = m_UI.FindAction("MiddleClick", throwIfNotFound: true);
-        m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
-        m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
-        m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Map Await Continue
+        m_MapAwaitContinue = asset.FindActionMap("Map Await Continue", throwIfNotFound: true);
+        m_MapAwaitContinue_Continue = m_MapAwaitContinue.FindAction("Continue", throwIfNotFound: true);
+        // Map Player Selection
+        m_MapPlayerSelection = asset.FindActionMap("Map Player Selection", throwIfNotFound: true);
+        m_MapPlayerSelection_SelectSinglePlayer = m_MapPlayerSelection.FindAction("Select SinglePlayer", throwIfNotFound: true);
+        m_MapPlayerSelection_SelectMultiPlayer = m_MapPlayerSelection.FindAction("Select MultiPlayer", throwIfNotFound: true);
+        // Map Player
+        m_MapPlayer = asset.FindActionMap("Map Player", throwIfNotFound: true);
+        m_MapPlayer_Move = m_MapPlayer.FindAction("Move", throwIfNotFound: true);
+        m_MapPlayer_Look = m_MapPlayer.FindAction("Look", throwIfNotFound: true);
+        m_MapPlayer_Attack = m_MapPlayer.FindAction("Attack", throwIfNotFound: true);
+        m_MapPlayer_Interact = m_MapPlayer.FindAction("Interact", throwIfNotFound: true);
+        m_MapPlayer_Crouch = m_MapPlayer.FindAction("Crouch", throwIfNotFound: true);
+        m_MapPlayer_Jump = m_MapPlayer.FindAction("Jump", throwIfNotFound: true);
+        m_MapPlayer_Previous = m_MapPlayer.FindAction("Previous", throwIfNotFound: true);
+        m_MapPlayer_Next = m_MapPlayer.FindAction("Next", throwIfNotFound: true);
+        m_MapPlayer_Sprint = m_MapPlayer.FindAction("Sprint", throwIfNotFound: true);
+        m_MapPlayer_Quit = m_MapPlayer.FindAction("Quit", throwIfNotFound: true);
+        // Map UI
+        m_MapUI = asset.FindActionMap("Map UI", throwIfNotFound: true);
+        m_MapUI_Navigate = m_MapUI.FindAction("Navigate", throwIfNotFound: true);
+        m_MapUI_Submit = m_MapUI.FindAction("Submit", throwIfNotFound: true);
+        m_MapUI_Cancel = m_MapUI.FindAction("Cancel", throwIfNotFound: true);
+        m_MapUI_Point = m_MapUI.FindAction("Point", throwIfNotFound: true);
+        m_MapUI_Click = m_MapUI.FindAction("Click", throwIfNotFound: true);
+        m_MapUI_RightClick = m_MapUI.FindAction("RightClick", throwIfNotFound: true);
+        m_MapUI_MiddleClick = m_MapUI.FindAction("MiddleClick", throwIfNotFound: true);
+        m_MapUI_ScrollWheel = m_MapUI.FindAction("ScrollWheel", throwIfNotFound: true);
+        m_MapUI_TrackedDevicePosition = m_MapUI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
+        m_MapUI_TrackedDeviceOrientation = m_MapUI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
     }
 
     ~@ProjectInputs()
     {
-        UnityEngine.Debug.Assert(!m_AwaitContinue.enabled, "This will cause a leak and performance issues, ProjectInputs.AwaitContinue.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_PlayerSelection.enabled, "This will cause a leak and performance issues, ProjectInputs.PlayerSelection.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, ProjectInputs.Player.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, ProjectInputs.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MapAwaitContinue.enabled, "This will cause a leak and performance issues, ProjectInputs.MapAwaitContinue.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MapPlayerSelection.enabled, "This will cause a leak and performance issues, ProjectInputs.MapPlayerSelection.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MapPlayer.enabled, "This will cause a leak and performance issues, ProjectInputs.MapPlayer.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MapUI.enabled, "This will cause a leak and performance issues, ProjectInputs.MapUI.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1348,29 +1397,29 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Await Continue
-    private readonly InputActionMap m_AwaitContinue;
-    private List<IAwaitContinueActions> m_AwaitContinueActionsCallbackInterfaces = new List<IAwaitContinueActions>();
-    private readonly InputAction m_AwaitContinue_Continue;
+    // Map Await Continue
+    private readonly InputActionMap m_MapAwaitContinue;
+    private List<IMapAwaitContinueActions> m_MapAwaitContinueActionsCallbackInterfaces = new List<IMapAwaitContinueActions>();
+    private readonly InputAction m_MapAwaitContinue_Continue;
     /// <summary>
-    /// Provides access to input actions defined in input action map "Await Continue".
+    /// Provides access to input actions defined in input action map "Map Await Continue".
     /// </summary>
-    public struct AwaitContinueActions
+    public struct MapAwaitContinueActions
     {
         private @ProjectInputs m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public AwaitContinueActions(@ProjectInputs wrapper) { m_Wrapper = wrapper; }
+        public MapAwaitContinueActions(@ProjectInputs wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "AwaitContinue/Continue".
+        /// Provides access to the underlying input action "MapAwaitContinue/Continue".
         /// </summary>
-        public InputAction @Continue => m_Wrapper.m_AwaitContinue_Continue;
+        public InputAction @Continue => m_Wrapper.m_MapAwaitContinue_Continue;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_AwaitContinue; }
+        public InputActionMap Get() { return m_Wrapper.m_MapAwaitContinue; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -1378,9 +1427,9 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="AwaitContinueActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="MapAwaitContinueActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(AwaitContinueActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(MapAwaitContinueActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -1388,11 +1437,11 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="AwaitContinueActions" />
-        public void AddCallbacks(IAwaitContinueActions instance)
+        /// <seealso cref="MapAwaitContinueActions" />
+        public void AddCallbacks(IMapAwaitContinueActions instance)
         {
-            if (instance == null || m_Wrapper.m_AwaitContinueActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_AwaitContinueActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_MapAwaitContinueActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MapAwaitContinueActionsCallbackInterfaces.Add(instance);
             @Continue.started += instance.OnContinue;
             @Continue.performed += instance.OnContinue;
             @Continue.canceled += instance.OnContinue;
@@ -1404,8 +1453,8 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="AwaitContinueActions" />
-        private void UnregisterCallbacks(IAwaitContinueActions instance)
+        /// <seealso cref="MapAwaitContinueActions" />
+        private void UnregisterCallbacks(IMapAwaitContinueActions instance)
         {
             @Continue.started -= instance.OnContinue;
             @Continue.performed -= instance.OnContinue;
@@ -1413,12 +1462,12 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="AwaitContinueActions.UnregisterCallbacks(IAwaitContinueActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MapAwaitContinueActions.UnregisterCallbacks(IMapAwaitContinueActions)" />.
         /// </summary>
-        /// <seealso cref="AwaitContinueActions.UnregisterCallbacks(IAwaitContinueActions)" />
-        public void RemoveCallbacks(IAwaitContinueActions instance)
+        /// <seealso cref="MapAwaitContinueActions.UnregisterCallbacks(IMapAwaitContinueActions)" />
+        public void RemoveCallbacks(IMapAwaitContinueActions instance)
         {
-            if (m_Wrapper.m_AwaitContinueActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_MapAwaitContinueActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -1428,50 +1477,50 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="AwaitContinueActions.AddCallbacks(IAwaitContinueActions)" />
-        /// <seealso cref="AwaitContinueActions.RemoveCallbacks(IAwaitContinueActions)" />
-        /// <seealso cref="AwaitContinueActions.UnregisterCallbacks(IAwaitContinueActions)" />
-        public void SetCallbacks(IAwaitContinueActions instance)
+        /// <seealso cref="MapAwaitContinueActions.AddCallbacks(IMapAwaitContinueActions)" />
+        /// <seealso cref="MapAwaitContinueActions.RemoveCallbacks(IMapAwaitContinueActions)" />
+        /// <seealso cref="MapAwaitContinueActions.UnregisterCallbacks(IMapAwaitContinueActions)" />
+        public void SetCallbacks(IMapAwaitContinueActions instance)
         {
-            foreach (var item in m_Wrapper.m_AwaitContinueActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_MapAwaitContinueActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_AwaitContinueActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_MapAwaitContinueActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="AwaitContinueActions" /> instance referencing this action map.
+    /// Provides a new <see cref="MapAwaitContinueActions" /> instance referencing this action map.
     /// </summary>
-    public AwaitContinueActions @AwaitContinue => new AwaitContinueActions(this);
+    public MapAwaitContinueActions @MapAwaitContinue => new MapAwaitContinueActions(this);
 
-    // Player Selection
-    private readonly InputActionMap m_PlayerSelection;
-    private List<IPlayerSelectionActions> m_PlayerSelectionActionsCallbackInterfaces = new List<IPlayerSelectionActions>();
-    private readonly InputAction m_PlayerSelection_SelectSinglePlayer;
-    private readonly InputAction m_PlayerSelection_SelectMultiPlayer;
+    // Map Player Selection
+    private readonly InputActionMap m_MapPlayerSelection;
+    private List<IMapPlayerSelectionActions> m_MapPlayerSelectionActionsCallbackInterfaces = new List<IMapPlayerSelectionActions>();
+    private readonly InputAction m_MapPlayerSelection_SelectSinglePlayer;
+    private readonly InputAction m_MapPlayerSelection_SelectMultiPlayer;
     /// <summary>
-    /// Provides access to input actions defined in input action map "Player Selection".
+    /// Provides access to input actions defined in input action map "Map Player Selection".
     /// </summary>
-    public struct PlayerSelectionActions
+    public struct MapPlayerSelectionActions
     {
         private @ProjectInputs m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public PlayerSelectionActions(@ProjectInputs wrapper) { m_Wrapper = wrapper; }
+        public MapPlayerSelectionActions(@ProjectInputs wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "PlayerSelection/SelectSinglePlayer".
+        /// Provides access to the underlying input action "MapPlayerSelection/SelectSinglePlayer".
         /// </summary>
-        public InputAction @SelectSinglePlayer => m_Wrapper.m_PlayerSelection_SelectSinglePlayer;
+        public InputAction @SelectSinglePlayer => m_Wrapper.m_MapPlayerSelection_SelectSinglePlayer;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerSelection/SelectMultiPlayer".
+        /// Provides access to the underlying input action "MapPlayerSelection/SelectMultiPlayer".
         /// </summary>
-        public InputAction @SelectMultiPlayer => m_Wrapper.m_PlayerSelection_SelectMultiPlayer;
+        public InputAction @SelectMultiPlayer => m_Wrapper.m_MapPlayerSelection_SelectMultiPlayer;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_PlayerSelection; }
+        public InputActionMap Get() { return m_Wrapper.m_MapPlayerSelection; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -1479,9 +1528,9 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="PlayerSelectionActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="MapPlayerSelectionActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(PlayerSelectionActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(MapPlayerSelectionActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -1489,11 +1538,11 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="PlayerSelectionActions" />
-        public void AddCallbacks(IPlayerSelectionActions instance)
+        /// <seealso cref="MapPlayerSelectionActions" />
+        public void AddCallbacks(IMapPlayerSelectionActions instance)
         {
-            if (instance == null || m_Wrapper.m_PlayerSelectionActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerSelectionActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_MapPlayerSelectionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MapPlayerSelectionActionsCallbackInterfaces.Add(instance);
             @SelectSinglePlayer.started += instance.OnSelectSinglePlayer;
             @SelectSinglePlayer.performed += instance.OnSelectSinglePlayer;
             @SelectSinglePlayer.canceled += instance.OnSelectSinglePlayer;
@@ -1508,8 +1557,8 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="PlayerSelectionActions" />
-        private void UnregisterCallbacks(IPlayerSelectionActions instance)
+        /// <seealso cref="MapPlayerSelectionActions" />
+        private void UnregisterCallbacks(IMapPlayerSelectionActions instance)
         {
             @SelectSinglePlayer.started -= instance.OnSelectSinglePlayer;
             @SelectSinglePlayer.performed -= instance.OnSelectSinglePlayer;
@@ -1520,12 +1569,12 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerSelectionActions.UnregisterCallbacks(IPlayerSelectionActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MapPlayerSelectionActions.UnregisterCallbacks(IMapPlayerSelectionActions)" />.
         /// </summary>
-        /// <seealso cref="PlayerSelectionActions.UnregisterCallbacks(IPlayerSelectionActions)" />
-        public void RemoveCallbacks(IPlayerSelectionActions instance)
+        /// <seealso cref="MapPlayerSelectionActions.UnregisterCallbacks(IMapPlayerSelectionActions)" />
+        public void RemoveCallbacks(IMapPlayerSelectionActions instance)
         {
-            if (m_Wrapper.m_PlayerSelectionActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_MapPlayerSelectionActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -1535,90 +1584,90 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="PlayerSelectionActions.AddCallbacks(IPlayerSelectionActions)" />
-        /// <seealso cref="PlayerSelectionActions.RemoveCallbacks(IPlayerSelectionActions)" />
-        /// <seealso cref="PlayerSelectionActions.UnregisterCallbacks(IPlayerSelectionActions)" />
-        public void SetCallbacks(IPlayerSelectionActions instance)
+        /// <seealso cref="MapPlayerSelectionActions.AddCallbacks(IMapPlayerSelectionActions)" />
+        /// <seealso cref="MapPlayerSelectionActions.RemoveCallbacks(IMapPlayerSelectionActions)" />
+        /// <seealso cref="MapPlayerSelectionActions.UnregisterCallbacks(IMapPlayerSelectionActions)" />
+        public void SetCallbacks(IMapPlayerSelectionActions instance)
         {
-            foreach (var item in m_Wrapper.m_PlayerSelectionActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_MapPlayerSelectionActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerSelectionActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_MapPlayerSelectionActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="PlayerSelectionActions" /> instance referencing this action map.
+    /// Provides a new <see cref="MapPlayerSelectionActions" /> instance referencing this action map.
     /// </summary>
-    public PlayerSelectionActions @PlayerSelection => new PlayerSelectionActions(this);
+    public MapPlayerSelectionActions @MapPlayerSelection => new MapPlayerSelectionActions(this);
 
-    // Player
-    private readonly InputActionMap m_Player;
-    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Look;
-    private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_Crouch;
-    private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Previous;
-    private readonly InputAction m_Player_Next;
-    private readonly InputAction m_Player_Sprint;
-    private readonly InputAction m_Player_Quit;
+    // Map Player
+    private readonly InputActionMap m_MapPlayer;
+    private List<IMapPlayerActions> m_MapPlayerActionsCallbackInterfaces = new List<IMapPlayerActions>();
+    private readonly InputAction m_MapPlayer_Move;
+    private readonly InputAction m_MapPlayer_Look;
+    private readonly InputAction m_MapPlayer_Attack;
+    private readonly InputAction m_MapPlayer_Interact;
+    private readonly InputAction m_MapPlayer_Crouch;
+    private readonly InputAction m_MapPlayer_Jump;
+    private readonly InputAction m_MapPlayer_Previous;
+    private readonly InputAction m_MapPlayer_Next;
+    private readonly InputAction m_MapPlayer_Sprint;
+    private readonly InputAction m_MapPlayer_Quit;
     /// <summary>
-    /// Provides access to input actions defined in input action map "Player".
+    /// Provides access to input actions defined in input action map "Map Player".
     /// </summary>
-    public struct PlayerActions
+    public struct MapPlayerActions
     {
         private @ProjectInputs m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public PlayerActions(@ProjectInputs wrapper) { m_Wrapper = wrapper; }
+        public MapPlayerActions(@ProjectInputs wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Player/Move".
+        /// Provides access to the underlying input action "MapPlayer/Move".
         /// </summary>
-        public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Move => m_Wrapper.m_MapPlayer_Move;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Look".
+        /// Provides access to the underlying input action "MapPlayer/Look".
         /// </summary>
-        public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @Look => m_Wrapper.m_MapPlayer_Look;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Attack".
+        /// Provides access to the underlying input action "MapPlayer/Attack".
         /// </summary>
-        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @Attack => m_Wrapper.m_MapPlayer_Attack;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Interact".
+        /// Provides access to the underlying input action "MapPlayer/Interact".
         /// </summary>
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Interact => m_Wrapper.m_MapPlayer_Interact;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Crouch".
+        /// Provides access to the underlying input action "MapPlayer/Crouch".
         /// </summary>
-        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @Crouch => m_Wrapper.m_MapPlayer_Crouch;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Jump".
+        /// Provides access to the underlying input action "MapPlayer/Jump".
         /// </summary>
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Jump => m_Wrapper.m_MapPlayer_Jump;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Previous".
+        /// Provides access to the underlying input action "MapPlayer/Previous".
         /// </summary>
-        public InputAction @Previous => m_Wrapper.m_Player_Previous;
+        public InputAction @Previous => m_Wrapper.m_MapPlayer_Previous;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Next".
+        /// Provides access to the underlying input action "MapPlayer/Next".
         /// </summary>
-        public InputAction @Next => m_Wrapper.m_Player_Next;
+        public InputAction @Next => m_Wrapper.m_MapPlayer_Next;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Sprint".
+        /// Provides access to the underlying input action "MapPlayer/Sprint".
         /// </summary>
-        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @Sprint => m_Wrapper.m_MapPlayer_Sprint;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Quit".
+        /// Provides access to the underlying input action "MapPlayer/Quit".
         /// </summary>
-        public InputAction @Quit => m_Wrapper.m_Player_Quit;
+        public InputAction @Quit => m_Wrapper.m_MapPlayer_Quit;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public InputActionMap Get() { return m_Wrapper.m_MapPlayer; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -1626,9 +1675,9 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="PlayerActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="MapPlayerActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(MapPlayerActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -1636,11 +1685,11 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="PlayerActions" />
-        public void AddCallbacks(IPlayerActions instance)
+        /// <seealso cref="MapPlayerActions" />
+        public void AddCallbacks(IMapPlayerActions instance)
         {
-            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_MapPlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MapPlayerActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -1679,8 +1728,8 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="PlayerActions" />
-        private void UnregisterCallbacks(IPlayerActions instance)
+        /// <seealso cref="MapPlayerActions" />
+        private void UnregisterCallbacks(IMapPlayerActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
@@ -1715,12 +1764,12 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MapPlayerActions.UnregisterCallbacks(IMapPlayerActions)" />.
         /// </summary>
-        /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
-        public void RemoveCallbacks(IPlayerActions instance)
+        /// <seealso cref="MapPlayerActions.UnregisterCallbacks(IMapPlayerActions)" />
+        public void RemoveCallbacks(IMapPlayerActions instance)
         {
-            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_MapPlayerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -1730,90 +1779,90 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
-        /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
-        /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
-        public void SetCallbacks(IPlayerActions instance)
+        /// <seealso cref="MapPlayerActions.AddCallbacks(IMapPlayerActions)" />
+        /// <seealso cref="MapPlayerActions.RemoveCallbacks(IMapPlayerActions)" />
+        /// <seealso cref="MapPlayerActions.UnregisterCallbacks(IMapPlayerActions)" />
+        public void SetCallbacks(IMapPlayerActions instance)
         {
-            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_MapPlayerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_MapPlayerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
+    /// Provides a new <see cref="MapPlayerActions" /> instance referencing this action map.
     /// </summary>
-    public PlayerActions @Player => new PlayerActions(this);
+    public MapPlayerActions @MapPlayer => new MapPlayerActions(this);
 
-    // UI
-    private readonly InputActionMap m_UI;
-    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Navigate;
-    private readonly InputAction m_UI_Submit;
-    private readonly InputAction m_UI_Cancel;
-    private readonly InputAction m_UI_Point;
-    private readonly InputAction m_UI_Click;
-    private readonly InputAction m_UI_RightClick;
-    private readonly InputAction m_UI_MiddleClick;
-    private readonly InputAction m_UI_ScrollWheel;
-    private readonly InputAction m_UI_TrackedDevicePosition;
-    private readonly InputAction m_UI_TrackedDeviceOrientation;
+    // Map UI
+    private readonly InputActionMap m_MapUI;
+    private List<IMapUIActions> m_MapUIActionsCallbackInterfaces = new List<IMapUIActions>();
+    private readonly InputAction m_MapUI_Navigate;
+    private readonly InputAction m_MapUI_Submit;
+    private readonly InputAction m_MapUI_Cancel;
+    private readonly InputAction m_MapUI_Point;
+    private readonly InputAction m_MapUI_Click;
+    private readonly InputAction m_MapUI_RightClick;
+    private readonly InputAction m_MapUI_MiddleClick;
+    private readonly InputAction m_MapUI_ScrollWheel;
+    private readonly InputAction m_MapUI_TrackedDevicePosition;
+    private readonly InputAction m_MapUI_TrackedDeviceOrientation;
     /// <summary>
-    /// Provides access to input actions defined in input action map "UI".
+    /// Provides access to input actions defined in input action map "Map UI".
     /// </summary>
-    public struct UIActions
+    public struct MapUIActions
     {
         private @ProjectInputs m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public UIActions(@ProjectInputs wrapper) { m_Wrapper = wrapper; }
+        public MapUIActions(@ProjectInputs wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "UI/Navigate".
+        /// Provides access to the underlying input action "MapUI/Navigate".
         /// </summary>
-        public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+        public InputAction @Navigate => m_Wrapper.m_MapUI_Navigate;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Submit".
+        /// Provides access to the underlying input action "MapUI/Submit".
         /// </summary>
-        public InputAction @Submit => m_Wrapper.m_UI_Submit;
+        public InputAction @Submit => m_Wrapper.m_MapUI_Submit;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Cancel".
+        /// Provides access to the underlying input action "MapUI/Cancel".
         /// </summary>
-        public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputAction @Cancel => m_Wrapper.m_MapUI_Cancel;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Point".
+        /// Provides access to the underlying input action "MapUI/Point".
         /// </summary>
-        public InputAction @Point => m_Wrapper.m_UI_Point;
+        public InputAction @Point => m_Wrapper.m_MapUI_Point;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Click".
+        /// Provides access to the underlying input action "MapUI/Click".
         /// </summary>
-        public InputAction @Click => m_Wrapper.m_UI_Click;
+        public InputAction @Click => m_Wrapper.m_MapUI_Click;
         /// <summary>
-        /// Provides access to the underlying input action "UI/RightClick".
+        /// Provides access to the underlying input action "MapUI/RightClick".
         /// </summary>
-        public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
+        public InputAction @RightClick => m_Wrapper.m_MapUI_RightClick;
         /// <summary>
-        /// Provides access to the underlying input action "UI/MiddleClick".
+        /// Provides access to the underlying input action "MapUI/MiddleClick".
         /// </summary>
-        public InputAction @MiddleClick => m_Wrapper.m_UI_MiddleClick;
+        public InputAction @MiddleClick => m_Wrapper.m_MapUI_MiddleClick;
         /// <summary>
-        /// Provides access to the underlying input action "UI/ScrollWheel".
+        /// Provides access to the underlying input action "MapUI/ScrollWheel".
         /// </summary>
-        public InputAction @ScrollWheel => m_Wrapper.m_UI_ScrollWheel;
+        public InputAction @ScrollWheel => m_Wrapper.m_MapUI_ScrollWheel;
         /// <summary>
-        /// Provides access to the underlying input action "UI/TrackedDevicePosition".
+        /// Provides access to the underlying input action "MapUI/TrackedDevicePosition".
         /// </summary>
-        public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
+        public InputAction @TrackedDevicePosition => m_Wrapper.m_MapUI_TrackedDevicePosition;
         /// <summary>
-        /// Provides access to the underlying input action "UI/TrackedDeviceOrientation".
+        /// Provides access to the underlying input action "MapUI/TrackedDeviceOrientation".
         /// </summary>
-        public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        public InputAction @TrackedDeviceOrientation => m_Wrapper.m_MapUI_TrackedDeviceOrientation;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public InputActionMap Get() { return m_Wrapper.m_MapUI; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -1821,9 +1870,9 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="UIActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="MapUIActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(MapUIActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -1831,11 +1880,11 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="UIActions" />
-        public void AddCallbacks(IUIActions instance)
+        /// <seealso cref="MapUIActions" />
+        public void AddCallbacks(IMapUIActions instance)
         {
-            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_MapUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MapUIActionsCallbackInterfaces.Add(instance);
             @Navigate.started += instance.OnNavigate;
             @Navigate.performed += instance.OnNavigate;
             @Navigate.canceled += instance.OnNavigate;
@@ -1874,8 +1923,8 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="UIActions" />
-        private void UnregisterCallbacks(IUIActions instance)
+        /// <seealso cref="MapUIActions" />
+        private void UnregisterCallbacks(IMapUIActions instance)
         {
             @Navigate.started -= instance.OnNavigate;
             @Navigate.performed -= instance.OnNavigate;
@@ -1910,12 +1959,12 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UIActions.UnregisterCallbacks(IUIActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MapUIActions.UnregisterCallbacks(IMapUIActions)" />.
         /// </summary>
-        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
-        public void RemoveCallbacks(IUIActions instance)
+        /// <seealso cref="MapUIActions.UnregisterCallbacks(IMapUIActions)" />
+        public void RemoveCallbacks(IMapUIActions instance)
         {
-            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_MapUIActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -1925,32 +1974,32 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
-        /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
-        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
-        public void SetCallbacks(IUIActions instance)
+        /// <seealso cref="MapUIActions.AddCallbacks(IMapUIActions)" />
+        /// <seealso cref="MapUIActions.RemoveCallbacks(IMapUIActions)" />
+        /// <seealso cref="MapUIActions.UnregisterCallbacks(IMapUIActions)" />
+        public void SetCallbacks(IMapUIActions instance)
         {
-            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_MapUIActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_MapUIActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="UIActions" /> instance referencing this action map.
+    /// Provides a new <see cref="MapUIActions" /> instance referencing this action map.
     /// </summary>
-    public UIActions @UI => new UIActions(this);
-    private int m_KeyboardMouseSchemeIndex = -1;
+    public MapUIActions @MapUI => new MapUIActions(this);
+    private int m_KeyboardMouse1SchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
     /// </summary>
     /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
-    public InputControlScheme KeyboardMouseScheme
+    public InputControlScheme KeyboardMouse1Scheme
     {
         get
         {
-            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
-            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+            if (m_KeyboardMouse1SchemeIndex == -1) m_KeyboardMouse1SchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse 1");
+            return asset.controlSchemes[m_KeyboardMouse1SchemeIndex];
         }
     }
     private int m_GamepadSchemeIndex = -1;
@@ -2005,12 +2054,25 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_XRSchemeIndex];
         }
     }
+    private int m_KeyboardMouse2SchemeIndex = -1;
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Await Continue" which allows adding and removing callbacks.
+    /// Provides access to the input control scheme.
     /// </summary>
-    /// <seealso cref="AwaitContinueActions.AddCallbacks(IAwaitContinueActions)" />
-    /// <seealso cref="AwaitContinueActions.RemoveCallbacks(IAwaitContinueActions)" />
-    public interface IAwaitContinueActions
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme KeyboardMouse2Scheme
+    {
+        get
+        {
+            if (m_KeyboardMouse2SchemeIndex == -1) m_KeyboardMouse2SchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse 2");
+            return asset.controlSchemes[m_KeyboardMouse2SchemeIndex];
+        }
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map Await Continue" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MapAwaitContinueActions.AddCallbacks(IMapAwaitContinueActions)" />
+    /// <seealso cref="MapAwaitContinueActions.RemoveCallbacks(IMapAwaitContinueActions)" />
+    public interface IMapAwaitContinueActions
     {
         /// <summary>
         /// Method invoked when associated input action "Continue" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
@@ -2021,11 +2083,11 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         void OnContinue(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player Selection" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map Player Selection" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="PlayerSelectionActions.AddCallbacks(IPlayerSelectionActions)" />
-    /// <seealso cref="PlayerSelectionActions.RemoveCallbacks(IPlayerSelectionActions)" />
-    public interface IPlayerSelectionActions
+    /// <seealso cref="MapPlayerSelectionActions.AddCallbacks(IMapPlayerSelectionActions)" />
+    /// <seealso cref="MapPlayerSelectionActions.RemoveCallbacks(IMapPlayerSelectionActions)" />
+    public interface IMapPlayerSelectionActions
     {
         /// <summary>
         /// Method invoked when associated input action "Select SinglePlayer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
@@ -2043,11 +2105,11 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         void OnSelectMultiPlayer(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map Player" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
-    /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
-    public interface IPlayerActions
+    /// <seealso cref="MapPlayerActions.AddCallbacks(IMapPlayerActions)" />
+    /// <seealso cref="MapPlayerActions.RemoveCallbacks(IMapPlayerActions)" />
+    public interface IMapPlayerActions
     {
         /// <summary>
         /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
@@ -2121,11 +2183,11 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
         void OnQuit(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map UI" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
-    /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
-    public interface IUIActions
+    /// <seealso cref="MapUIActions.AddCallbacks(IMapUIActions)" />
+    /// <seealso cref="MapUIActions.RemoveCallbacks(IMapUIActions)" />
+    public interface IMapUIActions
     {
         /// <summary>
         /// Method invoked when associated input action "Navigate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
