@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,14 +24,17 @@ public class GameManager : MonoBehaviour
 2. 'serve' (waiting on a key press to serve the ball)
 3. 'play' (the ball is in play, bouncing between paddles)
 4. 'done' (the game is over, with a victor, ready for restart)")]
-    [SerializeField] string gameState = "start";
+    [SerializeField] GameStates gameState = GameStates.start;
     static GameManager instance;
+    [SerializeField] float ballSpeedIncrease = 1.03f;
+
     public static GameManager Instance => instance;
     public int ServingPlayerId => servingPlayer;
     public int WinningPlayerId => winningPlayer;
     public int Player1Score => player1Score;
     public int Player2Score => player2Score;
-
+    public GameStates GameState => gameState;
+    public enum GameStates { start, serve, play, done };
     [ContextMenu(nameof(IncreaseScorePlayer1))]
     void IncreaseScorePlayer1()
     {
@@ -83,12 +87,44 @@ public class GameManager : MonoBehaviour
         // 2. 'serve' (waiting on a key press to serve the ball)
         // 3. 'play' (the ball is in play, bouncing between paddles)
         // 4. 'done' (the game is over, with a victor, ready for restart)
-        gameState = "start";
 
+        /* gameState = GameStates.start; */
     }
     void Update()
     {
+        UpdateGameState();
         Draw();
+        if (gameState == GameStates.play)
+            ball.Model.Update(Time.deltaTime);
+    }
+    void UpdateGameState()
+    {
+        switch (gameState)
+        {
+            case GameStates.serve:
+                float parallelDirection = Random.Range(-1f, 1f);
+                float towardDirection = servingPlayer == 1 ? Random.Range(-1f, -.5f) : Random.Range(.5f, 1f);
+
+                float randomSpeed = Random.Range(.66f, 1.33f) * ball.Model.BaseSpeed;
+                Vector2 direction = new Vector2(parallelDirection, towardDirection).normalized;
+                ball.Model.SetSpeedParallelToPlayers(direction.x * randomSpeed);
+                ball.Model.SetSpeedTowardPlayers(direction.y * randomSpeed);
+                return;
+            case GameStates.play:
+                if (ball.Model.Collides(player1.Paddle.Model))
+                {
+                    ball.Model.SetSpeedTowardPlayers(-ball.Model.SpeedTowardPlayers * ballSpeedIncrease);
+                    SnapBallInFrontOfPaddle(player1.Paddle);
+                }
+                return;
+            default:
+                return;
+        }
+    }
+    void SnapBallInFrontOfPaddle(PaddleMono paddle)
+    {
+        float pointInFrontOfPaddleTowardPlayers = GetTowardPlayers(paddle.PointInFrontOfPaddle);
+        ball.Model.SetPositionTowardPlayers(pointInFrontOfPaddleTowardPlayers);
     }
     void Draw()
     {
@@ -108,4 +144,9 @@ public class GameManager : MonoBehaviour
         // displayFPS()
 
     }
+    public void SetGameState(GameStates value) => gameState = value;
+    public static float GetTowardPlayers(Vector2 vector2) => vector2.y;
+    public static float GetParallelToPlayers(Vector2 vector2) => vector2.x;
+    public static Vector2 SetTowardPlayers(Vector2 vector2, float value) => new Vector2(vector2.x, value);
+    public static Vector2 SetParallelToPlayers(Vector2 vector2, float value) => new Vector2(value, vector2.y);
 }

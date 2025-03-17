@@ -1,60 +1,53 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using static Constants;
 
+[Serializable]
 public class Ball
 {
-    public float x;
-    public float y;
-    public float width;
-    public float height;
-    public float dy = 0;
-    public float dx = 0;
+    [SerializeField] float baseSpeed = 200;
+    [SerializeField] Vector2 speed;
+    [SerializeField] Paddle currentCollidedPaddle;
+    public event Action<Vector2, Vector2> OnPositionChange;
+    [SerializeField] Vector2 position;
 
-    public Ball(float x, float y, float width, float height)
+    public float BaseSpeed => baseSpeed;
+    public Vector2 Position => position;
+    public Vector2 Speed => speed;
+    public float SpeedTowardPlayers => GameManager.GetTowardPlayers(speed);
+    public float SpeedParallelToPlayers => GameManager.GetParallelToPlayers(speed);
+    public float PositionTowardPlayers => GameManager.GetTowardPlayers(position);
+    public float PositionParallelToPlayers => GameManager.GetParallelToPlayers(position);
+    void SetSpeed(Vector2 value) => speed = value;
+    void SetPosition(Vector2 value)
     {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        OnPositionChange?.Invoke(position, value);
+        position = value;
     }
-    [ContextMenu(nameof(Collides))]
-    public bool Collides(Paddle paddle)
+    public Ball(Vector2 position)
     {
-        //  first, check to see if the left edge of either is farther to the right
-        // than the right edge of the other
-        if (x > paddle.x + paddle.width || paddle.x > x + width)
-            return false;
-        //  then check to see if the bottom edge of either is higher than the top
-        // edge of the other
-        if (y > paddle.y + paddle.height || paddle.y > y + height)
-            return false;
-
-        //  if the above aren't true, they're overlapping
-        return true;
+        this.position = position;
     }
-    [ContextMenu(nameof(Reset))]
+    public bool Collides(Paddle paddle) => currentCollidedPaddle == paddle;
     public void Reset()
     {
-        x = VIRTUAL_WIDTH / 2 - width / 2;
-        y = VIRTUAL_HEIGHT / 2 - height / 2;
-        dy = 0;
-        dx = 0;
+        SetPosition(Vector2.zero);
+        SetSpeed(Vector2.zero);
     }
     public void Update(float dt)
     {
-        x = x + dx * dt;
-        y = y + dy * dt;
+        Vector2 aux = position;
+        aux.x += speed.x * dt;
+        aux.y += speed.y * dt;
+        SetPosition(aux);
     }
     public void Render()
     {
         // FIXME
         // love.graphics.rectangle('fill', x, y, width, height);
     }
-
-    internal int GetPositionConstrained()
-    {
-        throw new NotImplementedException();
-    }
+    public void SetSpeedTowardPlayers(float value) => SetSpeed(GameManager.SetTowardPlayers(speed, value));
+    public void SetSpeedParallelToPlayers(float value) => SetSpeed(GameManager.SetParallelToPlayers(speed, value));
+    public void SetPositionTowardPlayers(float value) => SetPosition(GameManager.SetTowardPlayers(position, value));
+    public void SetPositionParallelToPlayers(float value) => SetPosition(GameManager.SetParallelToPlayers(position, value));
 }

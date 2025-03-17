@@ -29,6 +29,6 @@ public class PaddleAutoController
                 paddle.currentSpeed += basePaddleSpeed * decelerationFactor * dt;
         }
     }
-    public bool IsPaddleAfterBall() => paddle.GetPositionConstrained() > ball.GetPositionConstrained();
-    public bool IsPaddleBeforeBall() => paddle.GetPositionConstrained() < ball.GetPositionConstrained();
+    public bool IsPaddleAfterBall() => paddle.GetPositionConstrained() > ball.PositionParallelToPlayers;
+    public bool IsPaddleBeforeBall() => paddle.GetPositionConstrained() < ball.PositionParallelToPlayers;
 }
