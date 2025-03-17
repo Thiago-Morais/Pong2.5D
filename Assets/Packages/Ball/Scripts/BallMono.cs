@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class BallMono : MonoBehaviour
 {
-    [SerializeField] Ball model = new Ball(Vector2.zero);
+    [SerializeField] Ball model = new Ball(new BallAxis());
     [SerializeField] Transform ballPivot;
     public event Action<Collider> OnTriggerEnterEvent;
     public event Action<Collider> OnTriggerExitEvent;
     public Ball Model => model;
     public void Update()
     {
-        float x = ballPivot.position.x + model.Position.x;
+        float x = ballPivot.position.x + model.Position.AsVector2.x;
         float y = ballPivot.position.y + 0;
-        float z = ballPivot.position.z + model.Position.y;
+        float z = ballPivot.position.z + model.Position.AsVector2.y;
         transform.position = new Vector3(x, y, z);
     }
     void OnTriggerEnter(Collider other)

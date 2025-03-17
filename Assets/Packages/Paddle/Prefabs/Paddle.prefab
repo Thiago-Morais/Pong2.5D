@@ -77,6 +77,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a401ac2faf8ce64dbd7a8a5c58a4071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model:
+    axisBounds:
+      m_Mode: 3
+      m_CurveMultiplier: 0
+      m_CurveMin:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_CurveMax:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_ConstantMin: -7
+      m_ConstantMax: 7
+    smoothTime: 0.05
+    velocityMultiplier: 25
 --- !u!1 &4295095969327347723
 GameObject:
   m_ObjectHideFlags: 0

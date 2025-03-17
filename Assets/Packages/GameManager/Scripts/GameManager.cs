@@ -107,6 +107,8 @@ public class GameManager : MonoBehaviour
         Draw();
         if (GameState == GameStates.play)
             ball.Model.Update(Time.deltaTime);
+        player1.Paddle.Model.Update(Time.deltaTime);
+        player2.Paddle.Model.Update(Time.deltaTime);
     }
     void UpdateGameState()
     {
@@ -118,13 +120,13 @@ public class GameManager : MonoBehaviour
 
                 float randomSpeed = Random.Range(.66f, 1.33f) * ball.Model.BaseSpeed;
                 Vector2 direction = new Vector2(parallelDirection, towardDirection).normalized;
-                ball.Model.SetSpeedParallelToPlayers(direction.x * randomSpeed);
-                ball.Model.SetSpeedTowardPlayers(direction.y * randomSpeed);
+                ball.Model.Speed.SetParallelToPlayers(direction.x * randomSpeed);
+                ball.Model.Speed.SetTowardPlayers(direction.y * randomSpeed);
                 return;
             case GameStates.play:
                 if (ball.Model.Collides(player1.Paddle.Model))
                 {
-                    ball.Model.SetSpeedTowardPlayers(-ball.Model.SpeedTowardPlayers * ballSpeedIncrease);
+                    ball.Model.Speed.SetTowardPlayers(-ball.Model.Speed.TowardPlayers * ballSpeedIncrease);
                     SnapBallInFrontOfPaddle(player1.Paddle);
                 }
                 return;
@@ -135,7 +137,7 @@ public class GameManager : MonoBehaviour
     void SnapBallInFrontOfPaddle(PaddleMono paddle)
     {
         float pointInFrontOfPaddleTowardPlayers = GetTowardPlayers(paddle.PointInFrontOfPaddle);
-        ball.Model.SetPositionTowardPlayers(pointInFrontOfPaddleTowardPlayers);
+        ball.Model.Position.SetTowardPlayers(pointInFrontOfPaddleTowardPlayers);
     }
     void Draw()
     {
@@ -238,9 +240,11 @@ public class GameManager : MonoBehaviour
                 SetGameState(GameStates.serve);
             }
     }
+
     void MovePlayer1(InputAction.CallbackContext context)
     {
+        Debug.Log($"Move: {context.phase}", this);
         if (context.performed)
-            player1.Paddle.Model.SetCurrentSpeed(context.ReadValue<float>());
+            player1.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
     }
 }

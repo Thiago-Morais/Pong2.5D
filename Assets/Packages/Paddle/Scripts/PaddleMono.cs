@@ -1,8 +1,9 @@
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class PaddleMono : MonoBehaviour
 {
-    Paddle model = new Paddle(0, 0, 0, 0);
+    [SerializeField] Paddle model = new Paddle(new MinMaxCurve(-7, 7));
     public Paddle Model => model;
-    public Vector2 PointInFrontOfPaddle { get; internal set; }
+    public Vector2 PointInFrontOfPaddle { get; set; }
 }

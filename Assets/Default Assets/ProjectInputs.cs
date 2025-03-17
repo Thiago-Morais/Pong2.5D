@@ -105,10 +105,21 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b91ba6d7-a221-462b-b8ec-bef4260f3e38"",
-                    ""path"": ""<Keyboard>/anyKey"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse 1"",
+                    ""groups"": ""Keyboard&Mouse 1;Keyboard&Mouse 2"",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20774f66-7ffb-4622-98ac-c816569081f4"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse 1;Keyboard&Mouse 2"",
                     ""action"": ""Continue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -191,7 +202,7 @@ public partial class @ProjectInputs: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""351f2ccd-1f9f-44bf-9bec-d62ac5c5f408"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",

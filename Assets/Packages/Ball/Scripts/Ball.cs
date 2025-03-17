@@ -5,50 +5,52 @@ using UnityEngine;
 public class Ball
 {
     [SerializeField] float baseSpeed = 200;
-    [SerializeField] Vector2 speed;
+    [SerializeField] BallAxis speed;
+    [SerializeField] BallAxis position;
     [SerializeField] Paddle currentCollidedPaddle;
-    public event Action<Vector2, Vector2> OnPositionChange;
-    [SerializeField] Vector2 position;
+    public event Action<BallAxis, BallAxis> OnPositionChange;
 
     public float BaseSpeed => baseSpeed;
-    public Vector2 Position => position;
-    public Vector2 Speed => speed;
-    public float SpeedTowardPlayers => GameManager.GetTowardPlayers(speed);
-    public float SpeedParallelToPlayers => GameManager.GetParallelToPlayers(speed);
-    public float PositionTowardPlayers => GameManager.GetTowardPlayers(position);
-    public float PositionParallelToPlayers => GameManager.GetParallelToPlayers(position);
+    public BallAxis Position => position;
+    public BallAxis Speed => speed;
     public Paddle CurrentCollidedPaddle => currentCollidedPaddle;
-    public void SetCurrentCollidedPaddle(Paddle value) => currentCollidedPaddle = value;
-    void SetSpeed(Vector2 value) => speed = value;
-    void SetPosition(Vector2 value)
-    {
-        OnPositionChange?.Invoke(position, value);
-        position = value;
-    }
-    public Ball(Vector2 position)
+    public Ball(BallAxis position)
     {
         this.position = position;
     }
     public bool Collides(Paddle paddle) => currentCollidedPaddle == paddle;
     public void Reset()
     {
-        SetPosition(Vector2.zero);
-        SetSpeed(Vector2.zero);
+        SetPosition(new BallAxis());
+        SetSpeed(new BallAxis());
     }
     public void Update(float dt)
     {
-        Vector2 aux = position;
-        aux.x += speed.x * dt;
-        aux.y += speed.y * dt;
-        SetPosition(aux);
+        float newPositionTowardPlayers = position.TowardPlayers + speed.TowardPlayers * dt;
+        float newPositionParallelToPlayers = position.ParallelToPlayers + speed.ParallelToPlayers * dt;
+        SetPosition(new BallAxis(towardPlayers: newPositionTowardPlayers, parallelToPlayers: newPositionParallelToPlayers));
     }
     public void Render()
     {
         // FIXME
         // love.graphics.rectangle('fill', x, y, width, height);
     }
-    public void SetSpeedTowardPlayers(float value) => SetSpeed(GameManager.SetTowardPlayers(speed, value));
-    public void SetSpeedParallelToPlayers(float value) => SetSpeed(GameManager.SetParallelToPlayers(speed, value));
-    public void SetPositionTowardPlayers(float value) => SetPosition(GameManager.SetTowardPlayers(position, value));
-    public void SetPositionParallelToPlayers(float value) => SetPosition(GameManager.SetParallelToPlayers(position, value));
+    public void SetCurrentCollidedPaddle(Paddle value) => currentCollidedPaddle = value;
+    void SetSpeed(BallAxis value) => speed = value;
+    void SetPosition(BallAxis value)
+    {
+        OnPositionChange?.Invoke(position, value);
+        position = value;
+    }
+}
+public struct BallAxis
+{
+    Vector2 axis;
+    public BallAxis(float towardPlayers, float parallelToPlayers) : this(new Vector2(parallelToPlayers, towardPlayers)) { }
+    public BallAxis(Vector2 axis) => this.axis = axis;
+    public readonly float TowardPlayers => GameManager.GetTowardPlayers(axis);
+    public readonly float ParallelToPlayers => GameManager.GetParallelToPlayers(axis);
+    public readonly Vector2 AsVector2 => axis;
+    public void SetTowardPlayers(float value) => axis = GameManager.SetTowardPlayers(axis, value);
+    public void SetParallelToPlayers(float value) => axis = GameManager.SetParallelToPlayers(axis, value);
 }
