@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static Constants;
 
 [Serializable]
 public class Ball
@@ -18,6 +17,8 @@ public class Ball
     public float SpeedParallelToPlayers => GameManager.GetParallelToPlayers(speed);
     public float PositionTowardPlayers => GameManager.GetTowardPlayers(position);
     public float PositionParallelToPlayers => GameManager.GetParallelToPlayers(position);
+    public Paddle CurrentCollidedPaddle => currentCollidedPaddle;
+    public void SetCurrentCollidedPaddle(Paddle value) => currentCollidedPaddle = value;
     void SetSpeed(Vector2 value) => speed = value;
     void SetPosition(Vector2 value)
     {
