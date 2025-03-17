@@ -1,10 +1,11 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-
     [SerializeField] AudioClip paddle_hit;
     [SerializeField] AudioClip score;
     [SerializeField] AudioClip wall_hit;
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameStates gameState = GameStates.start;
     static GameManager instance;
     [SerializeField] float ballSpeedIncrease = 1.03f;
+    [SerializeField] PlayerInput playerInput;
+    InputAction continueAction;
 
     public static GameManager Instance => instance;
     public int ServingPlayerId => servingPlayer;
@@ -34,7 +37,7 @@ public class GameManager : MonoBehaviour
     public int Player1Score => player1Score;
     public int Player2Score => player2Score;
     public GameStates GameState => gameState;
-    public enum GameStates { start, serve, play, done };
+    public enum GameStates { start, menu, serve, play, done };
     [ContextMenu(nameof(IncreaseScorePlayer1))]
     void IncreaseScorePlayer1()
     {
@@ -89,6 +92,14 @@ public class GameManager : MonoBehaviour
         // 4. 'done' (the game is over, with a victor, ready for restart)
 
         /* gameState = GameStates.start; */
+        GetInputActions();
+
+
+    }
+    void GetInputActions()
+    {
+        continueAction = InputSystem.actions.FindAction("Continue");
+        Debug.Log($"{nameof(continueAction)} = " + continueAction, this);
     }
     void Update()
     {
@@ -149,4 +160,42 @@ public class GameManager : MonoBehaviour
     public static float GetParallelToPlayers(Vector2 vector2) => vector2.x;
     public static Vector2 SetTowardPlayers(Vector2 vector2, float value) => new Vector2(vector2.x, value);
     public static Vector2 SetParallelToPlayers(Vector2 vector2, float value) => new Vector2(value, vector2.y);
+    void OnEnable()
+    {
+        continueAction.performed += Continue;
+    }
+    void OnDisable()
+    {
+        continueAction.performed -= Continue;
+    }
+    void Continue(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            switch (gameState)
+            {
+                case GameStates.start:
+                    gameState = GameStates.menu;
+                    break;
+                case GameStates.serve:
+                    gameState = GameStates.play;
+                    break;
+                case GameStates.done:
+                    gameState = GameStates.serve;
+
+                    ball.Reset();
+
+                    player1Score = 0;
+                    player2Score = 0;
+
+                    if (winningPlayer == 1)
+                        servingPlayer = 2;
+                    else
+                        servingPlayer = 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

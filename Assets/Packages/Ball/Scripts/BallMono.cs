@@ -17,16 +17,20 @@ public class BallMono : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        OnTriggerEnterEvent.Invoke(other);
+        OnTriggerEnterEvent?.Invoke(other);
         if (other.TryGetComponent<PaddleMono>(out var paddle))
             model.SetCurrentCollidedPaddle(paddle.Model);
     }
     // This may cause problems if the ball hits two paddles at the same time. But it wont, so... ¯\_(ツ)_/¯
     void OnTriggerExit(Collider other)
     {
-        OnTriggerExitEvent.Invoke(other);
+        OnTriggerExitEvent?.Invoke(other);
         if (other.TryGetComponent<PaddleMono>(out var paddle))
             if (paddle.Model == model.CurrentCollidedPaddle)
                 model.SetCurrentCollidedPaddle(null);
+    }
+    public void Reset()
+    {
+        model.Reset();
     }
 }
