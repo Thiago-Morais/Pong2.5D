@@ -13,4 +13,6 @@ public static class Constants
 
     //~ reduce ai speed by
     public const int DIFFICULTY_DAMP = 3;
+    public const string WALL_TAG = "Wall";
+    public const string GOAL_TAG = "Goal";
 }

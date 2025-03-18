@@ -5,30 +5,29 @@ using UnityEngine;
 public class Ball
 {
     [SerializeField] float baseSpeed = 200;
-    [SerializeField] BallAxis speed;
-    [SerializeField] BallAxis position;
+    [SerializeField] PlayerAxis speed = new PlayerAxis(Vector3.zero);
+    [SerializeField] PlayerAxis position = new PlayerAxis(Vector3.zero);
     [SerializeField] Paddle currentCollidedPaddle;
-    public event Action<BallAxis, BallAxis> OnPositionChange;
+    public event Action<PlayerAxis, PlayerAxis> OnPositionChange;
 
     public float BaseSpeed => baseSpeed;
-    public BallAxis Position => position;
-    public BallAxis Speed => speed;
+    public PlayerAxis Position => position;
+    public PlayerAxis Speed => speed;
     public Paddle CurrentCollidedPaddle => currentCollidedPaddle;
-    public Ball(BallAxis position)
+    public Ball(PlayerAxis position)
     {
         this.position = position;
     }
     public bool Collides(Paddle paddle) => currentCollidedPaddle == paddle;
     public void Reset()
     {
-        SetPosition(new BallAxis());
-        SetSpeed(new BallAxis());
+        SetPosition(new PlayerAxis(Vector3.zero));
+        SetSpeed(new PlayerAxis(Vector3.zero));
     }
     public void Update(float dt)
     {
-        float newPositionTowardPlayers = position.TowardPlayers + speed.TowardPlayers * dt;
-        float newPositionParallelToPlayers = position.ParallelToPlayers + speed.ParallelToPlayers * dt;
-        SetPosition(new BallAxis(towardPlayers: newPositionTowardPlayers, parallelToPlayers: newPositionParallelToPlayers));
+        position.SetTowardPlayers(position.TowardPlayers + speed.TowardPlayers * dt);
+        position.SetParallelToPlayers(position.ParallelToPlayers + speed.ParallelToPlayers * dt);
     }
     public void Render()
     {
@@ -36,21 +35,10 @@ public class Ball
         // love.graphics.rectangle('fill', x, y, width, height);
     }
     public void SetCurrentCollidedPaddle(Paddle value) => currentCollidedPaddle = value;
-    void SetSpeed(BallAxis value) => speed = value;
-    void SetPosition(BallAxis value)
+    public void SetSpeed(PlayerAxis value) => speed = value;
+    public void SetPosition(PlayerAxis value)
     {
         OnPositionChange?.Invoke(position, value);
         position = value;
     }
-}
-public struct BallAxis
-{
-    Vector2 axis;
-    public BallAxis(float towardPlayers, float parallelToPlayers) : this(new Vector2(parallelToPlayers, towardPlayers)) { }
-    public BallAxis(Vector2 axis) => this.axis = axis;
-    public readonly float TowardPlayers => GameManager.GetTowardPlayers(axis);
-    public readonly float ParallelToPlayers => GameManager.GetParallelToPlayers(axis);
-    public readonly Vector2 AsVector2 => axis;
-    public void SetTowardPlayers(float value) => axis = GameManager.SetTowardPlayers(axis, value);
-    public void SetParallelToPlayers(float value) => axis = GameManager.SetParallelToPlayers(axis, value);
 }

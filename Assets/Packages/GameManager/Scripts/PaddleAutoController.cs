@@ -29,7 +29,7 @@ public class PaddleAutoController
             else if (paddle.CurrentVelocity < 0)
                 newSpeed += basePaddleSpeed * decelerationFactor * dt;
         }
-        paddle.SetCurrentVelocitySmooth(newSpeed);
+        paddle.SetSmoothVelocity(newSpeed);
     }
     public bool IsPaddleAfterBall() => paddle.AxisPosition > ball.Position.ParallelToPlayers;
     public bool IsPaddleBeforeBall() => paddle.AxisPosition < ball.Position.ParallelToPlayers;

@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -136,8 +135,7 @@ public class GameManager : MonoBehaviour
     }
     void SnapBallInFrontOfPaddle(PaddleMono paddle)
     {
-        float pointInFrontOfPaddleTowardPlayers = GetTowardPlayers(paddle.PointInFrontOfPaddle);
-        ball.Model.Position.SetTowardPlayers(pointInFrontOfPaddleTowardPlayers);
+        ball.Model.Position.SetOnlyTowardPlayers(paddle.PointInFrontOfPaddle);
     }
     void Draw()
     {
@@ -173,16 +171,14 @@ public class GameManager : MonoBehaviour
             default: break;
         }
     }
-    public static float GetTowardPlayers(Vector2 vector2) => vector2.y;
-    public static float GetParallelToPlayers(Vector2 vector2) => vector2.x;
-    public static Vector2 SetTowardPlayers(Vector2 vector2, float value) => new Vector2(vector2.x, value);
-    public static Vector2 SetParallelToPlayers(Vector2 vector2, float value) => new Vector2(value, vector2.y);
     void OnEnable()
     {
         projectInputs.MapAwaitContinue.Continue.performed += Continue;
         projectInputs.MapPlayerSelection.SelectSinglePlayer.performed += SelectSinglePlayer;
         projectInputs.MapPlayerSelection.SelectMultiPlayer.performed += SelectMultiPlayer;
         projectInputs.MapPlayer.Move.performed += MovePlayer1;
+        ball.OnTriggerEnterEvent += Ball_OnTriggerEnterEvent;
+        ball.OnTriggerExitEvent += Ball_OnTriggerExitEvent;
     }
     void OnDisable()
     {
@@ -190,6 +186,8 @@ public class GameManager : MonoBehaviour
         projectInputs.MapPlayerSelection.SelectSinglePlayer.performed -= SelectSinglePlayer;
         projectInputs.MapPlayerSelection.SelectMultiPlayer.performed -= SelectMultiPlayer;
         projectInputs.MapPlayer.Move.performed -= MovePlayer1;
+        ball.OnTriggerEnterEvent -= Ball_OnTriggerEnterEvent;
+        ball.OnTriggerExitEvent -= Ball_OnTriggerExitEvent;
     }
     void Continue(InputAction.CallbackContext context)
     {
@@ -246,5 +244,23 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Move: {context.phase}", this);
         if (context.performed)
             player1.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
+    }
+    void Ball_OnTriggerEnterEvent(Collider collider)
+    {
+        if (collider.attachedRigidbody?.TryGetComponent<Wall>(out var wall) == true)
+        {
+            Debug.Log($"{nameof(wall)} = " + wall, this);
+            float radiusOffset = wall.IsUpperWall ? ball.Radius : -ball.Radius;
+            ball.Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
+            ball.Model.Speed.SetParallelToPlayers(-ball.Model.Speed.ParallelToPlayers);
+        }
+        else if (collider.CompareTag(Constants.GOAL_TAG))
+        {
+
+        }
+
+    }
+    void Ball_OnTriggerExitEvent(Collider collider)
+    {
     }
 }
