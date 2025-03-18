@@ -12,7 +12,7 @@ public class PlayerAxis
 
     public float TowardPlayers => GetTowardPlayers(axis);
     public float ParallelToPlayers => GetParallelToPlayers(axis);
-    public void SetOnlyTowardPlayers(Vector3 vector) => SetTowardPlayers(GetTowardPlayers(vector));
+    public void SetTowardPlayers(Vector3 vector) => SetTowardPlayers(GetTowardPlayers(vector));
     public void SetParallelToPlayers(Vector3 vector) => SetParallelToPlayers(GetParallelToPlayers(vector));
     public void SetTowardPlayers(float value) => axis = SetTowardPlayers(axis, value);
     public void SetParallelToPlayers(float value) => axis = SetParallelToPlayers(axis, value);

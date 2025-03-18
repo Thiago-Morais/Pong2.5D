@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
+// !! This is a God Object. The original project was like this so I kept like this.
 public class GameManager : MonoBehaviour
 {
     [SerializeField] AudioClip paddle_hit;
@@ -115,7 +116,9 @@ public class GameManager : MonoBehaviour
         {
             case GameStates.serve:
                 float parallelDirection = Random.Range(-1f, 1f);
-                float towardDirection = servingPlayer == 1 ? Random.Range(-1f, -.5f) : Random.Range(.5f, 1f);
+                float towardDirection = Random.Range(.5f, 1f);
+                if (servingPlayer == 2) towardDirection = -towardDirection;
+
 
                 float randomSpeed = Random.Range(.66f, 1.33f) * ball.Model.BaseSpeed;
                 Vector2 direction = new Vector2(parallelDirection, towardDirection).normalized;
@@ -123,19 +126,10 @@ public class GameManager : MonoBehaviour
                 ball.Model.Speed.SetTowardPlayers(direction.y * randomSpeed);
                 return;
             case GameStates.play:
-                if (ball.Model.Collides(player1.Paddle.Model))
-                {
-                    ball.Model.Speed.SetTowardPlayers(-ball.Model.Speed.TowardPlayers * ballSpeedIncrease);
-                    SnapBallInFrontOfPaddle(player1.Paddle);
-                }
                 return;
             default:
                 return;
         }
-    }
-    void SnapBallInFrontOfPaddle(PaddleMono paddle)
-    {
-        ball.Model.Position.SetOnlyTowardPlayers(paddle.PointInFrontOfPaddle);
     }
     void Draw()
     {
@@ -238,29 +232,49 @@ public class GameManager : MonoBehaviour
                 SetGameState(GameStates.serve);
             }
     }
-
     void MovePlayer1(InputAction.CallbackContext context)
     {
         Debug.Log($"Move: {context.phase}", this);
         if (context.performed)
             player1.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
     }
-    void Ball_OnTriggerEnterEvent(Collider collider)
+    void Ball_OnTriggerEnterEvent(Collider other)
     {
-        if (collider.attachedRigidbody?.TryGetComponent<Wall>(out var wall) == true)
-        {
-            Debug.Log($"{nameof(wall)} = " + wall, this);
-            float radiusOffset = wall.IsUpperWall ? ball.Radius : -ball.Radius;
-            ball.Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
-            ball.Model.Speed.SetParallelToPlayers(-ball.Model.Speed.ParallelToPlayers);
-        }
-        else if (collider.CompareTag(Constants.GOAL_TAG))
-        {
+        if (gameState == GameStates.play)
+            if (other.attachedRigidbody)
+            {
+                if (other.attachedRigidbody.TryGetComponent<PlayerMono>(out var player))
+                {
+                    Debug.Log($"Hit Player: {player}", this);
+                    ball.cachedPlayerCollided = player;
+                    if (player == player1)
+                        ball.Model.Position.SetTowardPlayers(PlayerAxis.GetTowardPlayers(player.Paddle.PointInFrontOfPaddle) - ball.Radius);
+                    if (player == player2)
+                        ball.Model.Position.SetTowardPlayers(PlayerAxis.GetTowardPlayers(player.Paddle.PointInFrontOfPaddle) + ball.Radius);
+                    ball.Model.Speed.SetTowardPlayers(-ball.Model.Speed.TowardPlayers * ballSpeedIncrease);
+                }
+                else if (other.attachedRigidbody.TryGetComponent<Wall>(out var wall))
+                {
+                    Debug.Log($"{nameof(wall)} = " + wall, this);
+                    float radiusOffset = wall.IsUpperWall ? ball.Radius : -ball.Radius;
+                    ball.Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
+                    ball.Model.Speed.SetParallelToPlayers(-ball.Model.Speed.ParallelToPlayers);
+                }
+            }
+            else if (other.CompareTag(Constants.GOAL_TAG))
+            {
 
-        }
-
+            }
     }
-    void Ball_OnTriggerExitEvent(Collider collider)
+    // This may cause problems if the ball hits two paddles at the same time. But it wont, so... ¯\_(ツ)_/¯
+    void Ball_OnTriggerExitEvent(Collider other)
     {
+        if (gameState == GameStates.play)
+            if (other.attachedRigidbody)
+            {
+                if (other.attachedRigidbody.TryGetComponent<PlayerMono>(out var player))
+                    if (player == ball.cachedPlayerCollided)
+                        ball.cachedPlayerCollided = null;
+            }
     }
 }
