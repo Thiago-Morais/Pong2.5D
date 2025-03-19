@@ -16,6 +16,8 @@ public class Paddle
     public float TargetVelocitySmooth => targetVelocitySmooth;
     public float CurrentVelocity => currentVelocity;
     public float AxisPosition => axisPosition;
+    public float VelocityMultiplier => velocityMultiplier;
+
     public Paddle(float axisPosition = 0) : this(axisPosition, new MinMaxCurve(-7, 7)) { }
     public Paddle(MinMaxCurve axisBounds) : this(0, axisBounds) { }
     public Paddle(float axisPosition, MinMaxCurve axisBounds)

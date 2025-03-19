@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Users;
 using Random = UnityEngine.Random;
 
 // !! This is a God Object. The original project was like this so I kept like this.
@@ -12,13 +14,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerMono player1;
     [SerializeField] PlayerMono player2;
     [SerializeField] BallMono ball;
-    [SerializeField] PaddleAutoController aiController;
+    PaddleAutoController aiController;
     [SerializeField] UIManager uiManager;
     [SerializeField] int player1Score;
     [SerializeField] int player2Score;
     [SerializeField] int servingPlayer = 1;
     [SerializeField] int winningPlayer;
-    [SerializeField] int singlePlayer;
+    [SerializeField] int playerCount;
     [Tooltip(
 @"the state of our game; can be any of the following:
 1. 'start' (the beginning of the game, before first serve)
@@ -28,9 +30,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameStates gameState = GameStates.start;
     static GameManager instance;
     [SerializeField] float ballSpeedIncrease = 1.03f;
-    ProjectInputs projectInputs;
+    Controls player1Controls;
+    Controls player2Controls;
     View view;
-
+    InputUser player1Input;
+    InputUser player2Input;
 
     public static GameManager Instance => instance;
     public int ServingPlayerId => servingPlayer;
@@ -53,26 +57,6 @@ public class GameManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
-        /* 
-            // initialize our nice-looking retro text fonts
-            smallFont = love.graphics.newFont('font.ttf', 8)
-            largeFont = love.graphics.newFont('font.ttf', 16)
-            scoreFont = love.graphics.newFont('font.ttf', 32)
-            love.graphics.setFont(smallFont) 
-        */
-        /* 
-            // set up our sound effects; later, we can just index this table and
-            // call each entry's `play` method
-            sounds = {
-            ['paddle_hit'] = love.audio.newSource('sounds/paddle_hit.wav', 'static'),
-            ['score'] = love.audio.newSource('sounds/score.wav', 'static'),
-            ['wall_hit'] = love.audio.newSource('sounds/wall_hit.wav', 'static')
-            }
-        */
-        /* 
-                aiController = PaddleAutoController(ball, player2, PADDLE_SPEED / DIFFICULTY_DAMP)
-                                //~ aiController = PaddleAutoController()
-         */
         // initialize score variables
         player1Score = 0;
         player2Score = 0;
@@ -86,20 +70,23 @@ public class GameManager : MonoBehaviour
         winningPlayer = 0;
 
         //~ amount of real players
-        singlePlayer = 0;
+        playerCount = 0;
 
-        // the state of our game; can be any of the following:
-        // 1. 'start' (the beginning of the game, before first serve)
-        // 2. 'serve' (waiting on a key press to serve the ball)
-        // 3. 'play' (the ball is in play, bouncing between paddles)
-        // 4. 'done' (the game is over, with a victor, ready for restart)
+        aiController = new PaddleAutoController.Builder(ball.Model, player2.Paddle.Model).Build();
 
-        GetInputActions();
+        SetUpInputSystem();
         SetGameState(GameStates.start);
     }
-    void GetInputActions()
+    void SetUpInputSystem()
     {
-        projectInputs = new ProjectInputs();
+        player1Controls = new();
+        player1Input = InputUser.PerformPairingWithDevice(Keyboard.current);
+        player1Input.ActivateControlScheme(player1Controls.KeyboardMouse1Scheme);
+        player1Input.AssociateActionsWithUser(player1Controls);
+        player2Controls = new();
+        player2Input = InputUser.PerformPairingWithDevice(Keyboard.current);
+        player2Input.ActivateControlScheme(player2Controls.KeyboardMouse2Scheme);
+        player2Input.AssociateActionsWithUser(player2Controls);
     }
     void Update()
     {
@@ -108,7 +95,11 @@ public class GameManager : MonoBehaviour
         if (GameState == GameStates.play)
             ball.Model.Update(Time.deltaTime);
         player1.Paddle.Model.Update(Time.deltaTime);
-        player2.Paddle.Model.Update(Time.deltaTime);
+        if (playerCount == 1)
+            aiController.Update(Time.deltaTime);
+        else if (playerCount == 2)
+            player2.Paddle.Model.Update(Time.deltaTime);
+
     }
     void UpdateGameState()
     {
@@ -154,32 +145,45 @@ public class GameManager : MonoBehaviour
         gameState = value;
         uiManager.SetState(gameState);
 
-        projectInputs.Disable();
+        UpdateActionMapWithState(gameState, player1Controls);
+        UpdateActionMapWithState(gameState, player2Controls);
+    }
+    static void UpdateActionMapWithState(GameStates gameState, Controls controls)
+    {
+        controls.Disable();
         switch (gameState)
         {
-            case GameStates.start: projectInputs.MapAwaitContinue.Enable(); break;
-            case GameStates.menu: projectInputs.MapPlayerSelection.Enable(); break;
-            case GameStates.serve: projectInputs.MapAwaitContinue.Enable(); break;
-            case GameStates.play: projectInputs.MapPlayer.Enable(); break;
-            case GameStates.done: projectInputs.MapAwaitContinue.Enable(); break;
+            case GameStates.start: controls.MapAwaitContinue.Enable(); break;
+            case GameStates.menu: controls.MapPlayerSelection.Enable(); break;
+            case GameStates.serve: controls.MapAwaitContinue.Enable(); break;
+            case GameStates.play: controls.MapPlayer.Enable(); break;
+            case GameStates.done: controls.MapAwaitContinue.Enable(); break;
             default: break;
         }
     }
     void OnEnable()
     {
-        projectInputs.MapAwaitContinue.Continue.performed += Continue;
-        projectInputs.MapPlayerSelection.SelectSinglePlayer.performed += SelectSinglePlayer;
-        projectInputs.MapPlayerSelection.SelectMultiPlayer.performed += SelectMultiPlayer;
-        projectInputs.MapPlayer.Move.performed += MovePlayer1;
+        player1Controls.MapAwaitContinue.Continue.performed += Continue;
+        player1Controls.MapPlayerSelection.SelectSinglePlayer.performed += SelectSinglePlayer;
+        player1Controls.MapPlayerSelection.SelectMultiPlayer.performed += SelectMultiPlayer;
+        player1Controls.MapPlayer.Move.performed += MovePlayer1;
+        player2Controls.MapPlayer.Move.performed += MovePlayer2;
+
+        InputUser.onUnpairedDeviceUsed += OnUnpairedDeviceUsed;
+
         ball.OnTriggerEnterEvent += Ball_OnTriggerEnterEvent;
         ball.OnTriggerExitEvent += Ball_OnTriggerExitEvent;
     }
     void OnDisable()
     {
-        projectInputs.MapAwaitContinue.Continue.performed -= Continue;
-        projectInputs.MapPlayerSelection.SelectSinglePlayer.performed -= SelectSinglePlayer;
-        projectInputs.MapPlayerSelection.SelectMultiPlayer.performed -= SelectMultiPlayer;
-        projectInputs.MapPlayer.Move.performed -= MovePlayer1;
+        player1Controls.MapAwaitContinue.Continue.performed -= Continue;
+        player1Controls.MapPlayerSelection.SelectSinglePlayer.performed -= SelectSinglePlayer;
+        player1Controls.MapPlayerSelection.SelectMultiPlayer.performed -= SelectMultiPlayer; ;
+        player1Controls.MapPlayer.Move.performed -= MovePlayer1;
+        player2Controls.MapPlayer.Move.performed -= MovePlayer2;
+
+        InputUser.onUnpairedDeviceUsed -= OnUnpairedDeviceUsed;
+
         ball.OnTriggerEnterEvent -= Ball_OnTriggerEnterEvent;
         ball.OnTriggerExitEvent -= Ball_OnTriggerExitEvent;
     }
@@ -219,7 +223,7 @@ public class GameManager : MonoBehaviour
         if (context.performed)
             if (gameState == GameStates.menu)
             {
-                singlePlayer = 1;
+                playerCount = 1;
                 SetGameState(GameStates.serve);
             }
     }
@@ -228,15 +232,29 @@ public class GameManager : MonoBehaviour
         if (context.performed)
             if (gameState == GameStates.menu)
             {
-                singlePlayer = 2;
+                playerCount = 2;
                 SetGameState(GameStates.serve);
             }
     }
     void MovePlayer1(InputAction.CallbackContext context)
     {
-        Debug.Log($"Move: {context.phase}", this);
         if (context.performed)
             player1.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
+    }
+    void MovePlayer2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            if (playerCount != 2)
+                Debug.Log($"Game is not in multiplayer mode", this);
+            else
+                player2.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
+    }
+    void OnUnpairedDeviceUsed(InputControl control, InputEventPtr ptr)
+    {
+        if (player1Input == null)
+            player1Input = InputUser.PerformPairingWithDevice(control.device);
+        else
+            player2Input = InputUser.PerformPairingWithDevice(control.device);
     }
     void Ball_OnTriggerEnterEvent(Collider other)
     {

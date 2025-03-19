@@ -1,5 +1,5 @@
 {
-    "name": "ProjectInputs",
+    "name": "Controls",
     "maps": [
         {
             "name": "Map Await Continue",
@@ -70,7 +70,7 @@
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse 1",
+                    "groups": "Keyboard&Mouse 1;Keyboard&Mouse 2",
                     "action": "Select SinglePlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -81,7 +81,7 @@
                     "path": "<Keyboard>/numpad1",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse 1;Keyboard&Mouse 2",
                     "action": "Select SinglePlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -92,7 +92,7 @@
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse 1",
+                    "groups": "Keyboard&Mouse 1;Keyboard&Mouse 2",
                     "action": "Select MultiPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -103,7 +103,7 @@
                     "path": "<Keyboard>/numpad2",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse 2;Keyboard&Mouse 1",
                     "action": "Select MultiPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
