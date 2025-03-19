@@ -25,4 +25,5 @@ public class PlayerAxis
     public static implicit operator Vector2(PlayerAxis axis) => new Vector2(axis.TowardPlayers, axis.ParallelToPlayers);
 
     public override string ToString() => $"{nameof(TowardPlayers)}: {TowardPlayers}; {nameof(ParallelToPlayers)}: {ParallelToPlayers}";
+    public PlayerAxis Normalized() => new PlayerAxis(axis.normalized);
 }

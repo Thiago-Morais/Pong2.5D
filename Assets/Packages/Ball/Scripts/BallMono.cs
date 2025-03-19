@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class BallMono : MonoBehaviour
 {
     [SerializeField] Ball model = new Ball(new PlayerAxis(Vector3.zero));
@@ -8,11 +9,16 @@ public class BallMono : MonoBehaviour
     [SerializeField] Transform ballPivot;
     [SerializeField] float radius;
     public PlayerMono cachedPlayerCollided;
+    new Rigidbody rigidbody;
 
     public event Action<Collider> OnTriggerEnterEvent;
     public event Action<Collider> OnTriggerExitEvent;
     public Ball Model => model;
     public float Radius => radius;
+    void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
     void Start()
     {
         CalculateRadius();
@@ -25,9 +31,9 @@ public class BallMono : MonoBehaviour
             bounds.Encapsulate(renderer.bounds);
         radius = Mathf.Max(bounds.extents.x, bounds.extents.y, bounds.extents.z);
     }
-    public void Update()
+    public void FixedUpdate()
     {
-        transform.position = ballPivot.position + model.Position;
+        rigidbody.position = ballPivot.position + model.Position;
     }
     void OnTriggerEnter(Collider other)
     {

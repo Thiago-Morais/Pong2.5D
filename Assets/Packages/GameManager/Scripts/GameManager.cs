@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] int playerCount;
     [SerializeField] int maxScore = 10;
     [SerializeField] float ballSpeedIncrease = 1.03f;
+    [SerializeField] float directionWeightPaddleForward = 1;
+    [SerializeField] float directionWeightPaddleVelocity = 1;
     PaddleAutoController aiController;
     Controls player1Controls;
     Controls player2Controls;
@@ -117,12 +119,16 @@ public class GameManager : MonoBehaviour
                 float towardDirection = Random.Range(.5f, 1f);
                 if (servingPlayer == 2) towardDirection = -towardDirection;
 
-                float randomSpeed = Random.Range(.66f, 1.33f) * ball.Model.BaseSpeed;
                 Vector2 direction = new Vector2(parallelDirection, towardDirection).normalized;
-                ball.Model.Speed.SetParallelToPlayers(direction.x * randomSpeed);
-                ball.Model.Speed.SetTowardPlayers(direction.y * randomSpeed);
+                ball.Model.Direction.SetParallelToPlayers(direction.x);
+                ball.Model.Direction.SetTowardPlayers(direction.y);
+                float randomSpeed = Random.Range(.66f, 1.33f) * ball.Model.BaseSpeed;
+                ball.Model.SetSpeed(randomSpeed);
+                if (playerCount == 1)
+                    aiController.SetVelocityDump(Random.Range(.3f, .55f));
                 return;
             case GameStates.play:
+                Debug.Log($"{nameof(aiController)}.{nameof(aiController.VelocityDump)} = " + aiController.VelocityDump, this);
                 return;
             default:
                 return;
@@ -294,18 +300,28 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.Log($"Hit Player: {player}", this);
                     ball.cachedPlayerCollided = player;
+                    Vector3 direction = ball.transform.position - player.Paddle.transform.position;
                     if (player == player1)
+                    {
                         ball.Model.Position.SetTowardPlayers(PlayerAxis.GetTowardPlayers(player.Paddle.PointInFrontOfPaddle) - ball.Radius);
-                    if (player == player2)
+                        direction += new PlayerAxis(-directionWeightPaddleForward, (player.Paddle.Model.CurrentVelocity / player.Paddle.Model.VelocityMultiplier) * directionWeightPaddleVelocity);
+                    }
+                    else if (player == player2)
+                    {
                         ball.Model.Position.SetTowardPlayers(PlayerAxis.GetTowardPlayers(player.Paddle.PointInFrontOfPaddle) + ball.Radius);
-                    ball.Model.Speed.SetTowardPlayers(-ball.Model.Speed.TowardPlayers * ballSpeedIncrease);
+                        direction += new PlayerAxis(directionWeightPaddleForward, (player.Paddle.Model.CurrentVelocity / player.Paddle.Model.VelocityMultiplier) * directionWeightPaddleVelocity);
+                    }
+                    // ball.Model.Direction.SetTowardPlayers(-ball.Model.Direction.TowardPlayers);
+                    Debug.DrawRay(player.Paddle.transform.position, direction, Color.red, 2f);
+                    ball.Model.SetDirection(new PlayerAxis(direction.normalized));
+                    ball.Model.SetSpeed(ball.Model.Speed * ballSpeedIncrease);
                 }
                 else if (other.attachedRigidbody.TryGetComponent<Wall>(out var wall))
                 {
                     Debug.Log($"{nameof(wall)} = " + wall, this);
                     float radiusOffset = wall.IsUpperWall ? ball.Radius : -ball.Radius;
                     ball.Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
-                    ball.Model.Speed.SetParallelToPlayers(-ball.Model.Speed.ParallelToPlayers);
+                    ball.Model.Direction.SetParallelToPlayers(-ball.Model.Direction.ParallelToPlayers);
                 }
                 else if (other.attachedRigidbody.CompareTag(Constants.GOAL_TAG))
                 {

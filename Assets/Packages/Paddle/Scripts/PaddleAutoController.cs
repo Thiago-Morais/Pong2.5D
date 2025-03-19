@@ -7,8 +7,10 @@ public class PaddleAutoController
     [SerializeField] bool isEnabled = true;
     [SerializeField] Ball ball;
     [SerializeField] Paddle paddle;
-    [SerializeField] float velocityMultiplier;
+    [SerializeField] float baseVelocityMultiplier;
+    [SerializeField] float velocityDump;
     public bool IsEnabled => isEnabled;
+    public float VelocityDump => velocityDump;
 
     PaddleAutoController() { }
     public void Update(float dt)
@@ -20,12 +22,13 @@ public class PaddleAutoController
             direction = -1;
         else if (IsPaddleBeforeBall())
             direction = 1;
-        paddle.SetTargetVelocitySmooth(direction, velocityMultiplier);
+        paddle.SetTargetVelocitySmooth(direction, baseVelocityMultiplier * velocityDump);
         paddle.Update(dt);
     }
     public bool IsPaddleAfterBall() => paddle.AxisPosition > ball.Position.ParallelToPlayers;
     public bool IsPaddleBeforeBall() => paddle.AxisPosition < ball.Position.ParallelToPlayers;
     public void SetEnabled(bool enabled) => isEnabled = enabled;
+    public void SetVelocityDump(float value) => velocityDump = value;
 
     public class Builder
     {
@@ -35,11 +38,17 @@ public class PaddleAutoController
         {
             paddleAutoController.ball = ball;
             paddleAutoController.paddle = paddle;
-            paddleAutoController.velocityMultiplier = paddle.VelocityMultiplier * .35f;
+            paddleAutoController.baseVelocityMultiplier = paddle.VelocityMultiplier;
+            paddleAutoController.velocityDump = .45f;
         }
         public Builder WithVelocityMultiplier(float velocityMultiplier)
         {
-            paddleAutoController.velocityMultiplier = velocityMultiplier;
+            paddleAutoController.baseVelocityMultiplier = velocityMultiplier;
+            return this;
+        }
+        public Builder WithVelocityDump(float velocityDump)
+        {
+            paddleAutoController.velocityDump = velocityDump;
             return this;
         }
         public PaddleAutoController Build() => paddleAutoController;
