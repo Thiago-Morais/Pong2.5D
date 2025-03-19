@@ -1,3 +1,6 @@
-public class Goal
+using UnityEngine;
+
+public class Goal : MonoBehaviour
 {
+
 }
