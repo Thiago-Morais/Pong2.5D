@@ -8,33 +8,39 @@ using Random = UnityEngine.Random;
 // !! This is a God Object. The original project was like this so I kept like this.
 public class GameManager : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] AudioClip paddle_hit;
     [SerializeField] AudioClip score;
     [SerializeField] AudioClip wall_hit;
     [SerializeField] PlayerMono player1;
+    [SerializeField] Goal player1TargetGoal;
     [SerializeField] PlayerMono player2;
+    [SerializeField] Goal player2TargetGoal;
     [SerializeField] BallMono ball;
-    PaddleAutoController aiController;
     [SerializeField] UIManager uiManager;
+    [Header("Data")]
+    [Tooltip(
+@"the state of our game; can be any of the following:
+1. 'start' (the beginning of the game, before first serve)
+2. 'menu' (select amount of players)
+3. 'serve' (waiting on a key press to serve the ball)
+4. 'play' (the ball is in play, bouncing between paddles)
+5. 'done' (the game is over, with a victor, ready for restart)")]
+    [SerializeField] GameStates gameState = GameStates.start;
     [SerializeField] int player1Score;
     [SerializeField] int player2Score;
     [SerializeField] int servingPlayer = 1;
     [SerializeField] int winningPlayer;
     [SerializeField] int playerCount;
-    [Tooltip(
-@"the state of our game; can be any of the following:
-1. 'start' (the beginning of the game, before first serve)
-2. 'serve' (waiting on a key press to serve the ball)
-3. 'play' (the ball is in play, bouncing between paddles)
-4. 'done' (the game is over, with a victor, ready for restart)")]
-    [SerializeField] GameStates gameState = GameStates.start;
-    static GameManager instance;
+    [SerializeField] int maxScore = 10;
     [SerializeField] float ballSpeedIncrease = 1.03f;
+    PaddleAutoController aiController;
     Controls player1Controls;
     Controls player2Controls;
-    View view;
     InputUser player1Input;
     InputUser player2Input;
+    View view;
+    static GameManager instance;
 
     public static GameManager Instance => instance;
     public int ServingPlayerId => servingPlayer;
@@ -93,13 +99,14 @@ public class GameManager : MonoBehaviour
         UpdateGameState();
         Draw();
         if (GameState == GameStates.play)
+        {
             ball.Model.Update(Time.deltaTime);
-        player1.Paddle.Model.Update(Time.deltaTime);
-        if (playerCount == 1)
-            aiController.Update(Time.deltaTime);
-        else if (playerCount == 2)
-            player2.Paddle.Model.Update(Time.deltaTime);
-
+            player1.Paddle.Model.Update(Time.deltaTime);
+            if (playerCount == 1)
+                aiController.Update(Time.deltaTime);
+            else if (playerCount == 2)
+                player2.Paddle.Model.Update(Time.deltaTime);
+        }
     }
     void UpdateGameState()
     {
@@ -109,7 +116,6 @@ public class GameManager : MonoBehaviour
                 float parallelDirection = Random.Range(-1f, 1f);
                 float towardDirection = Random.Range(.5f, 1f);
                 if (servingPlayer == 2) towardDirection = -towardDirection;
-
 
                 float randomSpeed = Random.Range(.66f, 1.33f) * ball.Model.BaseSpeed;
                 Vector2 direction = new Vector2(parallelDirection, towardDirection).normalized;
@@ -145,19 +151,32 @@ public class GameManager : MonoBehaviour
         gameState = value;
         uiManager.SetState(gameState);
 
-        UpdateActionMapWithState(gameState, player1Controls);
-        UpdateActionMapWithState(gameState, player2Controls);
-    }
-    static void UpdateActionMapWithState(GameStates gameState, Controls controls)
-    {
-        controls.Disable();
+        player1Controls.Disable();
+        player2Controls.Disable();
         switch (gameState)
         {
-            case GameStates.start: controls.MapAwaitContinue.Enable(); break;
-            case GameStates.menu: controls.MapPlayerSelection.Enable(); break;
-            case GameStates.serve: controls.MapAwaitContinue.Enable(); break;
-            case GameStates.play: controls.MapPlayer.Enable(); break;
-            case GameStates.done: controls.MapAwaitContinue.Enable(); break;
+            case GameStates.start:
+                player1Controls.MapAwaitContinue.Enable();
+                player2Controls.MapAwaitContinue.Enable();
+                break;
+            case GameStates.menu:
+                player1Controls.MapPlayerSelection.Enable();
+                player2Controls.MapPlayerSelection.Enable();
+                break;
+            case GameStates.serve:
+                player1Controls.MapAwaitContinue.Enable();
+                player2Controls.MapAwaitContinue.Enable();
+                player1.Reset();
+                player2.Reset();
+                break;
+            case GameStates.play:
+                player1Controls.MapPlayer.Enable();
+                player2Controls.MapPlayer.Enable();
+                break;
+            case GameStates.done:
+                player1Controls.MapAwaitContinue.Enable();
+                player2Controls.MapAwaitContinue.Enable();
+                break;
             default: break;
         }
     }
@@ -239,15 +258,25 @@ public class GameManager : MonoBehaviour
     void MovePlayer1(InputAction.CallbackContext context)
     {
         if (context.performed)
-            player1.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
+        {
+            if (gameState == GameStates.play)
+                player1.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
+        }
+        else if (context.canceled)
+            player1.Paddle.Model.SetTargetVelocitySmooth(0);
     }
     void MovePlayer2(InputAction.CallbackContext context)
     {
         if (context.performed)
-            if (playerCount != 2)
-                Debug.Log($"Game is not in multiplayer mode", this);
-            else
-                player2.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
+        {
+            if (gameState == GameStates.play)
+                if (playerCount != 2)
+                    Debug.Log($"Game is not in multiplayer mode", this);
+                else
+                    player2.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
+        }
+        else if (context.canceled)
+            player2.Paddle.Model.SetTargetVelocitySmooth(0);
     }
     void OnUnpairedDeviceUsed(InputControl control, InputEventPtr ptr)
     {
@@ -278,10 +307,35 @@ public class GameManager : MonoBehaviour
                     ball.Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
                     ball.Model.Speed.SetParallelToPlayers(-ball.Model.Speed.ParallelToPlayers);
                 }
-            }
-            else if (other.CompareTag(Constants.GOAL_TAG))
-            {
-
+                else if (other.attachedRigidbody.CompareTag(Constants.GOAL_TAG))
+                {
+                    if (other.attachedRigidbody.TryGetComponent<Goal>(out var goal))
+                    {
+                        if (goal == player1TargetGoal)
+                        {
+                            Debug.Log($"Goal player2Goal: {goal}", this);
+                            servingPlayer = 1;
+                            player1Score++;
+                            if (player1Score == maxScore)
+                                SetGameState(GameStates.done);
+                            else
+                                SetGameState(GameStates.serve);
+                        }
+                        else if (goal == player2TargetGoal)
+                        {
+                            Debug.Log($"Goal player1Goal: {goal}", this);
+                            servingPlayer = 2;
+                            player2Score++;
+                            if (player2Score == maxScore)
+                                SetGameState(GameStates.done);
+                            else
+                                SetGameState(GameStates.serve);
+                        }
+                        ball.Reset();
+                        player1.Paddle.Model.SetCurrentVelocity(0);
+                        player2.Paddle.Model.SetCurrentVelocity(0);
+                    }
+                }
             }
     }
     // This may cause problems if the ball hits two paddles at the same time. But it wont, so... ¯\_(ツ)_/¯

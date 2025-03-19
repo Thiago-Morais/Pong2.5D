@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -8,4 +9,6 @@ public class PaddleMono : MonoBehaviour
 
     public Paddle Model => model;
     public Vector3 PointInFrontOfPaddle => pointInFrontOfPaddle.position;
+
+    public void Reset() => model.Reset();
 }

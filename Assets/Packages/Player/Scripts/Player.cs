@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerMono : MonoBehaviour
 {
     [SerializeField] PaddleMono paddle;
     public PaddleMono Paddle => paddle;
+
     void Update()
     {
         float axisPosition = paddle.Model.AxisPosition;
@@ -11,4 +13,5 @@ public class PlayerMono : MonoBehaviour
         position.z = axisPosition;
         paddle.transform.position = position;
     }
+    public void Reset() => paddle.Reset();
 }

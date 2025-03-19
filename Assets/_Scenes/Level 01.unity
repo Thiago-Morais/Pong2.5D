@@ -613,7 +613,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 565046724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652608bf44961544ab2b98fb556f9ca9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5068499971a6c3941b015de862a2dd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   innerPoint: {fileID: 1343254490}
@@ -812,6 +812,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1023928040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023928041}
+  - component: {fileID: 1023928042}
+  - component: {fileID: 1023928043}
+  m_Layer: 0
+  m_Name: Goal Player1
+  m_TagString: Goal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023928041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023928040}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.499985, y: 0.24999994, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1693308632}
+  m_Father: {fileID: 1146100136}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1023928042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023928040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc91f4342d42c634da738a9af87f0531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &1023928043
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023928040}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1128069427
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,7 +929,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1128069427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652608bf44961544ab2b98fb556f9ca9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5068499971a6c3941b015de862a2dd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   innerPoint: {fileID: 68752024}
@@ -918,8 +991,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1616659514}
-  - {fileID: 1764261181}
-  - {fileID: 1693308632}
+  - {fileID: 1966087026}
+  - {fileID: 1023928041}
   - {fileID: 1128069428}
   - {fileID: 565046725}
   m_Father: {fileID: 2094380604}
@@ -1356,7 +1429,7 @@ GameObject:
   - component: {fileID: 1693308633}
   m_Layer: 0
   m_Name: Cube (4)
-  m_TagString: Goal
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1370,11 +1443,11 @@ Transform:
   m_GameObject: {fileID: 1693308631}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.499985, y: 0.24999994, z: -3.5527543e-15}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.4999249, z: 18}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1146100136}
+  m_Father: {fileID: 1023928041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1693308633
 BoxCollider:
@@ -1497,7 +1570,7 @@ GameObject:
   - component: {fileID: 1764261182}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Goal
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1511,11 +1584,11 @@ Transform:
   m_GameObject: {fileID: 1764261180}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.5, y: 0.24999994, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.4999249, z: 18}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1146100136}
+  m_Father: {fileID: 1966087026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1764261182
 BoxCollider:
@@ -1826,6 +1899,79 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!1 &1966087025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1966087026}
+  - component: {fileID: 1966087027}
+  - component: {fileID: 1966087028}
+  m_Layer: 0
+  m_Name: Goal Player2
+  m_TagString: Goal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1966087026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966087025}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.5, y: 0.24999994, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1764261181}
+  m_Father: {fileID: 1146100136}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1966087027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966087025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc91f4342d42c634da738a9af87f0531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &1966087028
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966087025}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1974619771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,6 +2544,14 @@ PrefabInstance:
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 1985980850}
+    - target: {fileID: 7521052517635784191, guid: 19533006afd2e184d952b2df266a7bb6, type: 3}
+      propertyPath: player1Goal
+      value: 
+      objectReference: {fileID: 1023928042}
+    - target: {fileID: 7521052517635784191, guid: 19533006afd2e184d952b2df266a7bb6, type: 3}
+      propertyPath: player2Goal
+      value: 
+      objectReference: {fileID: 1966087027}
     - target: {fileID: 7521052517635784191, guid: 19533006afd2e184d952b2df266a7bb6, type: 3}
       propertyPath: playerInput
       value: 

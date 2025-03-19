@@ -4,12 +4,17 @@ using UnityEngine;
 [Serializable]
 public class PaddleAutoController
 {
+    [SerializeField] bool isEnabled = true;
     [SerializeField] Ball ball;
     [SerializeField] Paddle paddle;
     [SerializeField] float velocityMultiplier;
+    public bool IsEnabled => isEnabled;
+
     PaddleAutoController() { }
     public void Update(float dt)
     {
+        if (!isEnabled) return;
+
         float direction = 0;
         if (IsPaddleAfterBall())
             direction = -1;
@@ -20,6 +25,8 @@ public class PaddleAutoController
     }
     public bool IsPaddleAfterBall() => paddle.AxisPosition > ball.Position.ParallelToPlayers;
     public bool IsPaddleBeforeBall() => paddle.AxisPosition < ball.Position.ParallelToPlayers;
+    public void SetEnabled(bool enabled) => isEnabled = enabled;
+
     public class Builder
     {
         readonly PaddleAutoController paddleAutoController = new();
