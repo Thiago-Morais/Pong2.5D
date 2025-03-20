@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         {
             case GameStates.serve:
                 float parallelDirection = Random.Range(-1f, 1f);
-                float towardDirection = Random.Range(.5f, 1f);
+                float towardDirection = Random.Range(-1f, -.5f);
                 if (servingPlayer == 2) towardDirection = -towardDirection;
 
                 Vector2 direction = new Vector2(parallelDirection, towardDirection).normalized;
@@ -330,20 +330,26 @@ public class GameManager : MonoBehaviour
                         if (goal == player1TargetGoal)
                         {
                             Debug.Log($"Goal player2Goal: {goal}", this);
-                            servingPlayer = 1;
+                            servingPlayer = 2;
                             player1Score++;
                             if (player1Score == maxScore)
+                            {
+                                winningPlayer = 1;
                                 SetGameState(GameStates.done);
+                            }
                             else
                                 SetGameState(GameStates.serve);
                         }
                         else if (goal == player2TargetGoal)
                         {
                             Debug.Log($"Goal player1Goal: {goal}", this);
-                            servingPlayer = 2;
+                            servingPlayer = 1;
                             player2Score++;
                             if (player2Score == maxScore)
+                            {
+                                winningPlayer = 2;
                                 SetGameState(GameStates.done);
+                            }
                             else
                                 SetGameState(GameStates.serve);
                         }
