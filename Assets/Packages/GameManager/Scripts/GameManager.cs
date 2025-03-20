@@ -194,6 +194,12 @@ public class GameManager : MonoBehaviour
         player1Controls.MapPlayer.Move.performed += MovePlayer1;
         player2Controls.MapPlayer.Move.performed += MovePlayer2;
 
+        player1Controls.MapAwaitContinue.Quit.performed += Quit;
+        player1Controls.MapPlayer.Quit.performed += Quit;
+        player1Controls.MapPlayerSelection.Quit.performed += Quit;
+        player1Controls.MapUI.Quit.performed += Quit;
+
+
         InputUser.onUnpairedDeviceUsed += OnUnpairedDeviceUsed;
 
         ball.OnTriggerEnterEvent += Ball_OnTriggerEnterEvent;
@@ -290,6 +296,14 @@ public class GameManager : MonoBehaviour
             player1Input = InputUser.PerformPairingWithDevice(control.device);
         else
             player2Input = InputUser.PerformPairingWithDevice(control.device);
+    }
+    void Quit(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log($"Quit", this);
+            Application.Quit();
+        }
     }
     void Ball_OnTriggerEnterEvent(Collider other)
     {
