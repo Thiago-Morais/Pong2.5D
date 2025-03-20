@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         {
             case GameStates.serve:
                 float parallelDirection = Random.Range(-1f, 1f);
-                float towardDirection = Random.Range(.5f, 1f);
+                float towardDirection = Random.Range(-1f, -.5f);
                 if (servingPlayer == 2) towardDirection = -towardDirection;
 
                 Vector2 direction = new Vector2(parallelDirection, towardDirection).normalized;
