@@ -9,9 +9,9 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] AudioClip paddle_hit;
-    [SerializeField] AudioClip score;
-    [SerializeField] AudioClip wall_hit;
+    [SerializeField] AudioSource paddle_hit;
+    [SerializeField] AudioSource score;
+    [SerializeField] AudioSource wall_hit;
     [SerializeField] PlayerMono player1;
     [SerializeField] Goal player1TargetGoal;
     [SerializeField] PlayerMono player2;
@@ -315,6 +315,7 @@ public class GameManager : MonoBehaviour
                     Debug.DrawRay(player.Paddle.transform.position, direction, Color.red, 2f);
                     ball.Model.SetDirection(new PlayerAxis(direction.normalized));
                     ball.Model.SetSpeed(ball.Model.Speed * ballSpeedIncrease);
+                    paddle_hit.Play();
                 }
                 else if (other.attachedRigidbody.TryGetComponent<Wall>(out var wall))
                 {
@@ -322,6 +323,7 @@ public class GameManager : MonoBehaviour
                     float radiusOffset = wall.IsUpperWall ? ball.Radius : -ball.Radius;
                     ball.Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
                     ball.Model.Direction.SetParallelToPlayers(-ball.Model.Direction.ParallelToPlayers);
+                    wall_hit.Play();
                 }
                 else if (other.attachedRigidbody.CompareTag(Constants.GOAL_TAG))
                 {
@@ -356,6 +358,7 @@ public class GameManager : MonoBehaviour
                         ball.Reset();
                         player1.Paddle.Model.SetCurrentVelocity(0);
                         player2.Paddle.Model.SetCurrentVelocity(0);
+                        score.Play();
                     }
                 }
             }
