@@ -1,8 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.InputSystem.Users;
 using Random = UnityEngine.Random;
 
 // !! This is a God Object. The original project was like this so I kept like this.
@@ -31,10 +28,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] int playerCount;
     [SerializeField] int winningPlayer;
     PaddleAutoController aiController;
-    Controls player1Controls;
-    Controls player2Controls;
-    InputUser player1Input;
-    InputUser player2Input;
     static GameManager instance;
 
     public static GameManager Instance => instance;
@@ -43,6 +36,7 @@ public class GameManager : MonoBehaviour
     public int Player1Score => player1Score;
     public int Player2Score => player2Score;
     public GameStates GameState => gameState;
+    public event Action<GameStates> OnGameStateChanged;
 
     public enum GameStates { start, menu, serve, play, done }
     [ContextMenu(nameof(IncreaseScorePlayer1))]
@@ -69,51 +63,27 @@ public class GameManager : MonoBehaviour
         aiController = new PaddleAutoController.Builder(ball.Model, player2.Paddle.Model).Build();
         ball.Constructor(this, player1, player2);
 
-        SetUpInputSystem();
         SetGameState(GameStates.start);
-    }
-    void SetUpInputSystem()
-    {
-        player1Controls = new();
-        player1Input = InputUser.PerformPairingWithDevice(Keyboard.current);
-        player1Input.ActivateControlScheme(player1Controls.KeyboardMouse1Scheme);
-        player1Input.AssociateActionsWithUser(player1Controls);
-        player2Controls = new();
-        player2Input = InputUser.PerformPairingWithDevice(Keyboard.current);
-        player2Input.ActivateControlScheme(player2Controls.KeyboardMouse2Scheme);
-        player2Input.AssociateActionsWithUser(player2Controls);
     }
     public void SetGameState(GameStates value)
     {
         gameState = value;
         uiManager.SetState(gameState);
+        OnGameStateChanged?.Invoke(gameState);
 
-        player1Controls.Disable();
-        player2Controls.Disable();
-        player1Controls.Always.Enable();
         switch (gameState)
         {
             case GameStates.start:
-                player1Controls.MapAwaitContinue.Enable();
-                player2Controls.MapAwaitContinue.Enable();
                 break;
             case GameStates.menu:
-                player1Controls.MapPlayerSelection.Enable();
-                player2Controls.MapPlayerSelection.Enable();
                 break;
             case GameStates.serve:
-                player1Controls.MapAwaitContinue.Enable();
-                player2Controls.MapAwaitContinue.Enable();
                 player1.Reset();
                 player2.Reset();
                 break;
             case GameStates.play:
-                player1Controls.MapPlayer.Enable();
-                player2Controls.MapPlayer.Enable();
                 break;
             case GameStates.done:
-                player1Controls.MapAwaitContinue.Enable();
-                player2Controls.MapAwaitContinue.Enable();
                 break;
             default: break;
         }
@@ -182,129 +152,72 @@ public class GameManager : MonoBehaviour
                 return;
         }
     }
-    void OnEnable()
+    public void Continue()
     {
-        player1Controls.MapAwaitContinue.Continue.performed += Continue;
-        player1Controls.MapPlayerSelection.SelectSinglePlayer.performed += SelectSinglePlayer;
-        player1Controls.MapPlayerSelection.SelectMultiPlayer.performed += SelectMultiPlayer;
-        player1Controls.MapPlayer.Move.performed += MovePlayer1;
-        player2Controls.MapPlayer.Move.performed += MovePlayer2;
-        player1Controls.Always.FullscreenToggle.performed += ToggleFullscreen;
-        player1Controls.Always.Quit.performed += Quit;
-
-        InputUser.onUnpairedDeviceUsed += OnUnpairedDeviceUsed;
-    }
-    void OnDisable()
-    {
-        player1Controls.MapAwaitContinue.Continue.performed -= Continue;
-        player1Controls.MapPlayerSelection.SelectSinglePlayer.performed -= SelectSinglePlayer;
-        player1Controls.MapPlayerSelection.SelectMultiPlayer.performed -= SelectMultiPlayer; ;
-        player1Controls.MapPlayer.Move.performed -= MovePlayer1;
-        player2Controls.MapPlayer.Move.performed -= MovePlayer2;
-        player1Controls.Always.FullscreenToggle.performed -= ToggleFullscreen;
-        player1Controls.Always.Quit.performed -= Quit;
-
-        InputUser.onUnpairedDeviceUsed -= OnUnpairedDeviceUsed;
-    }
-    void Continue(InputAction.CallbackContext context)
-    {
-        Debug.Log($"Continue: {context.phase}", this);
-        if (context.performed)
+        switch (GameState)
         {
-            switch (GameState)
-            {
-                case GameStates.start:
-                    SetGameState(GameStates.menu);
-                    break;
-                case GameStates.serve:
-                    SetGameState(GameStates.play);
-                    break;
-                case GameStates.done:
-                    SetGameState(GameStates.serve);
-
-                    ball.Reset();
-
-                    player1Score = 0;
-                    player2Score = 0;
-
-                    if (winningPlayer == 1)
-                        servingPlayer = 2;
-                    else
-                        servingPlayer = 1;
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-    void SelectSinglePlayer(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (gameState == GameStates.menu)
-            {
-                playerCount = 1;
+            case GameStates.start:
+                SetGameState(GameStates.menu);
+                break;
+            case GameStates.serve:
+                SetGameState(GameStates.play);
+                break;
+            case GameStates.done:
                 SetGameState(GameStates.serve);
-            }
-            camerasManager.SetPlayerCount(playerCount);
-        }
-    }
-    void SelectMultiPlayer(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (gameState == GameStates.menu)
-            {
-                playerCount = 2;
-                SetGameState(GameStates.serve);
-            }
-            camerasManager.SetPlayerCount(playerCount);
-        }
-    }
-    void MovePlayer1(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (gameState == GameStates.play)
-                player1.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
-        }
-        else if (context.canceled)
-            player1.Paddle.Model.SetTargetVelocitySmooth(0);
-    }
-    void MovePlayer2(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (gameState == GameStates.play)
-                if (playerCount != 2)
-                    Debug.Log($"Game is not in multiplayer mode", this);
+
+                ball.Reset();
+
+                player1Score = 0;
+                player2Score = 0;
+
+                if (winningPlayer == 1)
+                    servingPlayer = 2;
                 else
-                    player2.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
+                    servingPlayer = 1;
+                break;
+            default:
+                break;
         }
-        else if (context.canceled)
-            player2.Paddle.Model.SetTargetVelocitySmooth(0);
     }
-    void OnUnpairedDeviceUsed(InputControl control, InputEventPtr ptr)
+    public void SelectSinglePlayer()
     {
-        if (player1Input == null)
-            player1Input = InputUser.PerformPairingWithDevice(control.device);
-        else
-            player2Input = InputUser.PerformPairingWithDevice(control.device);
-    }
-    void ToggleFullscreen(InputAction.CallbackContext context)
-    {
-        if (context.performed)
+        if (gameState == GameStates.menu)
         {
-            Screen.fullScreen = !Screen.fullScreen;
-            Debug.Log($"Fullscreen: {Screen.fullScreen}", this);
+            playerCount = 1;
+            SetGameState(GameStates.serve);
         }
+        camerasManager.SetPlayerCount(playerCount);
     }
-    void Quit(InputAction.CallbackContext context)
+    public void SelectMultiPlayer()
     {
-        if (context.performed)
+        if (gameState == GameStates.menu)
         {
-            Debug.Log($"Quit", this);
-            Application.Quit();
+            playerCount = 2;
+            SetGameState(GameStates.serve);
         }
+        camerasManager.SetPlayerCount(playerCount);
+    }
+    public void MovePlayer1(float velocity)
+    {
+        if (gameState == GameStates.play)
+            player1.Paddle.Model.SetTargetVelocitySmooth(velocity);
+    }
+    public void MovePlayer2(float velocity)
+    {
+        if (gameState == GameStates.play)
+            if (playerCount != 2)
+                Debug.Log($"Game is not in multiplayer mode", this);
+            else
+                player2.Paddle.Model.SetTargetVelocitySmooth(velocity);
+    }
+    public void ToggleFullscreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+        Debug.Log($"Fullscreen: {Screen.fullScreen}", this);
+    }
+    public void Quit()
+    {
+        Debug.Log($"Quit", this);
+        Application.Quit();
     }
 }

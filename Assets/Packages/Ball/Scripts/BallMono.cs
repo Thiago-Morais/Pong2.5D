@@ -109,7 +109,6 @@ public class BallMono : MonoBehaviour
                         SetCachedPlayerCollided(null);
             }
     }
-    public PlayerAxis CalculateBallDirectionFromPlayer(PlayerMono player) => new PlayerAxis(directionWeightPaddleForward, (player.Paddle.Model.CurrentVelocity / player.Paddle.Model.VelocityMultiplier) * directionWeightPaddleVelocity);
     public void SetCachedPlayerCollided(PlayerMono value) => cachedPlayerCollided = value;
     public void Reset()
     {
