@@ -122,10 +122,10 @@ public class GameManager : MonoBehaviour
                 Vector2 direction = new Vector2(parallelDirection, towardDirection).normalized;
                 ball.Model.Direction.SetParallelToPlayers(direction.x);
                 ball.Model.Direction.SetTowardPlayers(direction.y);
-                float randomSpeed = Random.Range(.66f, 1.33f) * ball.Model.BaseSpeed;
+                float randomSpeed = Random.Range(.75f, 1.5f) * ball.Model.BaseSpeed;
                 ball.Model.SetSpeed(randomSpeed);
                 if (playerCount == 1)
-                    aiController.SetVelocityDump(Random.Range(.3f, .55f));
+                    aiController.SetVelocityDump(Random.Range(.5f, .8f));
                 return;
             case GameStates.play:
                 Debug.Log($"{nameof(aiController)}.{nameof(aiController.VelocityDump)} = " + aiController.VelocityDump, this);
