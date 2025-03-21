@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 390151735}
   - component: {fileID: 390151736}
   m_Layer: 0
-  m_Name: wall_hit
+  m_Name: paddle_hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -675,9 +675,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshes: {fileID: 1459074946}
   ballPivot: {fileID: 1273875084}
-  paddle_hit: {fileID: 765030865}
+  paddle_hit: {fileID: 390151736}
   score: {fileID: 1913795523}
-  wall_hit: {fileID: 390151736}
+  wall_hit: {fileID: 765030865}
   model:
     baseSpeed: 20
     speed: 0
@@ -920,7 +920,7 @@ GameObject:
   - component: {fileID: 765030864}
   - component: {fileID: 765030865}
   m_Layer: 0
-  m_Name: paddle_hit
+  m_Name: wall_hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
