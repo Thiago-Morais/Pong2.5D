@@ -35,7 +35,6 @@ public class Paddle
             axisPosition = Math.Min(axisBounds.constantMax, axisPosition + currentVelocity * dt);
     }
     public void SetTargetVelocitySmooth(float? value) => SetTargetVelocitySmooth(value, velocityMultiplier);
-    // public void SetTargetVelocitySmooth(float? value, float velocityMultiplier) => targetVelocitySmooth = value == null ? null : value * velocityMultiplier;
     public void SetTargetVelocitySmooth(float? value, float velocityMultiplier) => targetVelocitySmooth = value * velocityMultiplier;
     public void SetSmoothVelocity(float value) => SetSmoothVelocity(value, Time.deltaTime);
     public void SetSmoothVelocity(float value, float dt) => currentVelocity = Mathf.SmoothDamp(currentVelocity, value, ref m_velocityVelocity, smoothTime, Mathf.Infinity, dt);

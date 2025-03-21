@@ -99,15 +99,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Quit"",
-                    ""type"": ""Button"",
-                    ""id"": ""74589e84-0873-4409-b952-86b6f8491734"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,28 +123,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Continue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e2c51919-6029-4d1d-a93e-d3737fd0b803"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse 1"",
-                    ""action"": ""Quit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b7b458f9-0cd9-43dd-b218-fd1da1a79d1e"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse 1"",
-                    ""action"": ""Quit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -174,15 +143,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""Select MultiPlayer"",
                     ""type"": ""Button"",
                     ""id"": ""e5df3730-bf69-4985-a891-2d7426bd2387"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Quit"",
-                    ""type"": ""Button"",
-                    ""id"": ""847a5566-4966-4a93-ba1d-ee07767cef99"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -231,28 +191,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse 2;Keyboard&Mouse 1"",
                     ""action"": ""Select MultiPlayer"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9df0c037-e6fb-4c90-a961-2388f4833e0c"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse 1"",
-                    ""action"": ""Quit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9389cb55-8b28-4cd1-a9a1-a824d50a6cb6"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse 1"",
-                    ""action"": ""Quit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -339,15 +277,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""641cd816-40e6-41b4-8c3d-04687c349290"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Quit"",
-                    ""type"": ""Button"",
-                    ""id"": ""f70c810c-d4c3-4cc7-af4d-2f4e6081cf2e"",
-                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -653,28 +582,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ed5ab304-c865-45ae-829c-5efe45c347a8"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse 1"",
-                    ""action"": ""Quit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""63cd17d8-1177-429c-b199-17220afdb7b0"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse 1"",
-                    ""action"": ""Quit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""eb40bb66-4559-4dfa-9a2f-820438abb426"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -864,15 +771,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be"",
                     ""expectedControlType"": ""Quaternion"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Quit"",
-                    ""type"": ""Button"",
-                    ""id"": ""c339f346-dff3-4696-ad1b-035f74386da2"",
-                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -1296,10 +1194,36 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""TrackedDeviceOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Always"",
+            ""id"": ""9d6444dc-fa59-463d-9867-2d8052c8eb81"",
+            ""actions"": [
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""e97613a0-8a33-474a-a374-8a562663164a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Fullscreen Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""74c65928-1fbb-4364-8dbc-139715a5f5ba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
                     ""name"": """",
-                    ""id"": ""4e687808-3168-4171-9702-f9022b70cb1a"",
+                    ""id"": ""1909e075-0832-4b0a-a732-1ec953413f32"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -1310,12 +1234,23 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7dd72678-948d-4c27-9971-318003e68adb"",
+                    ""id"": ""17f6d5f0-57c8-44ab-acd2-1d48758a16a9"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse 1"",
                     ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b21fc918-0402-4d3f-8c22-3aa6db3013bc"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fullscreen Toggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1404,12 +1339,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Map Await Continue
         m_MapAwaitContinue = asset.FindActionMap("Map Await Continue", throwIfNotFound: true);
         m_MapAwaitContinue_Continue = m_MapAwaitContinue.FindAction("Continue", throwIfNotFound: true);
-        m_MapAwaitContinue_Quit = m_MapAwaitContinue.FindAction("Quit", throwIfNotFound: true);
         // Map Player Selection
         m_MapPlayerSelection = asset.FindActionMap("Map Player Selection", throwIfNotFound: true);
         m_MapPlayerSelection_SelectSinglePlayer = m_MapPlayerSelection.FindAction("Select SinglePlayer", throwIfNotFound: true);
         m_MapPlayerSelection_SelectMultiPlayer = m_MapPlayerSelection.FindAction("Select MultiPlayer", throwIfNotFound: true);
-        m_MapPlayerSelection_Quit = m_MapPlayerSelection.FindAction("Quit", throwIfNotFound: true);
         // Map Player
         m_MapPlayer = asset.FindActionMap("Map Player", throwIfNotFound: true);
         m_MapPlayer_Move = m_MapPlayer.FindAction("Move", throwIfNotFound: true);
@@ -1421,7 +1354,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_MapPlayer_Previous = m_MapPlayer.FindAction("Previous", throwIfNotFound: true);
         m_MapPlayer_Next = m_MapPlayer.FindAction("Next", throwIfNotFound: true);
         m_MapPlayer_Sprint = m_MapPlayer.FindAction("Sprint", throwIfNotFound: true);
-        m_MapPlayer_Quit = m_MapPlayer.FindAction("Quit", throwIfNotFound: true);
         // Map UI
         m_MapUI = asset.FindActionMap("Map UI", throwIfNotFound: true);
         m_MapUI_Navigate = m_MapUI.FindAction("Navigate", throwIfNotFound: true);
@@ -1434,7 +1366,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_MapUI_ScrollWheel = m_MapUI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_MapUI_TrackedDevicePosition = m_MapUI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_MapUI_TrackedDeviceOrientation = m_MapUI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        m_MapUI_Quit = m_MapUI.FindAction("Quit", throwIfNotFound: true);
+        // Always
+        m_Always = asset.FindActionMap("Always", throwIfNotFound: true);
+        m_Always_Quit = m_Always.FindAction("Quit", throwIfNotFound: true);
+        m_Always_FullscreenToggle = m_Always.FindAction("Fullscreen Toggle", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -1443,6 +1378,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_MapPlayerSelection.enabled, "This will cause a leak and performance issues, Controls.MapPlayerSelection.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_MapPlayer.enabled, "This will cause a leak and performance issues, Controls.MapPlayer.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_MapUI.enabled, "This will cause a leak and performance issues, Controls.MapUI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Always.enabled, "This will cause a leak and performance issues, Controls.Always.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1519,7 +1455,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_MapAwaitContinue;
     private List<IMapAwaitContinueActions> m_MapAwaitContinueActionsCallbackInterfaces = new List<IMapAwaitContinueActions>();
     private readonly InputAction m_MapAwaitContinue_Continue;
-    private readonly InputAction m_MapAwaitContinue_Quit;
     /// <summary>
     /// Provides access to input actions defined in input action map "Map Await Continue".
     /// </summary>
@@ -1535,10 +1470,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "MapAwaitContinue/Continue".
         /// </summary>
         public InputAction @Continue => m_Wrapper.m_MapAwaitContinue_Continue;
-        /// <summary>
-        /// Provides access to the underlying input action "MapAwaitContinue/Quit".
-        /// </summary>
-        public InputAction @Quit => m_Wrapper.m_MapAwaitContinue_Quit;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1568,9 +1499,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Continue.started += instance.OnContinue;
             @Continue.performed += instance.OnContinue;
             @Continue.canceled += instance.OnContinue;
-            @Quit.started += instance.OnQuit;
-            @Quit.performed += instance.OnQuit;
-            @Quit.canceled += instance.OnQuit;
         }
 
         /// <summary>
@@ -1585,9 +1513,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Continue.started -= instance.OnContinue;
             @Continue.performed -= instance.OnContinue;
             @Continue.canceled -= instance.OnContinue;
-            @Quit.started -= instance.OnQuit;
-            @Quit.performed -= instance.OnQuit;
-            @Quit.canceled -= instance.OnQuit;
         }
 
         /// <summary>
@@ -1627,7 +1552,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IMapPlayerSelectionActions> m_MapPlayerSelectionActionsCallbackInterfaces = new List<IMapPlayerSelectionActions>();
     private readonly InputAction m_MapPlayerSelection_SelectSinglePlayer;
     private readonly InputAction m_MapPlayerSelection_SelectMultiPlayer;
-    private readonly InputAction m_MapPlayerSelection_Quit;
     /// <summary>
     /// Provides access to input actions defined in input action map "Map Player Selection".
     /// </summary>
@@ -1647,10 +1571,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "MapPlayerSelection/SelectMultiPlayer".
         /// </summary>
         public InputAction @SelectMultiPlayer => m_Wrapper.m_MapPlayerSelection_SelectMultiPlayer;
-        /// <summary>
-        /// Provides access to the underlying input action "MapPlayerSelection/Quit".
-        /// </summary>
-        public InputAction @Quit => m_Wrapper.m_MapPlayerSelection_Quit;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1683,9 +1603,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SelectMultiPlayer.started += instance.OnSelectMultiPlayer;
             @SelectMultiPlayer.performed += instance.OnSelectMultiPlayer;
             @SelectMultiPlayer.canceled += instance.OnSelectMultiPlayer;
-            @Quit.started += instance.OnQuit;
-            @Quit.performed += instance.OnQuit;
-            @Quit.canceled += instance.OnQuit;
         }
 
         /// <summary>
@@ -1703,9 +1620,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SelectMultiPlayer.started -= instance.OnSelectMultiPlayer;
             @SelectMultiPlayer.performed -= instance.OnSelectMultiPlayer;
             @SelectMultiPlayer.canceled -= instance.OnSelectMultiPlayer;
-            @Quit.started -= instance.OnQuit;
-            @Quit.performed -= instance.OnQuit;
-            @Quit.canceled -= instance.OnQuit;
         }
 
         /// <summary>
@@ -1752,7 +1666,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_MapPlayer_Previous;
     private readonly InputAction m_MapPlayer_Next;
     private readonly InputAction m_MapPlayer_Sprint;
-    private readonly InputAction m_MapPlayer_Quit;
     /// <summary>
     /// Provides access to input actions defined in input action map "Map Player".
     /// </summary>
@@ -1800,10 +1713,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "MapPlayer/Sprint".
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_MapPlayer_Sprint;
-        /// <summary>
-        /// Provides access to the underlying input action "MapPlayer/Quit".
-        /// </summary>
-        public InputAction @Quit => m_Wrapper.m_MapPlayer_Quit;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1857,9 +1766,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
-            @Quit.started += instance.OnQuit;
-            @Quit.performed += instance.OnQuit;
-            @Quit.canceled += instance.OnQuit;
         }
 
         /// <summary>
@@ -1898,9 +1804,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
-            @Quit.started -= instance.OnQuit;
-            @Quit.performed -= instance.OnQuit;
-            @Quit.canceled -= instance.OnQuit;
         }
 
         /// <summary>
@@ -1948,7 +1851,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_MapUI_ScrollWheel;
     private readonly InputAction m_MapUI_TrackedDevicePosition;
     private readonly InputAction m_MapUI_TrackedDeviceOrientation;
-    private readonly InputAction m_MapUI_Quit;
     /// <summary>
     /// Provides access to input actions defined in input action map "Map UI".
     /// </summary>
@@ -2000,10 +1902,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "MapUI/TrackedDeviceOrientation".
         /// </summary>
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_MapUI_TrackedDeviceOrientation;
-        /// <summary>
-        /// Provides access to the underlying input action "MapUI/Quit".
-        /// </summary>
-        public InputAction @Quit => m_Wrapper.m_MapUI_Quit;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -2060,9 +1958,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
-            @Quit.started += instance.OnQuit;
-            @Quit.performed += instance.OnQuit;
-            @Quit.canceled += instance.OnQuit;
         }
 
         /// <summary>
@@ -2104,9 +1999,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
-            @Quit.started -= instance.OnQuit;
-            @Quit.performed -= instance.OnQuit;
-            @Quit.canceled -= instance.OnQuit;
         }
 
         /// <summary>
@@ -2140,6 +2032,113 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="MapUIActions" /> instance referencing this action map.
     /// </summary>
     public MapUIActions @MapUI => new MapUIActions(this);
+
+    // Always
+    private readonly InputActionMap m_Always;
+    private List<IAlwaysActions> m_AlwaysActionsCallbackInterfaces = new List<IAlwaysActions>();
+    private readonly InputAction m_Always_Quit;
+    private readonly InputAction m_Always_FullscreenToggle;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Always".
+    /// </summary>
+    public struct AlwaysActions
+    {
+        private @Controls m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public AlwaysActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Always/Quit".
+        /// </summary>
+        public InputAction @Quit => m_Wrapper.m_Always_Quit;
+        /// <summary>
+        /// Provides access to the underlying input action "Always/FullscreenToggle".
+        /// </summary>
+        public InputAction @FullscreenToggle => m_Wrapper.m_Always_FullscreenToggle;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Always; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="AlwaysActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(AlwaysActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="AlwaysActions" />
+        public void AddCallbacks(IAlwaysActions instance)
+        {
+            if (instance == null || m_Wrapper.m_AlwaysActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_AlwaysActionsCallbackInterfaces.Add(instance);
+            @Quit.started += instance.OnQuit;
+            @Quit.performed += instance.OnQuit;
+            @Quit.canceled += instance.OnQuit;
+            @FullscreenToggle.started += instance.OnFullscreenToggle;
+            @FullscreenToggle.performed += instance.OnFullscreenToggle;
+            @FullscreenToggle.canceled += instance.OnFullscreenToggle;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="AlwaysActions" />
+        private void UnregisterCallbacks(IAlwaysActions instance)
+        {
+            @Quit.started -= instance.OnQuit;
+            @Quit.performed -= instance.OnQuit;
+            @Quit.canceled -= instance.OnQuit;
+            @FullscreenToggle.started -= instance.OnFullscreenToggle;
+            @FullscreenToggle.performed -= instance.OnFullscreenToggle;
+            @FullscreenToggle.canceled -= instance.OnFullscreenToggle;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="AlwaysActions.UnregisterCallbacks(IAlwaysActions)" />.
+        /// </summary>
+        /// <seealso cref="AlwaysActions.UnregisterCallbacks(IAlwaysActions)" />
+        public void RemoveCallbacks(IAlwaysActions instance)
+        {
+            if (m_Wrapper.m_AlwaysActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="AlwaysActions.AddCallbacks(IAlwaysActions)" />
+        /// <seealso cref="AlwaysActions.RemoveCallbacks(IAlwaysActions)" />
+        /// <seealso cref="AlwaysActions.UnregisterCallbacks(IAlwaysActions)" />
+        public void SetCallbacks(IAlwaysActions instance)
+        {
+            foreach (var item in m_Wrapper.m_AlwaysActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_AlwaysActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="AlwaysActions" /> instance referencing this action map.
+    /// </summary>
+    public AlwaysActions @Always => new AlwaysActions(this);
     private int m_KeyboardMouse1SchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -2232,13 +2231,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnContinue(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Quit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnQuit(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map Player Selection" which allows adding and removing callbacks.
@@ -2261,13 +2253,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelectMultiPlayer(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Quit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnQuit(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map Player" which allows adding and removing callbacks.
@@ -2339,13 +2324,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Quit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnQuit(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map UI" which allows adding and removing callbacks.
@@ -2424,6 +2402,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Always" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="AlwaysActions.AddCallbacks(IAlwaysActions)" />
+    /// <seealso cref="AlwaysActions.RemoveCallbacks(IAlwaysActions)" />
+    public interface IAlwaysActions
+    {
         /// <summary>
         /// Method invoked when associated input action "Quit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -2431,5 +2417,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnQuit(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Fullscreen Toggle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFullscreenToggle(InputAction.CallbackContext context);
     }
 }

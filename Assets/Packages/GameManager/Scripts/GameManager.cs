@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
+
+        Screen.fullScreenMode = FullScreenMode.Windowed;
+
         // initialize score variables
         player1Score = 0;
         player2Score = 0;
@@ -100,7 +103,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         UpdateGameState();
-        Draw();
         if (GameState == GameStates.play)
         {
             ball.Model.Update(Time.deltaTime);
@@ -135,24 +137,6 @@ public class GameManager : MonoBehaviour
                 return;
         }
     }
-    void Draw()
-    {
-        // uiManager.SetState(gameState);
-
-        // render different things depending on which part of the game we're in
-
-
-        //     // show the score before ball is rendered so it can move over the text
-        //     displayScore()
-
-        // player1: render()
-        // player2: render()
-        // ball: render()
-
-        // // display FPS for debugging; simply comment out to remove
-        // displayFPS()
-
-    }
     public void SetGameState(GameStates value)
     {
         gameState = value;
@@ -160,6 +144,7 @@ public class GameManager : MonoBehaviour
 
         player1Controls.Disable();
         player2Controls.Disable();
+        player1Controls.Always.Enable();
         switch (gameState)
         {
             case GameStates.start:
@@ -194,11 +179,8 @@ public class GameManager : MonoBehaviour
         player1Controls.MapPlayerSelection.SelectMultiPlayer.performed += SelectMultiPlayer;
         player1Controls.MapPlayer.Move.performed += MovePlayer1;
         player2Controls.MapPlayer.Move.performed += MovePlayer2;
-
-        player1Controls.MapAwaitContinue.Quit.performed += Quit;
-        player1Controls.MapPlayer.Quit.performed += Quit;
-        player1Controls.MapPlayerSelection.Quit.performed += Quit;
-        player1Controls.MapUI.Quit.performed += Quit;
+        player1Controls.Always.FullscreenToggle.performed += ToggleFullscreen;
+        player1Controls.Always.Quit.performed += Quit;
 
 
         InputUser.onUnpairedDeviceUsed += OnUnpairedDeviceUsed;
@@ -213,6 +195,8 @@ public class GameManager : MonoBehaviour
         player1Controls.MapPlayerSelection.SelectMultiPlayer.performed -= SelectMultiPlayer; ;
         player1Controls.MapPlayer.Move.performed -= MovePlayer1;
         player2Controls.MapPlayer.Move.performed -= MovePlayer2;
+        player1Controls.Always.FullscreenToggle.performed -= ToggleFullscreen;
+        player1Controls.Always.Quit.performed -= Quit;
 
         InputUser.onUnpairedDeviceUsed -= OnUnpairedDeviceUsed;
 
@@ -304,6 +288,14 @@ public class GameManager : MonoBehaviour
         else
             player2Input = InputUser.PerformPairingWithDevice(control.device);
     }
+    void ToggleFullscreen(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Screen.fullScreen = !Screen.fullScreen;
+            Debug.Log($"Fullscreen: {Screen.fullScreen}", this);
+        }
+    }
     void Quit(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -332,7 +324,6 @@ public class GameManager : MonoBehaviour
                         ball.Model.Position.SetTowardPlayers(PlayerAxis.GetTowardPlayers(player.Paddle.PointInFrontOfPaddle) + ball.Radius);
                         direction += new PlayerAxis(directionWeightPaddleForward, (player.Paddle.Model.CurrentVelocity / player.Paddle.Model.VelocityMultiplier) * directionWeightPaddleVelocity);
                     }
-                    // ball.Model.Direction.SetTowardPlayers(-ball.Model.Direction.TowardPlayers);
                     Debug.DrawRay(player.Paddle.transform.position, direction, Color.red, 2f);
                     ball.Model.SetDirection(new PlayerAxis(direction.normalized));
                     ball.Model.SetSpeed(ball.Model.Speed * ballSpeedIncrease);

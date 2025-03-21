@@ -13,15 +13,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Quit",
-                    "type": "Button",
-                    "id": "74589e84-0873-4409-b952-86b6f8491734",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -46,28 +37,6 @@
                     "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e2c51919-6029-4d1d-a93e-d3737fd0b803",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse 1",
-                    "action": "Quit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b7b458f9-0cd9-43dd-b218-fd1da1a79d1e",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse 1",
-                    "action": "Quit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -88,15 +57,6 @@
                     "name": "Select MultiPlayer",
                     "type": "Button",
                     "id": "e5df3730-bf69-4985-a891-2d7426bd2387",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Quit",
-                    "type": "Button",
-                    "id": "847a5566-4966-4a93-ba1d-ee07767cef99",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -145,28 +105,6 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse 2;Keyboard&Mouse 1",
                     "action": "Select MultiPlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9df0c037-e6fb-4c90-a961-2388f4833e0c",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse 1",
-                    "action": "Quit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9389cb55-8b28-4cd1-a9a1-a824d50a6cb6",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse 1",
-                    "action": "Quit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -253,15 +191,6 @@
                     "type": "Button",
                     "id": "641cd816-40e6-41b4-8c3d-04687c349290",
                     "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Quit",
-                    "type": "Button",
-                    "id": "f70c810c-d4c3-4cc7-af4d-2f4e6081cf2e",
-                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -567,28 +496,6 @@
                 },
                 {
                     "name": "",
-                    "id": "ed5ab304-c865-45ae-829c-5efe45c347a8",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse 1",
-                    "action": "Quit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "63cd17d8-1177-429c-b199-17220afdb7b0",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse 1",
-                    "action": "Quit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "eb40bb66-4559-4dfa-9a2f-820438abb426",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -778,15 +685,6 @@
                     "type": "PassThrough",
                     "id": "9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be",
                     "expectedControlType": "Quaternion",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Quit",
-                    "type": "Button",
-                    "id": "c339f346-dff3-4696-ad1b-035f74386da2",
-                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1210,10 +1108,36 @@
                     "action": "TrackedDeviceOrientation",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Always",
+            "id": "9d6444dc-fa59-463d-9867-2d8052c8eb81",
+            "actions": [
+                {
+                    "name": "Quit",
+                    "type": "Button",
+                    "id": "e97613a0-8a33-474a-a374-8a562663164a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
+                    "name": "Fullscreen Toggle",
+                    "type": "Button",
+                    "id": "74c65928-1fbb-4364-8dbc-139715a5f5ba",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "4e687808-3168-4171-9702-f9022b70cb1a",
+                    "id": "1909e075-0832-4b0a-a732-1ec953413f32",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
@@ -1224,12 +1148,23 @@
                 },
                 {
                     "name": "",
-                    "id": "7dd72678-948d-4c27-9971-318003e68adb",
+                    "id": "17f6d5f0-57c8-44ab-acd2-1d48758a16a9",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse 1",
                     "action": "Quit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b21fc918-0402-4d3f-8c22-3aa6db3013bc",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fullscreen Toggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
