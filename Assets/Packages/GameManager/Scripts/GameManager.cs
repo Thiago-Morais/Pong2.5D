@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Goal player2TargetGoal;
     [SerializeField] BallMono ball;
     [SerializeField] UIManager uiManager;
+    [SerializeField] CamerasManager camerasManager;
     [Header("Data")]
     [Tooltip(
 @"the state of our game; can be any of the following:
@@ -252,20 +253,26 @@ public class GameManager : MonoBehaviour
     void SelectSinglePlayer(InputAction.CallbackContext context)
     {
         if (context.performed)
+        {
             if (gameState == GameStates.menu)
             {
                 playerCount = 1;
                 SetGameState(GameStates.serve);
             }
+            camerasManager.SetPlayerCount(playerCount);
+        }
     }
     void SelectMultiPlayer(InputAction.CallbackContext context)
     {
         if (context.performed)
+        {
             if (gameState == GameStates.menu)
             {
                 playerCount = 2;
                 SetGameState(GameStates.serve);
             }
+            camerasManager.SetPlayerCount(playerCount);
+        }
     }
     void MovePlayer1(InputAction.CallbackContext context)
     {
