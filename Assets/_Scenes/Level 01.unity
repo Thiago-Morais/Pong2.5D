@@ -444,8 +444,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 402357489}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20690234, y: -0.6761593, z: 0.2069023, w: 0.6761593}
-  m_LocalPosition: {x: 23.618536, y: 11.133147, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 26.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -903,6 +903,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 986907334}
   - {fileID: 2068005338}
   - {fileID: 1921415782}
   - {fileID: 304807491}
@@ -1074,6 +1075,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4499581484894240688, guid: 05d22b93feeb4434c97a496efec3b8bb, type: 3}
   m_PrefabInstance: {fileID: 1070881418733275049}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &986907333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 986907334}
+  - component: {fileID: 986907335}
+  m_Layer: 0
+  m_Name: Dependency Injector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &986907334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986907333}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 739170200}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &986907335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986907333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3424e8cacc31c49ac2d582fa6a10a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 2068005339}
+  player1: {fileID: 6041896396276868143}
+  player2: {fileID: 1070881418733275050}
+  ball: {fileID: 499529049}
+  uiManager: {fileID: 1985980850}
+  camerasManager: {fileID: 304807492}
+  inputManager: {fileID: 1921415783}
 --- !u!1 &1023928040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2504,6 +2556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1921415782}
+  - component: {fileID: 1921415783}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -2526,6 +2579,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 739170200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1921415783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921415781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541f3e7fc1e791f4795b6df47336a576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1966087025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2927,6 +2992,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 373075682897073514, guid: 19533006afd2e184d952b2df266a7bb6, type: 3}
   m_PrefabInstance: {fileID: 8979745028308314332}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2068005339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7521052517635784191, guid: 19533006afd2e184d952b2df266a7bb6, type: 3}
+  m_PrefabInstance: {fileID: 8979745028308314332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62f255c2cd331746b1c80e5ed5042fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2094380603
 GameObject:
   m_ObjectHideFlags: 0
@@ -3199,6 +3275,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7521052517635784191, guid: 19533006afd2e184d952b2df266a7bb6, type: 3}
+      propertyPath: inputManager
+      value: 
+      objectReference: {fileID: 1921415783}
     - target: {fileID: 7521052517635784191, guid: 19533006afd2e184d952b2df266a7bb6, type: 3}
       propertyPath: camerasManager
       value: 

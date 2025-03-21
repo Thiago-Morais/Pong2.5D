@@ -2,15 +2,8 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-// !! This is a God Object. The original project was like this so I kept like this.
 public class GameManager : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] PlayerMono player1;
-    [SerializeField] PlayerMono player2;
-    [SerializeField] BallMono ball;
-    [SerializeField] UIManager uiManager;
-    [SerializeField] CamerasManager camerasManager;
     [Header("Static Data")]
     [SerializeField] int maxScore = 10;
     [Header("Dynamic Data")]
@@ -28,8 +21,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] int playerCount;
     [SerializeField] int winningPlayer;
     PaddleAutoController aiController;
+    [Header("References")]
+    PlayerMono player1;
+    PlayerMono player2;
+    BallMono ball;
+    UIManager uiManager;
+    CamerasManager camerasManager;
     static GameManager instance;
-
     public static GameManager Instance => instance;
     public int ServingPlayerId => servingPlayer;
     public int WinningPlayerId => winningPlayer;
@@ -39,11 +37,13 @@ public class GameManager : MonoBehaviour
     public event Action<GameStates> OnGameStateChanged;
 
     public enum GameStates { start, menu, serve, play, done }
-    [ContextMenu(nameof(IncreaseScorePlayer1))]
-    void IncreaseScorePlayer1()
+    public void Constructor(PlayerMono player1, PlayerMono player2, BallMono ball, UIManager uiManager, CamerasManager camerasManager)
     {
-        player1Score++;
-        uiManager.UpdateScore();
+        this.player1 = player1;
+        this.player2 = player2;
+        this.ball = ball;
+        this.uiManager = uiManager;
+        this.camerasManager = camerasManager;
     }
     void Awake()
     {
@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
         playerCount = 0;
 
         aiController = new PaddleAutoController.Builder(ball.Model, player2.Paddle.Model).Build();
-        ball.Constructor(this, player1, player2);
 
         SetGameState(GameStates.start);
     }
@@ -163,7 +162,7 @@ public class GameManager : MonoBehaviour
                 SetGameState(GameStates.play);
                 break;
             case GameStates.done:
-                SetGameState(GameStates.serve);
+                SetGameState(GameStates.menu);
 
                 ball.Reset();
 

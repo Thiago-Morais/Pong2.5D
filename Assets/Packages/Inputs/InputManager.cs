@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -11,7 +10,8 @@ public class InputManager : MonoBehaviour
     Controls player2Controls;
     InputUser player1Input;
     InputUser player2Input;
-    GameManager game = GameManager.Instance;
+    GameManager game;
+    public void Constructor(GameManager game) => this.game = game;
     void Awake()
     {
         SetUpInputSystem();
