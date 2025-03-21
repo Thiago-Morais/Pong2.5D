@@ -673,6 +673,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb21436825b59f4c979cd0e59ffb013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshes: {fileID: 1459074946}
+  ballPivot: {fileID: 1273875084}
+  paddle_hit: {fileID: 765030865}
+  score: {fileID: 1913795523}
+  wall_hit: {fileID: 390151736}
   model:
     baseSpeed: 20
     speed: 0
@@ -680,10 +685,10 @@ MonoBehaviour:
       axis: {x: 0, y: 0, z: 0}
     position:
       axis: {x: 0, y: 0, z: 0}
-  meshes: {fileID: 1459074946}
-  ballPivot: {fileID: 1273875084}
   radius: 0.5
-  cachedPlayerCollided: {fileID: 0}
+  ballSpeedIncreaseOnHit: 1.03
+  directionWeightPaddleForward: 1
+  directionWeightPaddleVelocity: 3
 --- !u!54 &499529050
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1081,7 +1086,7 @@ GameObject:
   - component: {fileID: 1023928042}
   - component: {fileID: 1023928043}
   m_Layer: 0
-  m_Name: Goal Player1
+  m_Name: 'Player2 Target Goal '
   m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2533,7 +2538,7 @@ GameObject:
   - component: {fileID: 1966087027}
   - component: {fileID: 1966087028}
   m_Layer: 0
-  m_Name: Goal Player2
+  m_Name: 'Player1 Target Goal '
   m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3006,6 +3011,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8418781807969849245, guid: 05d22b93feeb4434c97a496efec3b8bb, type: 3}
+      propertyPath: targetGoal
+      value: 
+      objectReference: {fileID: 1023928042}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3074,6 +3083,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6155160130413481841, guid: 8d8c99137f147024496b4fc43eaa8359, type: 3}
+      propertyPath: targetGoal
+      value: 
+      objectReference: {fileID: 1966087027}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
