@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        Screen.fullScreenMode = FullScreenMode.Windowed;
 
         player1Score = 0;
         player2Score = 0;
@@ -208,11 +207,6 @@ public class GameManager : MonoBehaviour
                 Debug.Log($"Game is not in multiplayer mode", this);
             else
                 player2.Paddle.Model.SetTargetVelocitySmooth(velocity);
-    }
-    public void ToggleFullscreen()
-    {
-        Screen.fullScreen = !Screen.fullScreen;
-        Debug.Log($"Fullscreen: {Screen.fullScreen}", this);
     }
     public void Quit()
     {

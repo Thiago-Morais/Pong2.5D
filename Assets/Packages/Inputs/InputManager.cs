@@ -35,7 +35,6 @@ public class InputManager : MonoBehaviour
         player1Controls.MapPlayerSelection.SelectMultiPlayer.performed += SelectMultiPlayer;
         player1Controls.MapPlayer.Move.performed += MovePlayer1;
         player2Controls.MapPlayer.Move.performed += MovePlayer2;
-        player1Controls.Always.FullscreenToggle.performed += ToggleFullscreen;
         player1Controls.Always.Quit.performed += Quit;
 
         InputUser.onUnpairedDeviceUsed += OnUnpairedDeviceUsed;
@@ -48,7 +47,6 @@ public class InputManager : MonoBehaviour
         player1Controls.MapPlayerSelection.SelectMultiPlayer.performed -= SelectMultiPlayer; ;
         player1Controls.MapPlayer.Move.performed -= MovePlayer1;
         player2Controls.MapPlayer.Move.performed -= MovePlayer2;
-        player1Controls.Always.FullscreenToggle.performed -= ToggleFullscreen;
         player1Controls.Always.Quit.performed -= Quit;
 
         InputUser.onUnpairedDeviceUsed -= OnUnpairedDeviceUsed;
@@ -108,11 +106,6 @@ public class InputManager : MonoBehaviour
     {
         if (context.performed)
             game.MovePlayer2(context.ReadValue<float>());
-    }
-    void ToggleFullscreen(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            game.ToggleFullscreen();
     }
     void Quit(InputAction.CallbackContext context)
     {
