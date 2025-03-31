@@ -11,6 +11,7 @@ public class BallMono : MonoBehaviour
     [SerializeField] AudioSource paddleHitAudio;
     [SerializeField] AudioSource scoreAudio;
     [SerializeField] AudioSource wallHitAudio;
+    [SerializeField] BallParticles particlesManager;
     [Header("Data")]
     [SerializeField] Ball model = new Ball(new PlayerAxis(Vector3.zero));
     [SerializeField] float radius;
@@ -77,6 +78,7 @@ public class BallMono : MonoBehaviour
                     Model.SetDirection(new PlayerAxis(direction.normalized));
                     Model.SetSpeed(Model.Speed * ballSpeedIncreaseOnHit);
                     paddleHitAudio.Play();
+                    particlesManager.PlayHitParticles(this, other);
                 }
                 else if (other.attachedRigidbody.TryGetComponent<Wall>(out var wall))
                 {
@@ -84,6 +86,7 @@ public class BallMono : MonoBehaviour
                     Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
                     Model.Direction.SetParallelToPlayers(-Model.Direction.ParallelToPlayers);
                     wallHitAudio.Play();
+                    particlesManager.PlayHitParticles(this, other);
                 }
                 else if (other.attachedRigidbody.CompareTag(Constants.GOAL_TAG))
                 {
@@ -112,5 +115,6 @@ public class BallMono : MonoBehaviour
     public void Reset()
     {
         model.Reset();
+        particlesManager.KillAllParticles();
     }
 }
