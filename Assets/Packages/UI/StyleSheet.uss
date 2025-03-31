@@ -27,3 +27,15 @@
     left: 0;
     position: absolute;
 }
+
+.score {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.player-1-color {
+    color: rgb(255, 51, 51);
+}
+
+.player-2-color {
+    color: rgb(51, 51, 255);
+}

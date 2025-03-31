@@ -3,10 +3,10 @@
     <engine:VisualElement style="font-size: 8px; flex-direction: column; flex-grow: 1; justify-content: center;">
         <engine:VisualElement style="flex-direction: row; align-self: center; width: 150px;">
             <engine:VisualElement style="flex-grow: 1;">
-                <engine:Label text="0" name="score-player-1" class="text" style="font-size: 32px; display: flex; align-self: flex-start; justify-content: space-between;" />
+                <engine:Label text="0" name="score-player-1" class="text player-1-color score" style="font-size: 32px; display: flex; align-self: flex-start; justify-content: space-between;" />
             </engine:VisualElement>
             <engine:VisualElement style="flex-grow: 1;">
-                <engine:Label text="0" name="score-player-2" class="text" style="font-size: 32px; display: flex; align-self: flex-end;" />
+                <engine:Label text="0" name="score-player-2" class="text player-2-color score" style="font-size: 32px; display: flex; align-self: flex-end;" />
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
