@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
             case GameStates.serve:
                 player1.Reset();
                 player2.Reset();
+                ball.Reset();
                 break;
             case GameStates.play:
                 break;
@@ -97,8 +98,6 @@ public class GameManager : MonoBehaviour
         }
         else
             SetGameState(GameStates.serve);
-        player1.Paddle.Model.SetCurrentVelocity(0);
-        player2.Paddle.Model.SetCurrentVelocity(0);
     }
     public void Player2Goal()
     {
@@ -111,8 +110,6 @@ public class GameManager : MonoBehaviour
         }
         else
             SetGameState(GameStates.serve);
-        player1.Paddle.Model.SetCurrentVelocity(0);
-        player2.Paddle.Model.SetCurrentVelocity(0);
     }
     void Update()
     {
@@ -154,6 +151,7 @@ public class GameManager : MonoBehaviour
     {
         switch (GameState)
         {
+            default: break;
             case GameStates.start:
                 SetGameState(GameStates.menu);
                 break;
@@ -172,8 +170,6 @@ public class GameManager : MonoBehaviour
                     servingPlayer = 2;
                 else
                     servingPlayer = 1;
-                break;
-            default:
                 break;
         }
     }
@@ -212,5 +208,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Quit", this);
         Application.Quit();
+    }
+    public void BallOutOfBounds()
+    {
+        if (gameState == GameStates.play)
+            SetGameState(GameStates.serve);
     }
 }

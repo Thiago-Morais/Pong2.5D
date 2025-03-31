@@ -8,9 +8,9 @@ public class BallMono : MonoBehaviour
     [Header("References")]
     [SerializeField] Transform meshes;
     [SerializeField] Transform ballPivot;
-    [SerializeField] AudioSource paddle_hit;
-    [SerializeField] AudioSource score;
-    [SerializeField] AudioSource wall_hit;
+    [SerializeField] AudioSource paddleHitAudio;
+    [SerializeField] AudioSource scoreAudio;
+    [SerializeField] AudioSource wallHitAudio;
     [Header("Data")]
     [SerializeField] Ball model = new Ball(new PlayerAxis(Vector3.zero));
     [SerializeField] float radius;
@@ -76,14 +76,14 @@ public class BallMono : MonoBehaviour
                     Debug.DrawRay(player.Paddle.transform.position, direction, Color.red, 2f);
                     Model.SetDirection(new PlayerAxis(direction.normalized));
                     Model.SetSpeed(Model.Speed * ballSpeedIncreaseOnHit);
-                    paddle_hit.Play();
+                    paddleHitAudio.Play();
                 }
                 else if (other.attachedRigidbody.TryGetComponent<Wall>(out var wall))
                 {
                     float radiusOffset = wall.IsUpperWall ? Radius : -Radius;
                     Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
                     Model.Direction.SetParallelToPlayers(-Model.Direction.ParallelToPlayers);
-                    wall_hit.Play();
+                    wallHitAudio.Play();
                 }
                 else if (other.attachedRigidbody.CompareTag(Constants.GOAL_TAG))
                 {
@@ -93,8 +93,7 @@ public class BallMono : MonoBehaviour
                             game.Player1Goal();
                         else if (goal == player2.TargetGoal)
                             game.Player2Goal();
-                        Reset();
-                        score.Play();
+                        scoreAudio.Play();
                     }
                 }
             }
