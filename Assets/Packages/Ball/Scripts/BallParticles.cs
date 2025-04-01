@@ -1,22 +1,36 @@
-using System;
 using System.Collections.Generic;
+using ParticleSystemOverride;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class BallParticles : MonoBehaviour
 {
     [SerializeField] ParticleSystem hitParticlesPrefab;
-    [SerializeField] OverrideParticleSystemProperties overrideParticleSystemProperties;
+    [SerializeField] PSOverrideCreatorMono psOverrideCreator;
+    [SerializeField] MinMaxCurve intensityRange = new MinMaxCurve(22, 30);
     List<ParticleSystem> particleSystemLiveInstances = new();
-    public void PlayHitParticles(BallMono from, Collider other)
+    public void PlayHitParticles(BallMono ball, Collider other)
     {
-        Vector3 contactPoint = other.ClosestPointOnBounds(from.transform.position);
+        if (ball.Model.Speed < intensityRange.constantMin) return;
+
+        Vector3 contactPoint = other.ClosestPointOnBounds(ball.transform.position);
         DebugDrawPoint(contactPoint, Color.red, 2f);
         ParticleSystem instance = Instantiate(hitParticlesPrefab, contactPoint, Quaternion.identity);
-        instance.Play();
         ParticleCallback particleCallback = instance.AddComponent<ParticleCallback>();
         particleCallback.e_OnParticleSystemStopped += () => OnParticleStopped(instance);
-        overrideParticleSystemProperties.OverridePlanesIn(new[] { instance });
+        var intensity = Mathf.InverseLerp(intensityRange.constantMin, intensityRange.constantMax, ball.Model.Speed);
+
+        psOverrideCreator.Model.CreateOverride(targetPS: instance, t: intensity)
+                                        .Add(new OverrideFirstBurstCount())
+                                        .Add(new OverrideStartSize())
+                                        .Add(new OverrideDrag())
+                                        .Add(new OverrideStartColor())
+                                        .Add(new OverrideNoiseStrength())
+                                        .Add(new OverrideSpeedModifier())
+                                        .Add(new OverrideColorOverLifetime())
+                                        .Apply();
+        instance.Play();
         particleSystemLiveInstances.Add(instance);
     }
     void OnParticleStopped(ParticleSystem ps)
