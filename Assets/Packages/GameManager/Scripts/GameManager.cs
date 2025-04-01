@@ -1,24 +1,12 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.InputSystem.Users;
 using Random = UnityEngine.Random;
 
-// !! This is a God Object. The original project was like this so I kept like this.
 public class GameManager : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] AudioClip paddle_hit;
-    [SerializeField] AudioClip score;
-    [SerializeField] AudioClip wall_hit;
-    [SerializeField] PlayerMono player1;
-    [SerializeField] Goal player1TargetGoal;
-    [SerializeField] PlayerMono player2;
-    [SerializeField] Goal player2TargetGoal;
-    [SerializeField] BallMono ball;
-    [SerializeField] UIManager uiManager;
-    [Header("Data")]
+    [Header("Static Data")]
+    [SerializeField] int maxScore = 10;
+    [Header("Dynamic Data")]
     [Tooltip(
 @"the state of our game; can be any of the following:
 1. 'start' (the beginning of the game, before first serve)
@@ -30,34 +18,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] int player1Score;
     [SerializeField] int player2Score;
     [SerializeField] int servingPlayer = 1;
-    [SerializeField] int winningPlayer;
     [SerializeField] int playerCount;
-    [SerializeField] int maxScore = 10;
-    [SerializeField] float ballSpeedIncrease = 1.03f;
-    [SerializeField] float directionWeightPaddleForward = 1;
-    [SerializeField] float directionWeightPaddleVelocity = 1;
+    [SerializeField] int winningPlayer;
     PaddleAutoController aiController;
-    Controls player1Controls;
-    Controls player2Controls;
-    InputUser player1Input;
-    InputUser player2Input;
-    View view;
+    [Header("References")]
+    PlayerMono player1;
+    PlayerMono player2;
+    BallMono ball;
+    UIManager uiManager;
+    CamerasManager camerasManager;
     static GameManager instance;
-
     public static GameManager Instance => instance;
     public int ServingPlayerId => servingPlayer;
     public int WinningPlayerId => winningPlayer;
     public int Player1Score => player1Score;
     public int Player2Score => player2Score;
     public GameStates GameState => gameState;
+    public event Action<GameStates> OnGameStateChanged;
 
     public enum GameStates { start, menu, serve, play, done }
-    enum View { ThirdPerson, TopDown, }
-    [ContextMenu(nameof(IncreaseScorePlayer1))]
-    void IncreaseScorePlayer1()
+    public void Constructor(PlayerMono player1, PlayerMono player2, BallMono ball, UIManager uiManager, CamerasManager camerasManager)
     {
-        player1Score++;
-        uiManager.UpdateScore();
+        this.player1 = player1;
+        this.player2 = player2;
+        this.ball = ball;
+        this.uiManager = uiManager;
+        this.camerasManager = camerasManager;
     }
     void Awake()
     {
@@ -65,41 +51,69 @@ public class GameManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
-        // initialize score variables
+
+
         player1Score = 0;
         player2Score = 0;
-
-        // either going to be 1 or 2; whomever is scored on gets to serve the
-        // following turn
         servingPlayer = 1;
-
-        // player who won the game; not set to a proper value until we reach
-        // that state in the game
         winningPlayer = 0;
-
-        //~ amount of real players
         playerCount = 0;
 
         aiController = new PaddleAutoController.Builder(ball.Model, player2.Paddle.Model).Build();
 
-        SetUpInputSystem();
         SetGameState(GameStates.start);
     }
-    void SetUpInputSystem()
+    public void SetGameState(GameStates value)
     {
-        player1Controls = new();
-        player1Input = InputUser.PerformPairingWithDevice(Keyboard.current);
-        player1Input.ActivateControlScheme(player1Controls.KeyboardMouse1Scheme);
-        player1Input.AssociateActionsWithUser(player1Controls);
-        player2Controls = new();
-        player2Input = InputUser.PerformPairingWithDevice(Keyboard.current);
-        player2Input.ActivateControlScheme(player2Controls.KeyboardMouse2Scheme);
-        player2Input.AssociateActionsWithUser(player2Controls);
+        gameState = value;
+        uiManager.SetState(gameState);
+        OnGameStateChanged?.Invoke(gameState);
+
+        switch (gameState)
+        {
+            case GameStates.start:
+                break;
+            case GameStates.menu:
+                break;
+            case GameStates.serve:
+                player1.Reset();
+                player2.Reset();
+                ball.Reset();
+                break;
+            case GameStates.play:
+                break;
+            case GameStates.done:
+                break;
+            default: break;
+        }
+    }
+    public void Player1Goal()
+    {
+        player1Score++;
+        servingPlayer = 2;
+        if (player1Score == maxScore)
+        {
+            winningPlayer = 1;
+            SetGameState(GameStates.done);
+        }
+        else
+            SetGameState(GameStates.serve);
+    }
+    public void Player2Goal()
+    {
+        player2Score++;
+        servingPlayer = 1;
+        if (player2Score == maxScore)
+        {
+            winningPlayer = 2;
+            SetGameState(GameStates.done);
+        }
+        else
+            SetGameState(GameStates.serve);
     }
     void Update()
     {
         UpdateGameState();
-        Draw();
         if (GameState == GameStates.play)
         {
             ball.Model.Update(Time.deltaTime);
@@ -122,253 +136,82 @@ public class GameManager : MonoBehaviour
                 Vector2 direction = new Vector2(parallelDirection, towardDirection).normalized;
                 ball.Model.Direction.SetParallelToPlayers(direction.x);
                 ball.Model.Direction.SetTowardPlayers(direction.y);
-                float randomSpeed = Random.Range(.66f, 1.33f) * ball.Model.BaseSpeed;
+                float randomSpeed = Random.Range(.75f, 1.5f) * ball.Model.BaseSpeed;
                 ball.Model.SetSpeed(randomSpeed);
                 if (playerCount == 1)
-                    aiController.SetVelocityDump(Random.Range(.3f, .55f));
+                    aiController.SetVelocityDump(Random.Range(.5f, .8f));
                 return;
             case GameStates.play:
-                Debug.Log($"{nameof(aiController)}.{nameof(aiController.VelocityDump)} = " + aiController.VelocityDump, this);
                 return;
             default:
                 return;
         }
     }
-    void Draw()
+    public void Continue()
     {
-        // uiManager.SetState(gameState);
-
-        // render different things depending on which part of the game we're in
-
-
-        //     // show the score before ball is rendered so it can move over the text
-        //     displayScore()
-
-        // player1: render()
-        // player2: render()
-        // ball: render()
-
-        // // display FPS for debugging; simply comment out to remove
-        // displayFPS()
-
-    }
-    public void SetGameState(GameStates value)
-    {
-        gameState = value;
-        uiManager.SetState(gameState);
-
-        player1Controls.Disable();
-        player2Controls.Disable();
-        switch (gameState)
+        switch (GameState)
         {
+            default: break;
             case GameStates.start:
-                player1Controls.MapAwaitContinue.Enable();
-                player2Controls.MapAwaitContinue.Enable();
-                break;
-            case GameStates.menu:
-                player1Controls.MapPlayerSelection.Enable();
-                player2Controls.MapPlayerSelection.Enable();
+                SetGameState(GameStates.menu);
                 break;
             case GameStates.serve:
-                player1Controls.MapAwaitContinue.Enable();
-                player2Controls.MapAwaitContinue.Enable();
-                player1.Reset();
-                player2.Reset();
-                break;
-            case GameStates.play:
-                player1Controls.MapPlayer.Enable();
-                player2Controls.MapPlayer.Enable();
+                SetGameState(GameStates.play);
                 break;
             case GameStates.done:
-                player1Controls.MapAwaitContinue.Enable();
-                player2Controls.MapAwaitContinue.Enable();
-                break;
-            default: break;
-        }
-    }
-    void OnEnable()
-    {
-        player1Controls.MapAwaitContinue.Continue.performed += Continue;
-        player1Controls.MapPlayerSelection.SelectSinglePlayer.performed += SelectSinglePlayer;
-        player1Controls.MapPlayerSelection.SelectMultiPlayer.performed += SelectMultiPlayer;
-        player1Controls.MapPlayer.Move.performed += MovePlayer1;
-        player2Controls.MapPlayer.Move.performed += MovePlayer2;
+                SetGameState(GameStates.menu);
 
-        InputUser.onUnpairedDeviceUsed += OnUnpairedDeviceUsed;
+                ball.Reset();
 
-        ball.OnTriggerEnterEvent += Ball_OnTriggerEnterEvent;
-        ball.OnTriggerExitEvent += Ball_OnTriggerExitEvent;
-    }
-    void OnDisable()
-    {
-        player1Controls.MapAwaitContinue.Continue.performed -= Continue;
-        player1Controls.MapPlayerSelection.SelectSinglePlayer.performed -= SelectSinglePlayer;
-        player1Controls.MapPlayerSelection.SelectMultiPlayer.performed -= SelectMultiPlayer; ;
-        player1Controls.MapPlayer.Move.performed -= MovePlayer1;
-        player2Controls.MapPlayer.Move.performed -= MovePlayer2;
+                player1Score = 0;
+                player2Score = 0;
 
-        InputUser.onUnpairedDeviceUsed -= OnUnpairedDeviceUsed;
-
-        ball.OnTriggerEnterEvent -= Ball_OnTriggerEnterEvent;
-        ball.OnTriggerExitEvent -= Ball_OnTriggerExitEvent;
-    }
-    void Continue(InputAction.CallbackContext context)
-    {
-        Debug.Log($"Continue: {context.phase}", this);
-        if (context.performed)
-        {
-            switch (GameState)
-            {
-                case GameStates.start:
-                    SetGameState(GameStates.menu);
-                    break;
-                case GameStates.serve:
-                    SetGameState(GameStates.play);
-                    break;
-                case GameStates.done:
-                    SetGameState(GameStates.serve);
-
-                    ball.Reset();
-
-                    player1Score = 0;
-                    player2Score = 0;
-
-                    if (winningPlayer == 1)
-                        servingPlayer = 2;
-                    else
-                        servingPlayer = 1;
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-    void SelectSinglePlayer(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            if (gameState == GameStates.menu)
-            {
-                playerCount = 1;
-                SetGameState(GameStates.serve);
-            }
-    }
-    void SelectMultiPlayer(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            if (gameState == GameStates.menu)
-            {
-                playerCount = 2;
-                SetGameState(GameStates.serve);
-            }
-    }
-    void MovePlayer1(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (gameState == GameStates.play)
-                player1.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
-        }
-        else if (context.canceled)
-            player1.Paddle.Model.SetTargetVelocitySmooth(0);
-    }
-    void MovePlayer2(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (gameState == GameStates.play)
-                if (playerCount != 2)
-                    Debug.Log($"Game is not in multiplayer mode", this);
+                if (winningPlayer == 1)
+                    servingPlayer = 2;
                 else
-                    player2.Paddle.Model.SetTargetVelocitySmooth(context.ReadValue<float>());
+                    servingPlayer = 1;
+                break;
         }
-        else if (context.canceled)
-            player2.Paddle.Model.SetTargetVelocitySmooth(0);
     }
-    void OnUnpairedDeviceUsed(InputControl control, InputEventPtr ptr)
+    public void SelectSinglePlayer()
     {
-        if (player1Input == null)
-            player1Input = InputUser.PerformPairingWithDevice(control.device);
-        else
-            player2Input = InputUser.PerformPairingWithDevice(control.device);
+        if (gameState == GameStates.menu)
+        {
+            playerCount = 1;
+            SetGameState(GameStates.serve);
+        }
+        camerasManager.SetPlayerCount(playerCount);
     }
-    void Ball_OnTriggerEnterEvent(Collider other)
+    public void SelectMultiPlayer()
     {
-        if (gameState == GameStates.play)
-            if (other.attachedRigidbody)
-            {
-                if (other.attachedRigidbody.TryGetComponent<PlayerMono>(out var player))
-                {
-                    Debug.Log($"Hit Player: {player}", this);
-                    ball.cachedPlayerCollided = player;
-                    Vector3 direction = ball.transform.position - player.Paddle.transform.position;
-                    if (player == player1)
-                    {
-                        ball.Model.Position.SetTowardPlayers(PlayerAxis.GetTowardPlayers(player.Paddle.PointInFrontOfPaddle) - ball.Radius);
-                        direction += new PlayerAxis(-directionWeightPaddleForward, (player.Paddle.Model.CurrentVelocity / player.Paddle.Model.VelocityMultiplier) * directionWeightPaddleVelocity);
-                    }
-                    else if (player == player2)
-                    {
-                        ball.Model.Position.SetTowardPlayers(PlayerAxis.GetTowardPlayers(player.Paddle.PointInFrontOfPaddle) + ball.Radius);
-                        direction += new PlayerAxis(directionWeightPaddleForward, (player.Paddle.Model.CurrentVelocity / player.Paddle.Model.VelocityMultiplier) * directionWeightPaddleVelocity);
-                    }
-                    // ball.Model.Direction.SetTowardPlayers(-ball.Model.Direction.TowardPlayers);
-                    Debug.DrawRay(player.Paddle.transform.position, direction, Color.red, 2f);
-                    ball.Model.SetDirection(new PlayerAxis(direction.normalized));
-                    ball.Model.SetSpeed(ball.Model.Speed * ballSpeedIncrease);
-                }
-                else if (other.attachedRigidbody.TryGetComponent<Wall>(out var wall))
-                {
-                    Debug.Log($"{nameof(wall)} = " + wall, this);
-                    float radiusOffset = wall.IsUpperWall ? ball.Radius : -ball.Radius;
-                    ball.Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
-                    ball.Model.Direction.SetParallelToPlayers(-ball.Model.Direction.ParallelToPlayers);
-                }
-                else if (other.attachedRigidbody.CompareTag(Constants.GOAL_TAG))
-                {
-                    if (other.attachedRigidbody.TryGetComponent<Goal>(out var goal))
-                    {
-                        if (goal == player1TargetGoal)
-                        {
-                            Debug.Log($"Goal player2Goal: {goal}", this);
-                            servingPlayer = 2;
-                            player1Score++;
-                            if (player1Score == maxScore)
-                            {
-                                winningPlayer = 1;
-                                SetGameState(GameStates.done);
-                            }
-                            else
-                                SetGameState(GameStates.serve);
-                        }
-                        else if (goal == player2TargetGoal)
-                        {
-                            Debug.Log($"Goal player1Goal: {goal}", this);
-                            servingPlayer = 1;
-                            player2Score++;
-                            if (player2Score == maxScore)
-                            {
-                                winningPlayer = 2;
-                                SetGameState(GameStates.done);
-                            }
-                            else
-                                SetGameState(GameStates.serve);
-                        }
-                        ball.Reset();
-                        player1.Paddle.Model.SetCurrentVelocity(0);
-                        player2.Paddle.Model.SetCurrentVelocity(0);
-                    }
-                }
-            }
+        if (gameState == GameStates.menu)
+        {
+            playerCount = 2;
+            SetGameState(GameStates.serve);
+        }
+        camerasManager.SetPlayerCount(playerCount);
     }
-    // This may cause problems if the ball hits two paddles at the same time. But it wont, so... ¯\_(ツ)_/¯
-    void Ball_OnTriggerExitEvent(Collider other)
+    public void MovePlayer1(float velocity)
     {
         if (gameState == GameStates.play)
-            if (other.attachedRigidbody)
-            {
-                if (other.attachedRigidbody.TryGetComponent<PlayerMono>(out var player))
-                    if (player == ball.cachedPlayerCollided)
-                        ball.cachedPlayerCollided = null;
-            }
+            player1.Paddle.Model.SetTargetVelocitySmooth(velocity);
+    }
+    public void MovePlayer2(float velocity)
+    {
+        if (gameState == GameStates.play)
+            if (playerCount != 2)
+                Debug.Log($"Game is not in multiplayer mode", this);
+            else
+                player2.Paddle.Model.SetTargetVelocitySmooth(velocity);
+    }
+    public void Quit()
+    {
+        Debug.Log($"Quit", this);
+        Application.Quit();
+    }
+    public void BallOutOfBounds()
+    {
+        if (gameState == GameStates.play)
+            SetGameState(GameStates.serve);
     }
 }

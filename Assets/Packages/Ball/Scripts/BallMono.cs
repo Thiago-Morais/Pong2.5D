@@ -1,23 +1,42 @@
 using System;
 using UnityEngine;
+using static GameManager;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BallMono : MonoBehaviour
 {
-    [SerializeField] Ball model = new Ball(new PlayerAxis(Vector3.zero));
+    [Header("References")]
     [SerializeField] Transform meshes;
     [SerializeField] Transform ballPivot;
+    [SerializeField] AudioSource paddleHitAudio;
+    [SerializeField] AudioSource scoreAudio;
+    [SerializeField] AudioSource wallHitAudio;
+    [SerializeField] BallParticles particlesManager;
+    [Header("Data")]
+    [SerializeField] Ball model = new Ball(new PlayerAxis(Vector3.zero));
     [SerializeField] float radius;
-    public PlayerMono cachedPlayerCollided;
+    [SerializeField] float ballSpeedIncreaseOnHit = 1.03f;
+    [SerializeField] float directionWeightPaddleForward = 1;
+    [SerializeField] float directionWeightPaddleVelocity = 3;
+    PlayerMono cachedPlayerCollided;
     new Rigidbody rigidbody;
+    GameManager game;
 
-    public event Action<Collider> OnTriggerEnterEvent;
-    public event Action<Collider> OnTriggerExitEvent;
+    PlayerMono player1;
+    PlayerMono player2;
+
     public Ball Model => model;
     public float Radius => radius;
+    public PlayerMono CachedPlayerCollided => cachedPlayerCollided;
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+    }
+    public void Constructor(GameManager game, PlayerMono player1, PlayerMono player2)
+    {
+        this.game = game;
+        this.player1 = player1;
+        this.player2 = player2;
     }
     void Start()
     {
@@ -37,14 +56,65 @@ public class BallMono : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        OnTriggerEnterEvent?.Invoke(other);
+        if (game.GameState == GameStates.play)
+            if (other.attachedRigidbody)
+            {
+                if (other.attachedRigidbody.TryGetComponent<PlayerMono>(out var player))
+                {
+                    SetCachedPlayerCollided(player);
+                    Vector3 direction = transform.position - player.Paddle.transform.position;
+                    if (player == player1)
+                    {
+                        Model.Position.SetTowardPlayers(PlayerAxis.GetTowardPlayers(player.Paddle.PointInFrontOfPaddle) - Radius);
+
+                        direction += new PlayerAxis(-directionWeightPaddleForward, (player.Paddle.Model.CurrentVelocity / player.Paddle.Model.VelocityMultiplier) * directionWeightPaddleVelocity);
+                    }
+                    else if (player == player2)
+                    {
+                        Model.Position.SetTowardPlayers(PlayerAxis.GetTowardPlayers(player.Paddle.PointInFrontOfPaddle) + Radius);
+                        direction += new PlayerAxis(directionWeightPaddleForward, (player.Paddle.Model.CurrentVelocity / player.Paddle.Model.VelocityMultiplier) * directionWeightPaddleVelocity);
+                    }
+                    Debug.DrawRay(player.Paddle.transform.position, direction, Color.red, 2f);
+                    Model.SetDirection(new PlayerAxis(direction.normalized));
+                    Model.SetSpeed(Model.Speed * ballSpeedIncreaseOnHit);
+                    paddleHitAudio.Play();
+                    particlesManager.PlayHitParticles(this, other);
+                }
+                else if (other.attachedRigidbody.TryGetComponent<Wall>(out var wall))
+                {
+                    float radiusOffset = wall.IsUpperWall ? Radius : -Radius;
+                    Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
+                    Model.Direction.SetParallelToPlayers(-Model.Direction.ParallelToPlayers);
+                    wallHitAudio.Play();
+                    particlesManager.PlayHitParticles(this, other);
+                }
+                else if (other.attachedRigidbody.CompareTag(Constants.GOAL_TAG))
+                {
+                    if (other.attachedRigidbody.TryGetComponent<Goal>(out var goal))
+                    {
+                        if (goal == player1.TargetGoal)
+                            game.Player1Goal();
+                        else if (goal == player2.TargetGoal)
+                            game.Player2Goal();
+                        scoreAudio.Play();
+                    }
+                }
+            }
     }
     void OnTriggerExit(Collider other)
     {
-        OnTriggerExitEvent?.Invoke(other);
+        if (game.GameState == GameStates.play)
+            if (other.attachedRigidbody)
+            {
+                if (other.attachedRigidbody.TryGetComponent<PlayerMono>(out var player))
+                    if (player == CachedPlayerCollided)
+                        SetCachedPlayerCollided(null);
+            }
     }
+    public void SetCachedPlayerCollided(PlayerMono value) => cachedPlayerCollided = value;
     public void Reset()
     {
         model.Reset();
+        particlesManager.KillAllParticles();
     }
 }

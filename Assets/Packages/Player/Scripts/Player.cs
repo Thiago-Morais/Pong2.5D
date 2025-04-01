@@ -5,8 +5,12 @@ using UnityEngine;
 public class PlayerMono : MonoBehaviour
 {
     [SerializeField] PaddleMono paddle;
+    [SerializeField] Goal targetGoal;
     new Rigidbody rigidbody;
+
     public PaddleMono Paddle => paddle;
+    public Goal TargetGoal => targetGoal;
+
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
