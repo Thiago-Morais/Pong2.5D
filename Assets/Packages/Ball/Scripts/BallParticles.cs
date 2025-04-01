@@ -3,23 +3,18 @@ using ParticleSystemOverride;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
-
 public class BallParticles : MonoBehaviour
 {
     [SerializeField] ParticleSystem hitParticlesPrefab;
     [SerializeField] PSOverrideCreatorMono psOverrideCreator;
-    [SerializeField] MinMaxCurve intensityRange = new MinMaxCurve(22, 30);
     List<ParticleSystem> particleSystemLiveInstances = new();
-    public void PlayHitParticles(BallMono ball, Collider other)
-    {
-        if (ball.Model.Speed < intensityRange.constantMin) return;
 
-        Vector3 contactPoint = other.ClosestPointOnBounds(ball.transform.position);
-        DebugDrawPoint(contactPoint, Color.red, 2f);
-        ParticleSystem instance = Instantiate(hitParticlesPrefab, contactPoint, Quaternion.identity);
+    public void PlayHitParticlesAt(Vector3 position, float intensity)
+    {
+        DebugDrawPoint(position, Color.red, 2f);
+        ParticleSystem instance = Instantiate(hitParticlesPrefab, position, Quaternion.identity);
         ParticleCallback particleCallback = instance.AddComponent<ParticleCallback>();
         particleCallback.e_OnParticleSystemStopped += () => OnParticleStopped(instance);
-        var intensity = Mathf.InverseLerp(intensityRange.constantMin, intensityRange.constantMax, ball.Model.Speed);
 
         psOverrideCreator.Model.CreateOverride(targetPS: instance, t: intensity)
                                         .Add(new OverrideFirstBurstCount())
