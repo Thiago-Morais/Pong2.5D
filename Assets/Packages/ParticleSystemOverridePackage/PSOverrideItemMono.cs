@@ -4,14 +4,14 @@ namespace ParticleSystemOverride
 {
     public abstract class PSOverrideItemMono : MonoBehaviour, IPSOverrideItem
     {
-        public abstract void Apply(ParticleSystem targetPS, ParticleSystem minPS, ParticleSystem maxPS, float t);
+        public abstract void Lerp(ParticleSystem targetPS, ParticleSystem minPS, ParticleSystem maxPS, float t);
     }
-    public class PSOverrideItemMono<T> : PSOverrideItemMono, IPSOverrideItem where T : IPSOverrideItem
+    public class PSOverrideItemMono<T> : PSOverrideItemMono, IPSOverrideItem where T : IPSOverrideItem, new()
     {
-        [SerializeField] T model;
-        public override void Apply(ParticleSystem targetPS, ParticleSystem minPS, ParticleSystem maxPS, float t)
+        [SerializeField] T model = new T();
+        public override void Lerp(ParticleSystem targetPS, ParticleSystem minPS, ParticleSystem maxPS, float t)
         {
-            model.Apply(targetPS, minPS, maxPS, t);
+            model.Lerp(targetPS, minPS, maxPS, t);
         }
     }
 }

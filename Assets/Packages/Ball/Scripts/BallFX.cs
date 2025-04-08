@@ -41,6 +41,7 @@ public class BallFX : MonoBehaviour
             ballIntensityColorRange.colorMin = ballMaterial.color;
             ballIntensityEmissiveColorRange.colorMin = ballMaterial.GetColor("_EmissiveColor");
         }
+        UpdateFXValues(0);
     }
     void OnEnable()
     {
@@ -96,6 +97,7 @@ public class BallFX : MonoBehaviour
         SetSFXIntensity(intensity);
         ballMaterial.color = ballIntensityColorRange.Evaluate(intensity, intensity);
         ballMaterial.SetColor("_EmissiveColor", ballIntensityEmissiveColorRange.Evaluate(intensity, intensity));
+        particlesManager.SetContinuousParticlesIntensity(intensity);
     }
     void SetSFXIntensity(float intensity)
     {

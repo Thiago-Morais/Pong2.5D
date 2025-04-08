@@ -26,7 +26,7 @@ namespace ParticleSystemOverride
         public void Apply()
         {
             foreach (IPSOverrideItem overrideFirstBurstCount in overrides)
-                overrideFirstBurstCount.Apply(targetPS, minPS, maxPS, t);
+                overrideFirstBurstCount.Lerp(targetPS, minPS, maxPS, t);
         }
     }
 }
