@@ -1,5 +1,7 @@
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using static UnityEngine.ParticleSystem;
 
 public class BallFX : MonoBehaviour
@@ -11,10 +13,17 @@ public class BallFX : MonoBehaviour
     [SerializeField] AudioSource paddleHitAudio;
     [SerializeField] AudioSource scoreAudio;
     [SerializeField] AudioSource wallHitAudio;
+    [SerializeField] AudioMixer ballHitMixer;
     [Header("Data")]
     [SerializeField] MinMaxCurve speedRemapIntensity = new MinMaxCurve(22, 30);
+    [SerializeField] MinMaxCurve intensityCurve = new MinMaxCurve(1, AnimationCurve.Linear(0, 0, 1, 1));
     [SerializeField] float impulseForce = .2f;
     [SerializeField] AnimationCurve impulseForceCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    [SerializeField] MinMaxCurve ballHitStandardVolumeRange = new MinMaxCurve(0, 1);
+    [SerializeField] MinMaxCurve ballHitIntenseVolumeRange = new MinMaxCurve(0, .25f);
+    const string STANDARD_VOLUME_KEY = "BallHitStandardVolume";
+    const string INTENSE_VOLUME_KEY = "BallHitIntenseVolume";
+
     void Awake()
     {
         if (!ball) ball = GetComponent<BallMono>();
@@ -28,9 +37,10 @@ public class BallFX : MonoBehaviour
     }
     public void OnBallHitPlayer(BallMono ball, Collider other, PlayerMono player)
     {
-        paddleHitAudio.Play();
         float intensity = GetIntensity(ball);
-        if (intensity < 0) return;
+        SetSFXIntensity(intensity);
+        paddleHitAudio.Play();
+        if (intensity <= 0) return;
 
         Vector3 contactPoint = other.ClosestPointOnBounds(ball.transform.position);
         particlesManager.PlayHitParticlesAt(contactPoint, intensity);
@@ -38,18 +48,18 @@ public class BallFX : MonoBehaviour
     }
     public void OnBallHitGoal(BallMono ball, Collider other, Goal goal)
     {
-        scoreAudio.Play();
         float intensity = GetIntensity(ball);
-        if (intensity < 0) return;
+        scoreAudio.Play();
+        if (intensity <= 0) return;
 
         impulseSource.GenerateImpulseWithVelocity(impulseForce * impulseForceCurve.Evaluate(intensity) * Random.onUnitSphere);
     }
     public void OnBallHitWall(BallMono ball, Collider other, Wall wall)
     {
-        wallHitAudio.Play();
-
         float intensity = GetIntensity(ball);
-        if (intensity < 0) return;
+        SetSFXIntensity(intensity);
+        wallHitAudio.Play();
+        if (intensity <= 0) return;
 
         Vector3 contactPoint = other.ClosestPointOnBounds(ball.transform.position);
         particlesManager.PlayHitParticlesAt(contactPoint, intensity);
@@ -59,5 +69,22 @@ public class BallFX : MonoBehaviour
     {
         particlesManager.KillAllParticles();
     }
-    float GetIntensity(BallMono ball) => Mathf.InverseLerp(speedRemapIntensity.constantMin, speedRemapIntensity.constantMax, ball.Model.Speed);
+    float GetIntensity(BallMono ball)
+    {
+        float baseIntensity = Mathf.InverseLerp(speedRemapIntensity.constantMin, speedRemapIntensity.constantMax, ball.Model.Speed);
+        intensityCurve.Evaluate(baseIntensity, baseIntensity);
+        return baseIntensity;
+    }
+
+    void SetSFXIntensity(float intensity)
+    {
+        ballHitMixer.SetFloat(STANDARD_VOLUME_KEY, CalculateVolumeWithLog(Remap(intensity, 0, 1, ballHitStandardVolumeRange.Evaluate(1, 1), ballHitStandardVolumeRange.Evaluate(0, 0))));
+        ballHitMixer.SetFloat(INTENSE_VOLUME_KEY, CalculateVolumeWithLog(Remap(intensity, 0, 1, ballHitIntenseVolumeRange.Evaluate(0, 0), ballHitIntenseVolumeRange.Evaluate(1, 1))));
+    }
+    static float Remap(float value, float from1, float to1, float from2, float to2) => from2 + (value - from1) * ((to2 - from2) / (to1 - from1));
+    float CalculateVolumeWithLog(float intensity)
+    {
+        if (intensity == 0) return -80f;
+        return Mathf.Log10(intensity) * 20f;
+    }
 }
