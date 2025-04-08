@@ -1151,11 +1151,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626532007}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &680709577 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5444761156383874747, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-  m_PrefabInstance: {fileID: 6632740615140458331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &683823747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,25 +1221,6 @@ Transform:
   - {fileID: 304807491}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &741337869 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7986638309894810895, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-  m_PrefabInstance: {fileID: 6632740615140458331}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &741337871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741337869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8da78e75b422444a7a1d989666b2a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  play: 0
-  playShortcut: 112
 --- !u!82 &765030865 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 3937773919478239430, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
@@ -1643,25 +1619,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 565046725}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!1 &1379501262 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4773278559815607787, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-  m_PrefabInstance: {fileID: 6632740615140458331}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1379501264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379501262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8da78e75b422444a7a1d989666b2a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  play: 0
-  playShortcut: 118
 --- !u!1 &1447144250
 GameObject:
   m_ObjectHideFlags: 0
@@ -3046,20 +3003,6 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 4020561158907414934, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
   m_PrefabInstance: {fileID: 6632740615140458331}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1913795525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680709577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8da78e75b422444a7a1d989666b2a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  play: 0
-  playShortcut: 112
 --- !u!1 &1921415781
 GameObject:
   m_ObjectHideFlags: 0
@@ -3777,22 +3720,10 @@ PrefabInstance:
       propertyPath: 'model.planes.Array.data[4]'
       value: 
       objectReference: {fileID: 1343254490}
-    - target: {fileID: 3937773919478239430, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: -4858254873689115218, guid: d92888ef642334447ad5f3bda2cfc46e, type: 2}
-    - target: {fileID: 4020561158907414934, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 24300002, guid: d92888ef642334447ad5f3bda2cfc46e, type: 2}
     - target: {fileID: 4279398487864562708, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
-    - target: {fileID: 6306565248103137863, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: -4858254873689115218, guid: d92888ef642334447ad5f3bda2cfc46e, type: 2}
     - target: {fileID: 6656511550414912332, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3837,79 +3768,10 @@ PrefabInstance:
       propertyPath: ballPivot
       value: 
       objectReference: {fileID: 1273875084}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: ballHitMixerIntense
-      value: 
-      objectReference: {fileID: -8962785296191291796, guid: d92888ef642334447ad5f3bda2cfc46e, type: 2}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: ballHitMixerStandard
-      value: 
-      objectReference: {fileID: -4858254873689115218, guid: d92888ef642334447ad5f3bda2cfc46e, type: 2}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[0].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[1].inSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[0].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[1].inWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[1].outSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[0].outWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[1].outWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[0].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927973562844820146, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      propertyPath: impulseForceCurve.m_Curve.Array.data[1].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4773278559815607787, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1379501264}
-    - targetCorrespondingSourceObject: {fileID: 5444761156383874747, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1913795525}
-    - targetCorrespondingSourceObject: {fileID: 7986638309894810895, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 741337871}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
 --- !u!1001 &8979745028308314332
 PrefabInstance:
