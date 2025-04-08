@@ -12,12 +12,13 @@ namespace ParticleSystemOverride
     [Serializable]
     public class OverrideCollisionPlanes : IPSOverrideItem
     {
-        [SerializeField] List<Transform> planes;
+        [SerializeField] List<Transform> planes = new();
+        public OverrideCollisionPlanes() { }
         public OverrideCollisionPlanes(List<Transform> planes)
         {
             this.planes = planes;
         }
-        public void Apply(ParticleSystem targetPS, ParticleSystem minPS, ParticleSystem maxPS, float t)
+        public void Lerp(ParticleSystem targetPS, ParticleSystem minPS, ParticleSystem maxPS, float t)
         {
             CollisionModule collision = targetPS.collision;
             collision.enabled = true;

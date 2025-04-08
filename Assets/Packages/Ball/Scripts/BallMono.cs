@@ -1,4 +1,5 @@
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
 using static GameManager;
 
@@ -8,10 +9,6 @@ public class BallMono : MonoBehaviour
     [Header("References")]
     [SerializeField] Transform meshes;
     [SerializeField] Transform ballPivot;
-    [SerializeField] AudioSource paddleHitAudio;
-    [SerializeField] AudioSource scoreAudio;
-    [SerializeField] AudioSource wallHitAudio;
-    [SerializeField] BallParticles particlesManager;
     [Header("Data")]
     [SerializeField] Ball model = new Ball(new PlayerAxis(Vector3.zero));
     [SerializeField] float radius;
@@ -24,6 +21,10 @@ public class BallMono : MonoBehaviour
 
     PlayerMono player1;
     PlayerMono player2;
+    public event Action<BallMono, Collider, PlayerMono> OnBallHitPlayer;
+    public event Action<BallMono, Collider, Goal> OnBallHitGoal;
+    public event Action<BallMono, Collider, Wall> OnBallHitWall;
+    public event Action<BallMono> OnReset;
 
     public Ball Model => model;
     public float Radius => radius;
@@ -77,16 +78,14 @@ public class BallMono : MonoBehaviour
                     Debug.DrawRay(player.Paddle.transform.position, direction, Color.red, 2f);
                     Model.SetDirection(new PlayerAxis(direction.normalized));
                     Model.SetSpeed(Model.Speed * ballSpeedIncreaseOnHit);
-                    paddleHitAudio.Play();
-                    particlesManager.PlayHitParticles(this, other);
+                    OnBallHitPlayer?.Invoke(this, other, player);
                 }
                 else if (other.attachedRigidbody.TryGetComponent<Wall>(out var wall))
                 {
                     float radiusOffset = wall.IsUpperWall ? Radius : -Radius;
                     Model.Position.SetParallelToPlayers(PlayerAxis.GetParallelToPlayers(wall.InnerPoint) + radiusOffset);
                     Model.Direction.SetParallelToPlayers(-Model.Direction.ParallelToPlayers);
-                    wallHitAudio.Play();
-                    particlesManager.PlayHitParticles(this, other);
+                    OnBallHitWall?.Invoke(this, other, wall);
                 }
                 else if (other.attachedRigidbody.CompareTag(Constants.GOAL_TAG))
                 {
@@ -96,7 +95,7 @@ public class BallMono : MonoBehaviour
                             game.Player1Goal();
                         else if (goal == player2.TargetGoal)
                             game.Player2Goal();
-                        scoreAudio.Play();
+                        OnBallHitGoal?.Invoke(this, other, goal);
                     }
                 }
             }
@@ -115,6 +114,6 @@ public class BallMono : MonoBehaviour
     public void Reset()
     {
         model.Reset();
-        particlesManager.KillAllParticles();
+        OnReset?.Invoke(this);
     }
 }
