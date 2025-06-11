@@ -915,7 +915,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6632740615140458331}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5eb21436825b59f4c979cd0e59ffb013, type: 3}
   m_Name: 
@@ -2404,7 +2404,7 @@ MonoBehaviour:
     AmplitudeGain: 1
     FrequencyGain: 1
     Duration: 1
-    m_NoiseOffsets: {x: 0, y: 0, z: 0}
+    m_NoiseOffsets: {x: 30.548462, y: -859.8557, z: -990.8135}
 --- !u!1 &1553843461
 GameObject:
   m_ObjectHideFlags: 0
@@ -3117,7 +3117,7 @@ MonoBehaviour:
     AmplitudeGain: 1
     FrequencyGain: 1
     Duration: 1
-    m_NoiseOffsets: {x: 0, y: 0, z: 0}
+    m_NoiseOffsets: {x: -284.0127, y: 955.5366, z: 126.95682}
 --- !u!82 &1913795523 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 4020561158907414934, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
@@ -3900,6 +3900,10 @@ PrefabInstance:
       propertyPath: ballPivot
       value: 
       objectReference: {fileID: 1273875084}
+    - target: {fileID: 7336971608479199764, guid: 376f049e572c15647979e9c8ce65258a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
